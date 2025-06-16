@@ -29,7 +29,7 @@ export default async function LoginPage() {
   return (
     <Card className="h-auto w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Login</CardTitle>
+        <CardTitle>Sign In</CardTitle>
         <CardDescription>
           Enter your credentials to access your account.
         </CardDescription>
