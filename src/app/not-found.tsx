@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { createClient } from '@/lib/supabase/server';
-
 import {
   Card,
   CardContent,
@@ -14,38 +12,26 @@ import {
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-import { ExternalLink } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
-export default async function Home() {
-  const supabase = await createClient();
-
-  const { data } = await supabase.auth.getUser();
+export default async function PrivatePage() {
   return (
     <Card className="h-auto w-full max-w-sm">
       <CardHeader>
         <Avatar>
           <AvatarImage src="./logo.png" />
-          <AvatarFallback>logo</AvatarFallback>
+          <AvatarFallback>Logo</AvatarFallback>
         </Avatar>
 
         <CardTitle className="font-primary font-extrabold">
-          DOST SA USC
+          404 Not Found
         </CardTitle>
-        <CardDescription>
-          DOST Scholars’ Association in the University of San Carlos.
-        </CardDescription>
+        <CardDescription>Requested resource was Not Found.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         <Button className="w-full" asChild>
-          {data?.user ? (
-            <Link href="/dashboard">Dashboard</Link>
-          ) : (
-            <Link href="/signin">Sign In</Link>
-          )}
-        </Button>
-        <Button className="w-full" variant="outline" asChild>
-          <Link href="https://www.facebook.com/dostsausc" target="_blank">
-            <ExternalLink /> Facebook
+          <Link href="/">
+            <ChevronLeft /> Go Back
           </Link>
         </Button>
       </CardContent>

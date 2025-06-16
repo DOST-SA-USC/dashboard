@@ -13,7 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="dark font-secondary bg-background antialiased">
+        <div className="flex h-screen w-full items-center justify-center p-8">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
