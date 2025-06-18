@@ -29,11 +29,6 @@ async function signIn(_: authState, formData: FormData): Promise<authState> {
 
   revalidatePath(dashboardURL, 'layout');
   redirect(dashboardURL);
-
-  return {
-    message: 'Successfully signed in!',
-    error: false,
-  };
 }
 
 async function signOut() {
@@ -41,9 +36,7 @@ async function signOut() {
 
   const { error } = await supabase.auth.signOut();
 
-  if (error) {
-    redirect('/error');
-  }
+  if (error) throw error;
 
   const landingURL = process.env.NEXT_PUBLIC_LANDING_URL as string;
 

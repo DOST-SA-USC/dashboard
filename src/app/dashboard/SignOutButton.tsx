@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 
@@ -17,7 +18,9 @@ const SignOutButton = () => {
     try {
       await signOut();
     } catch (error) {
-      console.error('Sign out failed:', error);
+      toast.error(
+        `An error occurred while signing out: ${error instanceof Error ? error.message : String(error)}`
+      );
     } finally {
       setLoading(false);
     }
