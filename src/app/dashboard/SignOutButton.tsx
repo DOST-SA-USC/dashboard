@@ -25,7 +25,7 @@ const SignOutButton = () => {
 
   return (
     <Button
-      className="w-full hover:cursor-pointer"
+      className="w-full cursor-pointer"
       onClick={handleSignOut}
       disabled={loading}
     >

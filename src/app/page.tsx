@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { createClient } from '@/lib/supabase/server';
 
+import SignInForm from '@/components/SignInForm';
+
 import {
   Card,
   CardContent,
@@ -13,6 +15,14 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 import { ExternalLink } from 'lucide-react';
 
@@ -36,13 +46,28 @@ export default async function Home() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
-        <Button className="w-full" asChild>
-          {data?.user ? (
-            <Link href="/dashboard">Dashboard</Link>
-          ) : (
-            <Link href="/signin">Sign In</Link>
-          )}
-        </Button>
+        {data?.user ? (
+          <Button className="w-full cursor-pointer" asChild>
+            <Link href={process.env.NEXT_PUBLIC_DASHBOARD_URL as string}>
+              Dashboard
+            </Link>
+          </Button>
+        ) : (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="w-full cursor-pointer">Sign In</Button>
+            </DialogTrigger>
+            <DialogContent className="w-96">
+              <DialogHeader>
+                <DialogTitle>Sign In</DialogTitle>
+                <DialogDescription>
+                  Enter your credentials to access your account.
+                </DialogDescription>
+              </DialogHeader>
+              <SignInForm />
+            </DialogContent>
+          </Dialog>
+        )}
         <Button className="w-full" variant="outline" asChild>
           <Link href="https://www.facebook.com/dostsausc" target="_blank">
             <ExternalLink /> Facebook

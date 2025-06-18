@@ -5,24 +5,35 @@ import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
 
-async function signIn(formData: FormData) {
+import { authState } from '@/type';
+
+async function signIn(_: authState, formData: FormData): Promise<authState> {
   const supabase = await createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+  const uscEmailDomain = process.env.NEXT_PUBLIC_USC_EMAIL_DOMAIN as string;
   const data = {
-    email: `${formData.get('uscID')}@usc.edu.ph` as string,
+    email: `${formData.get('uscID')}@${uscEmailDomain}` as string,
     password: formData.get('password') as string,
   };
 
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect('/error');
+    return {
+      error: true,
+      message: 'Invalid sign in credentials',
+    };
   }
 
-  revalidatePath('/dashboard', 'layout');
-  redirect('/dashboard');
+  const dashboardURL = process.env.NEXT_PUBLIC_DASHBOARD_URL as string;
+
+  revalidatePath(dashboardURL, 'layout');
+  redirect(dashboardURL);
+
+  return {
+    message: 'Successfully signed in!',
+    error: false,
+  };
 }
 
 async function signOut() {
@@ -34,8 +45,10 @@ async function signOut() {
     redirect('/error');
   }
 
-  revalidatePath('/', 'layout');
-  redirect('/');
+  const landingURL = process.env.NEXT_PUBLIC_LANDING_URL as string;
+
+  revalidatePath(landingURL, 'layout');
+  redirect(landingURL);
 }
 
 export { signIn, signOut };

@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import type { Metadata } from 'next';
 import '@/globals.css';
 
@@ -17,6 +18,7 @@ export default function RootLayout({
         <div className="flex h-screen w-full items-center justify-center p-8">
           {children}
         </div>
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );
