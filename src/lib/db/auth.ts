@@ -11,7 +11,7 @@ async function signIn(formData: FormData) {
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const data = {
-    email: formData.get('email') as string,
+    email: `${formData.get('uscID')}@usc.edu.ph` as string,
     password: formData.get('password') as string,
   };
 

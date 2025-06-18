@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/lib/db/auth';
 import { createClient } from '@/lib/supabase/server';
 
+import SignInButton from './SignInButton';
+
 import {
   Card,
   CardHeader,
@@ -36,14 +38,14 @@ export default async function LoginPage() {
       </CardHeader>
       <CardContent className="h-full w-full">
         <form className="flex w-full flex-col gap-2">
-          <Label htmlFor="email">Email:</Label>
-          <Input id="email" name="email" type="email" required />
+          <Label htmlFor="uscID">USC ID:</Label>
+          <Input id="uscID" name="uscID" type="text" required />
           <Label htmlFor="password">Password:</Label>
           <Input id="password" name="password" type="password" required />
 
           <hr className="my-4" />
 
-          <Button formAction={signIn}>Log in</Button>
+          <SignInButton formAction={signIn} />
           <Button className="w-full" variant="outline" asChild>
             <Link href="/">
               <ChevronLeft /> Go Back
