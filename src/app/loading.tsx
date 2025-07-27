@@ -1,12 +1,5 @@
-import React from 'react';
-import { LoaderCircle } from 'lucide-react';
+import Loader from '@/components/Loader';
 
-const Loading = () => {
-  return (
-    <div className="animate-spin">
-      <LoaderCircle />
-    </div>
-  );
-};
-
-export default Loading;
+export default function Loading() {
+  return <Loader />;
+}
