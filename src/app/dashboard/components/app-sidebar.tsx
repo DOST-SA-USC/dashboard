@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Frame, Map, PieChart } from 'lucide-react';
 
 import { NavMain } from './nav-main';
-import { NavUser } from '@/app/dashboard/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -40,9 +39,7 @@ const navData = [
   },
 ];
 
-export function AppSidebar(props: {
-  userData: { name: string; email: string };
-}) {
+export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -70,9 +67,7 @@ export function AppSidebar(props: {
       <SidebarContent>
         <NavMain items={navData} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={props.userData} />
-      </SidebarFooter>
+      <SidebarFooter>{/* // dost sa usc socials */}</SidebarFooter>
     </Sidebar>
   );
 }
