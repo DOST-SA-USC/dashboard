@@ -18,24 +18,23 @@ import {
 
 const companyData = {
   name: 'DOST SA USC',
-  description:
-    'Department of Science and Technology - University of San Carlos',
+  description: 'University of San Carlos',
   logo: '/logo.png',
 };
 
 const navData = [
   {
-    name: 'Design Engineering',
+    title: 'Design Engineering',
     url: '#',
     icon: Frame,
   },
   {
-    name: 'Sales & Marketing',
+    title: 'Sales & Marketing',
     url: '#',
     icon: PieChart,
   },
   {
-    name: 'Travel',
+    title: 'Travel',
     url: '#',
     icon: Map,
   },
@@ -45,7 +44,7 @@ export function AppSidebar(props: {
   userData: { name: string; email: string };
 }) {
   return (
-    <Sidebar variant="inset">
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -69,7 +68,7 @@ export function AppSidebar(props: {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain projects={navData} />
+        <NavMain items={navData} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={props.userData} />
