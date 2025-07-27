@@ -12,6 +12,9 @@ import {
 import { UserComponent } from './components/user';
 import ThemeSwitch from './components/ThemeSwitch';
 import Settings from './components/Settings';
+import RoleBadge from './components/role-badge';
+
+import { getUserByUUID } from '@/lib/db/user';
 
 export default async function RootLayout({
   children,
@@ -25,6 +28,8 @@ export default async function RootLayout({
   if (!data?.user) {
     return null;
   }
+
+  const user = await getUserByUUID(data.user.id);
 
   function getCurrentDateTimeString() {
     const now = new Date();
@@ -50,20 +55,22 @@ export default async function RootLayout({
           <div className="flex w-full items-center justify-between gap-2 px-4">
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
+
               <Separator
                 orientation="vertical"
                 className="mr-2 data-[orientation=vertical]:h-4"
               />
-              <span className="text-muted-foreground text-xs md:text-sm">
+              <span className="text-muted-foreground hidden text-sm md:block">
                 {getCurrentDateTimeString()}
               </span>
             </div>
             <div className="flex items-center gap-4 px-4">
+              <RoleBadge role={user.role} />
               <Settings />
               <ThemeSwitch />
               <UserComponent
                 user={{
-                  name: 'John Doe', // temporary
+                  name: `${user.first_name} ${user.last_name}`,
                   email: data.user.email as string,
                 }}
               />

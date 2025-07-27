@@ -3,4 +3,6 @@ interface authState {
   message: string;
 }
 
-export type { authState };
+type UserRoles = 'admin' | 'faculty' | 'officer' | 'student';
+
+export type { authState, UserRoles };
