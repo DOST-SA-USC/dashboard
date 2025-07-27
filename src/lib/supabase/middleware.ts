@@ -40,17 +40,31 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL as string;
-  const homePage = process.env.NEXT_PUBLIC_LANDING_URL as string;
+  const dashboardURL = process.env.NEXT_PUBLIC_DASHBOARD_URL as string;
 
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith(signInURL) &&
-    !request.nextUrl.pathname.startsWith('/auth') &&
-    request.nextUrl.pathname !== homePage // users can access the home page without being logged in
+    signInURL &&
+    (request.nextUrl.pathname === dashboardURL ||
+      (!request.nextUrl.pathname.startsWith(signInURL) &&
+        !request.nextUrl.pathname.startsWith('/auth')))
   ) {
-    // no user, potentially respond by redirecting the user to the login page
+    // If the user is not authenticated, redirect them to the sign-in page.
     const url = request.nextUrl.clone();
     url.pathname = signInURL;
+    return NextResponse.redirect(url);
+  }
+
+  if (
+    user &&
+    signInURL &&
+    dashboardURL &&
+    request.nextUrl.pathname.startsWith(signInURL) &&
+    request.nextUrl.pathname !== dashboardURL
+  ) {
+    // Authenticated user on sign-in page, redirect to dashboard
+    const url = request.nextUrl.clone();
+    url.pathname = dashboardURL;
     return NextResponse.redirect(url);
   }
 

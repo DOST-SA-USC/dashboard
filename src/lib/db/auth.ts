@@ -2,9 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
 import { createClient } from '@/lib/supabase/server';
-
 import { authState } from '@/type';
 
 async function signIn(_: authState, formData: FormData): Promise<authState> {
@@ -37,6 +35,11 @@ async function signOut() {
   const { error } = await supabase.auth.signOut();
 
   if (error) throw error;
+
+  const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL as string;
+
+  revalidatePath(signInURL, 'layout');
+  redirect(signInURL);
 }
 
 export { signIn, signOut };

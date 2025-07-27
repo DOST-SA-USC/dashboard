@@ -1,7 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
 import { LogOut } from 'lucide-react';
-import { toast } from 'sonner';
 import { signOut } from '@/lib/db/auth';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -22,22 +20,6 @@ export function UserComponent({
     email: string;
   };
 }) {
-  const [loading, setLoading] = useState(false);
-
-  const handleSignOut = useCallback(async () => {
-    setLoading(true);
-
-    try {
-      await signOut();
-    } catch (error) {
-      toast.error(
-        `An error occurred while signing out: ${error instanceof Error ? error.message : String(error)}`
-      );
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   function getUserInitials(name: string) {
     if (!name) return '';
     const parts = name.trim().split(' ');
@@ -76,7 +58,7 @@ export function UserComponent({
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSignOut} disabled={loading}>
+        <DropdownMenuItem onClick={signOut}>
           <LogOut />
           Log out
         </DropdownMenuItem>

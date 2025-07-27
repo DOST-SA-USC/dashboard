@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
 
 import { AppSidebar } from '@/app/dashboard/components/app-sidebar';
 import { Separator } from '@/components/ui/separator';
@@ -21,9 +20,10 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect(process.env.NEXT_PUBLIC_SIGNIN_URL as string);
+  const { data } = await supabase.auth.getUser();
+
+  if (!data?.user) {
+    return null;
   }
 
   function getCurrentDateTimeString() {
