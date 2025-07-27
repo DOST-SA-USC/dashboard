@@ -14,10 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark font-secondary bg-background antialiased">
-        <div className="flex h-screen w-full items-center justify-center p-8">
-          {children}
-        </div>
+      <body className="font-secondary bg-background antialiased">
+        {children}
         <Toaster position="bottom-right" richColors />
       </body>
     </html>

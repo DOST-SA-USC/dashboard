@@ -1,41 +1,14 @@
 import React from 'react';
 
-import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
-
-import SignOutButton from './SignOutButton';
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-
-export default async function PrivatePage() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect(process.env.NEXT_PUBLIC_SIGNIN_URL as string);
-  }
-
+export default async function Page() {
   return (
-    <Card className="h-auto w-full max-w-sm">
-      <CardHeader>
-        <CardTitle className="font-primary font-extrabold">
-          {data.user.email}
-        </CardTitle>
-        <CardDescription>Welcome to your private dashboard!</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2">
-        <SignOutButton />
-      </CardContent>
-      <CardFooter className="text-sm">
-        <p>© 2025, DOST SA USC. All Rights Reserved.</p>
-      </CardFooter>
-    </Card>
+    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+        <div className="bg-muted/50 aspect-video rounded-xl" />
+      </div>
+      <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+    </div>
   );
 }
