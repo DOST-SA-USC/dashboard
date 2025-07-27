@@ -37,11 +37,6 @@ async function signOut() {
   const { error } = await supabase.auth.signOut();
 
   if (error) throw error;
-
-  const landingURL = process.env.NEXT_PUBLIC_LANDING_URL as string;
-
-  revalidatePath(landingURL, 'layout');
-  redirect(landingURL);
 }
 
 export { signIn, signOut };
