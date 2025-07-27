@@ -17,8 +17,8 @@ import {
 } from '@/components/ui/sidebar';
 
 const companyData = {
-  name: 'DOST SA USC',
-  description: 'University of San Carlos',
+  name: 'ISKOLA',
+  description: 'DOST SA USC',
   logo: '/logo.png',
 };
 

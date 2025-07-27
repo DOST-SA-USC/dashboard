@@ -96,7 +96,7 @@ export function LoginForm({
             <Image
               width={500}
               height={500}
-              src="/logo.png" // temporary
+              src="/placeholder.jpg" // temporary
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover"
             />
