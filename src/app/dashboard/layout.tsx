@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/sidebar';
 import { UserComponent } from './components/user';
 import ThemeSwitch from './components/ThemeSwitch';
-import Settings from './components/Settings';
 import RoleBadge from './components/role-badge';
 
 import { getUserByUUID } from '@/lib/db/user';
@@ -66,7 +65,6 @@ export default async function RootLayout({
             </div>
             <div className="flex items-center gap-4 px-4">
               <RoleBadge role={user.role} />
-              <Settings />
               <ThemeSwitch />
               <UserComponent
                 user={{
