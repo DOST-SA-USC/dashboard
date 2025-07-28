@@ -72,13 +72,13 @@ export function UserComponent({
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setOpenSettingsModal(true)}>
-            <Settings />
-            Account Settings
-          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenIDModal(true)}>
             <IdCardLanyard />
             Scholar ID
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpenSettingsModal(true)}>
+            <Settings />
+            Account Settings
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut}>
