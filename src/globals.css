@@ -1,8 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.2808 0.0062 34.2973);
@@ -53,6 +51,58 @@
   --shadow-xl:
     0px 2px 4px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.25);
+  --tracking-normal: 0rem;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: oklch(0.25 0.005 20); /* soft dark gray */
+  --foreground: oklch(0.95 0.01 34.3); /* near-white text */
+  --card: oklch(0.28 0.005 20); /* slightly lighter than bg */
+  --card-foreground: oklch(0.95 0.01 34.3);
+  --popover: oklch(0.3 0.005 20);
+  --popover-foreground: oklch(0.95 0.01 34.3);
+  --primary: oklch(0.65 0.14 271.8); /* keep brand purple */
+  --primary-foreground: oklch(0.1 0.005 271.8); /* soft dark for contrast */
+  --secondary: oklch(0.55 0.1 271.8);
+  --secondary-foreground: oklch(0.1 0.005 271.8);
+  --muted: oklch(0.35 0.01 337.3);
+  --muted-foreground: oklch(0.75 0.01 34.3);
+  --accent: oklch(0.45 0.02 337.3);
+  --accent-foreground: oklch(0.9 0.02 271.8);
+  --destructive: oklch(0.55 0.15 25.3); /* softer red */
+  --destructive-foreground: oklch(0.98 0.005 0); /* light text */
+  --border: oklch(0.4 0.01 20); /* soft border */
+  --input: oklch(0.35 0.01 20);
+  --ring: oklch(0.65 0.14 271.8);
+
+  --chart-1: oklch(0.75 0.13 91.97);
+  --chart-2: oklch(0.6 0.13 144.13);
+  --chart-3: oklch(0.65 0.14 271.8);
+  --chart-4: oklch(0.65 0.12 89.54);
+  --chart-5: oklch(0.5 0.12 143.96);
+
+  --sidebar: oklch(0.28 0.005 20);
+  --sidebar-foreground: oklch(0.9 0.01 34.3);
+  --sidebar-primary: oklch(0.65 0.14 271.8);
+  --sidebar-primary-foreground: oklch(0.1 0.005 0);
+  --sidebar-accent: oklch(0.5 0.02 308.3);
+  --sidebar-accent-foreground: oklch(0.95 0.01 34.3);
+  --sidebar-border: oklch(0.4 0.01 17.3);
+  --sidebar-ring: oklch(0.65 0.14 271.8);
+
+  --font-sans: Poppins, sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-mono: JetBrains Mono, monospace;
+  --radius: 0.5rem;
+
+  --shadow-xs: 0px 2px 4px hsl(0 0% 0% / 0.06);
+  --shadow-sm: 0px 4px 6px hsl(0 0% 0% / 0.08);
+  --shadow-md: 0px 6px 10px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0px 8px 16px hsl(0 0% 0% / 0.12);
+  --shadow-xl: 0px 12px 20px hsl(0 0% 0% / 0.14);
+  --shadow-2xl: 0px 16px 24px hsl(0 0% 0% / 0.15);
+
   --tracking-normal: 0rem;
   --spacing: 0.25rem;
 }

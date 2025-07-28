@@ -10,7 +10,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { UserComponent } from './components/user';
-import ThemeSwitch from './components/ThemeSwitch';
+import ModeToggle from '@/components/ThemeSwitch';
 import RoleBadge from './components/role-badge';
 
 import { getUserByUUID } from '@/lib/db/user';
@@ -65,7 +65,7 @@ export default async function RootLayout({
             </div>
             <div className="flex items-center gap-4 px-4">
               <RoleBadge role={user.role} />
-              <ThemeSwitch />
+              <ModeToggle variant="outline" />
               <UserComponent
                 user={{
                   name: `${user.first_name} ${user.last_name}`,
