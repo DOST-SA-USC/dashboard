@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, MonitorCog } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
@@ -23,8 +23,10 @@ export default function ModeToggle(props: {
         <Button variant={props.variant} size="icon">
           {theme === 'dark' ? (
             <Moon className="h-5 w-5" />
-          ) : (
+          ) : theme === 'light' ? (
             <Sun className="h-5 w-5" />
+          ) : (
+            <MonitorCog className="h-5 w-5" />
           )}
           <span className="sr-only">Toggle theme</span>
         </Button>
