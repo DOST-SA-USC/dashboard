@@ -13,7 +13,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import ScholarID from '../scholar-id';
+import ScholarIDModal from '../scholar-id';
+import SettingsModal from '../settings';
 
 export function UserComponent({
   user,
@@ -23,7 +24,8 @@ export function UserComponent({
     email: string;
   };
 }) {
-  const [open, setOpen] = useState(false);
+  const [openIDModal, setOpenIDModal] = useState(false);
+  const [openSettingsModal, setOpenSettingsModal] = useState(false);
 
   function getUserInitials(name: string) {
     if (!name) return '';
@@ -36,7 +38,11 @@ export function UserComponent({
 
   return (
     <>
-      <ScholarID open={open} onOpenChange={setOpen} />
+      <ScholarIDModal open={openIDModal} onOpenChange={setOpenIDModal} />
+      <SettingsModal
+        open={openSettingsModal}
+        onOpenChange={setOpenSettingsModal}
+      />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -66,11 +72,11 @@ export function UserComponent({
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpenSettingsModal(true)}>
             <Settings />
             Account Settings
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
+          <DropdownMenuItem onClick={() => setOpenIDModal(true)}>
             <IdCardLanyard />
             Scholar ID
           </DropdownMenuItem>
