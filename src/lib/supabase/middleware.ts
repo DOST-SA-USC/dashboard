@@ -45,7 +45,7 @@ export async function updateSession(request: NextRequest) {
   if (
     !user &&
     signInURL &&
-    (request.nextUrl.pathname === dashboardURL ||
+    (request.nextUrl.pathname.startsWith(dashboardURL) ||
       (!request.nextUrl.pathname.startsWith(signInURL) &&
         !request.nextUrl.pathname.startsWith('/auth')))
   ) {
@@ -60,7 +60,7 @@ export async function updateSession(request: NextRequest) {
     signInURL &&
     dashboardURL &&
     request.nextUrl.pathname.startsWith(signInURL) &&
-    request.nextUrl.pathname !== dashboardURL
+    !request.nextUrl.pathname.startsWith(dashboardURL)
   ) {
     // Authenticated user on sign-in page, redirect to dashboard
     const url = request.nextUrl.clone();

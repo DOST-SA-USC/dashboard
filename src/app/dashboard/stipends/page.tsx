@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default async function Dashboard() {
+export default async function Stipends() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">Dashboard</h1>
+      <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">Stipends</h1>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />

@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { Frame, Map, PieChart } from 'lucide-react';
+import {
+  House,
+  Megaphone,
+  Calendar,
+  CircleDollarSign,
+  BookOpen,
+} from 'lucide-react';
 
 import { NavMain } from './ui/nav-main';
 import {
@@ -23,19 +29,29 @@ const companyData = {
 
 const navData = [
   {
-    title: 'Design Engineering',
-    url: '#',
-    icon: Frame,
+    title: 'Dashboard',
+    url: '/dashboard',
+    icon: House,
   },
   {
-    title: 'Sales & Marketing',
-    url: '#',
-    icon: PieChart,
+    title: 'Announcements',
+    url: '/dashboard/announcements',
+    icon: Megaphone,
   },
   {
-    title: 'Travel',
-    url: '#',
-    icon: Map,
+    title: 'Events',
+    url: '/dashboard/events',
+    icon: Calendar,
+  },
+  {
+    title: 'Stipends',
+    url: '/dashboard/stipends',
+    icon: CircleDollarSign,
+  },
+  {
+    title: 'Resources',
+    url: '/dashboard/resources',
+    icon: BookOpen,
   },
 ];
 
