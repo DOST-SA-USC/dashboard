@@ -4,7 +4,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Frame, Map, PieChart } from 'lucide-react';
 
-import { NavMain } from './nav-main';
+import { NavMain } from './ui/nav-main';
 import {
   Sidebar,
   SidebarContent,
