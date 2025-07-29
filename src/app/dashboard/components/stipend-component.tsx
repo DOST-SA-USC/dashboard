@@ -138,7 +138,7 @@ const StipendComponent = (props: { className?: string }) => {
                 <Link
                   href={DBM_DATA.link}
                   target="_blank"
-                  className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
+                  className="flex items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
                 >
                   <LinkIcon className="size-3" /> Link
                 </Link>
