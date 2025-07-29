@@ -8,10 +8,14 @@ const OverviewCard = (props: {
   value: string;
   description: string;
   icon: LucideIcon;
+  action?: () => void;
   className?: string;
 }) => {
   return (
-    <Card className={`flex !gap-0 p-4 md:p-6 ${props.className}`}>
+    <Card
+      className={`flex flex-col gap-2 p-4 md:p-6 ${props.className}`}
+      onClick={props.action}
+    >
       <div className="flex items-center justify-between">
         <h1 className="text-card-foreground text-xs font-medium md:text-sm">
           {props.title}

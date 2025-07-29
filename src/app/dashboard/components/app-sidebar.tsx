@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import {
-  Command,
-  Megaphone,
-  Calendar,
-  CircleDollarSign,
-  BookOpen,
-} from 'lucide-react';
+import { Command, Megaphone, Calendar, BookOpen } from 'lucide-react';
 
 import { NavMain } from './ui/nav-main';
 import {
@@ -42,11 +36,6 @@ const navData = [
     title: 'Events',
     url: '/dashboard/events',
     icon: Calendar,
-  },
-  {
-    title: 'Stipends',
-    url: '/dashboard/stipends',
-    icon: CircleDollarSign,
   },
   {
     title: 'Resources',

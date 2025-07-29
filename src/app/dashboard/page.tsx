@@ -1,9 +1,10 @@
 import React from 'react';
 import OverviewCard from '@/components/dashboard/overview-card';
-import { Bell, Calendar, DollarSign } from 'lucide-react';
+import { Bell, Calendar } from 'lucide-react';
 import PageCard from '@/components/dashboard/PageCard';
 import AnnouncementItem from '@/components/dashboard/announcement-item';
 import EventItem from '@/components/dashboard/event-item';
+import StipendComponent from './components/stipend-component';
 
 import type { AnnouncementType, EventType } from '@/type';
 
@@ -84,6 +85,7 @@ export default async function Dashboard() {
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">Dashboard</h1>
       <div className="grid grid-cols-2 grid-rows-2 gap-4 lg:grid-cols-3 lg:grid-rows-1">
+        <StipendComponent className="col-span-2 lg:col-span-1" />
         <OverviewCard
           title="New Announcements"
           value="12"
@@ -97,13 +99,6 @@ export default async function Dashboard() {
           description="This week"
           icon={Calendar}
           className="row-span-1"
-        />
-        <OverviewCard
-          title="Stipend Status"
-          value="Pending"
-          description="Awaiting approval"
-          icon={DollarSign}
-          className="col-span-2 lg:col-span-1"
         />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
