@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import '@/globals.css';
 
 export const metadata: Metadata = {
-  title: 'DOST SA USC',
+  title: 'Iskola | DOST SA USC',
   description: 'Official scholar portal for DOST SA USC.',
 };
 
