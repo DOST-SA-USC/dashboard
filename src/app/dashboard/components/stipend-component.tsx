@@ -63,7 +63,7 @@ const StipendCard = (props: {
     <Card className="flex flex-col gap-1 p-4 text-sm md:text-base">
       <div className="flex items-center justify-between gap-2">
         <h2 className="text-xs font-semibold md:text-sm">{props.title}</h2>
-        <props.icon className="text-muted-foreground size-4" />
+        <props.icon className="text-primary size-4" />
       </div>
       <span className="text-primary text-2xl font-extrabold">
         {props.value}

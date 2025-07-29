@@ -27,7 +27,7 @@ const PageCard = (props: {
   return (
     <Card className={props.className}>
       <CardHeader>
-        <CardTitle>{props.title}</CardTitle>
+        <CardTitle className="text-primary">{props.title}</CardTitle>
         <CardDescription className="text-xs md:text-sm">
           {props.description}
         </CardDescription>
@@ -36,7 +36,7 @@ const PageCard = (props: {
             <Tooltip>
               <TooltipTrigger className="text-muted-foreground ml-1" asChild>
                 <Link href={props.link} className="flex items-center">
-                  <ExternalLink className="ml-1 h-4 w-4" />
+                  <ExternalLink className="text-primary ml-1 size-4" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>More {props.title}</TooltipContent>

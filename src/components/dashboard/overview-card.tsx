@@ -20,9 +20,9 @@ const OverviewCard = (props: {
         <h1 className="text-card-foreground text-xs font-medium md:text-sm">
           {props.title}
         </h1>
-        <props.icon className="text-muted-foreground size-3 md:size-5" />
+        <props.icon className="text-primary size-3 md:size-5" />
       </div>
-      <span className="text-foreground text-2xl font-extrabold md:text-4xl">
+      <span className="text-primary text-2xl font-extrabold md:text-4xl">
         {props.value}
       </span>
       <p className="text-muted-foreground text-[10px] md:text-xs">
