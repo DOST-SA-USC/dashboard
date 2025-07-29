@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import {
-  House,
+  Command,
   Megaphone,
   Calendar,
   CircleDollarSign,
@@ -31,7 +31,7 @@ const navData = [
   {
     title: 'Dashboard',
     url: '/dashboard',
-    icon: House,
+    icon: Command,
   },
   {
     title: 'Announcements',
