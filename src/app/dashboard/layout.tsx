@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/sidebar';
 import { UserComponent } from './components/ui/user';
 import ModeToggle from '@/components/ThemeSwitch';
-import RoleBadge from './components/ui/role-badge';
+import RoleBadge from '../../components/dashboard/role-badge';
 
 import { getUserByUUID } from '@/lib/db/user';
 

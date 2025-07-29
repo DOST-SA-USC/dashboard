@@ -5,4 +5,19 @@ interface authState {
 
 type UserRoles = 'admin' | 'faculty' | 'officer' | 'student';
 
-export type { authState, UserRoles };
+interface AnnouncementType {
+  type: 'officer' | 'faculty' | 'facebook';
+  priority: 'low' | 'urgent';
+  date: string;
+  title: string;
+  content: string;
+}
+
+interface EventType {
+  title: string;
+  type: Array<'scientia' | 'virtus' | 'devotio'>;
+  startDate: string;
+  endDate?: string;
+}
+
+export type { authState, UserRoles, AnnouncementType, EventType };
