@@ -34,7 +34,12 @@ async function signOut() {
 
   const { error } = await supabase.auth.signOut();
 
-  if (error) throw error;
+  if (error) {
+    return {
+      error: true,
+      message: error.message || 'Failed to sign out',
+    };
+  }
 
   const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL as string;
 

@@ -1,5 +1,8 @@
 'use client';
 import React, { useState } from 'react';
+import { useActionState } from 'react';
+
+import { toast } from 'sonner';
 import { LogOut, IdCardLanyard, Settings } from 'lucide-react';
 import { signOut } from '@/lib/db/auth';
 
@@ -15,6 +18,9 @@ import {
 
 import ScholarIDModal from '../scholar-id';
 import SettingsModal from '../settings';
+import { authState } from '@/type';
+
+const initialState: authState = { message: '', error: false };
 
 export function UserComponent({
   user,
@@ -24,6 +30,8 @@ export function UserComponent({
     email: string;
   };
 }) {
+  const [, formAction, isPending] = useActionState(signOut, initialState);
+
   const [openIDModal, setOpenIDModal] = useState(false);
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
 
@@ -34,6 +42,13 @@ export function UserComponent({
       return parts[0].slice(0, 2).toUpperCase();
     }
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  function handleSignOut() {
+    formAction();
+    if (!isPending) {
+      toast.success('Successfully signed out');
+    }
   }
 
   return (
@@ -81,10 +96,14 @@ export function UserComponent({
             Account Settings
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={signOut}>
-            <LogOut />
-            Log out
-          </DropdownMenuItem>
+          <form action={handleSignOut} className="w-full">
+            <DropdownMenuItem asChild>
+              <button type="submit" className="w-full" disabled={isPending}>
+                <LogOut />
+                Sign Out
+              </button>
+            </DropdownMenuItem>
+          </form>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
