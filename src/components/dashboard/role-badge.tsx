@@ -5,23 +5,23 @@ import type { UserRoles } from '@/type';
 
 export default function RoleBadge({ role }: { role: UserRoles }) {
   const icons = {
-    admin: <ShieldUser className="h-4 w-4" />,
-    faculty: <ContactRound className="h-4 w-4" />,
-    officer: <Contact className="h-4 w-4" />,
-    student: <FileUser className="h-4 w-4" />,
+    admin: <ShieldUser className="size-4" />,
+    faculty: <ContactRound className="size-4" />,
+    officer: <Contact className="size-4" />,
+    student: <FileUser className="size-4" />,
   };
 
   const colors = {
-    admin: 'bg-red-700/30 text-red-700 border-red-700',
-    faculty: 'bg-blue-700/30 text-blue-700 border-blue-700',
-    officer: 'bg-yellow-600/30 text-yellow-600 border-yellow-600',
-    student: 'bg-green-700/30 text-green-700 border-green-700',
+    student: 'bg-chart-2/30 text-chart-2 border-chart-2',
+    admin: 'bg-chart-1/30 text-chart-1 border-chart-1',
+    faculty: 'bg-chart-3/30 text-chart-3 border-chart-3',
+    officer: 'bg-chart-4/30 text-chart-4 border-chart-4',
   };
 
   return (
-    <Badge className={`flex items-center gap-1 border ${colors[role]}`}>
+    <Badge className={`flex items-center gap-1.5 border ${colors[role]}`}>
       {icons[role]}
-      {role.charAt(0).toUpperCase() + role.slice(1)}
+      {role}
     </Badge>
   );
 }
