@@ -1,0 +1,72 @@
+[
+  {
+    "type": "officer",
+    "priority": "low",
+    "date": "2023-10-01",
+    "title": "Student Council Meeting",
+    "content": "The next student council meeting will be held on October 5th at 3:00 PM in Room 204. All representatives are required to attend."
+  },
+  {
+    "type": "faculty",
+    "priority": "urgent",
+    "date": "2023-10-02",
+    "title": "Class Suspension Notice",
+    "content": "All classes are suspended on October 6th due to scheduled maintenance of school facilities. Please check your emails for further updates."
+  },
+  {
+    "type": "officer",
+    "priority": "urgent",
+    "date": "2023-10-03",
+    "title": "Scholarship Application Deadline",
+    "content": "The deadline for submitting scholarship applications is October 10th. Submit all required documents to the registrar’s office."
+  },
+  {
+    "type": "facebook",
+    "priority": "low",
+    "date": "2023-10-04",
+    "title": "Campus Clean-Up Drive",
+    "content": "Join us for the campus clean-up drive this Saturday at 8:00 AM. Volunteers will receive certificates of participation."
+  },
+  {
+    "type": "faculty",
+    "priority": "medium",
+    "date": "2023-10-05",
+    "title": "Parent-Teacher Conference",
+    "content": "Parent-teacher conferences will be held on October 12th. Please schedule your appointments with your child’s teachers."
+  },
+  {
+    "type": "officer",
+    "priority": "low",
+    "date": "2023-10-06",
+    "title": "Lost and Found",
+    "content": "A set of keys was found in the library. Please visit the administration office to claim your lost items."
+  },
+  {
+    "type": "faculty",
+    "priority": "urgent",
+    "date": "2023-10-07",
+    "title": "Fire Drill Announcement",
+    "content": "A fire drill is scheduled for October 9th at 10:00 AM. All students and staff must participate and follow safety protocols."
+  },
+  {
+    "type": "facebook",
+    "priority": "medium",
+    "date": "2023-10-08",
+    "title": "Sports Fest Registration",
+    "content": "Registration for the annual sports fest is now open. Sign up your teams at the gym office by October 15th."
+  },
+  {
+    "type": "officer",
+    "priority": "low",
+    "date": "2023-10-09",
+    "title": "Book Fair",
+    "content": "The school book fair will run from October 14th to 16th in the main hall. Discounts available on selected titles."
+  },
+  {
+    "type": "faculty",
+    "priority": "medium",
+    "date": "2023-10-10",
+    "title": "Midterm Exam Schedule",
+    "content": "Midterm exams will take place from October 20th to 24th. Check the bulletin board for your exam schedule."
+  }
+]

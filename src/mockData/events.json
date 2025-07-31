@@ -1,0 +1,59 @@
+[
+  {
+    "title": "Science Fair",
+    "type": ["scientia", "virtus"],
+    "startDate": "2023-10-15",
+    "endDate": "2023-10-16"
+  },
+  {
+    "title": "Cultural Festival",
+    "type": ["virtus", "devotio"],
+    "startDate": "2023-10-20",
+    "endDate": "2023-10-22"
+  },
+  {
+    "title": "Charity Run",
+    "type": ["devotio"],
+    "startDate": "2023-10-25"
+  },
+  {
+    "title": "Math Olympiad",
+    "type": ["scientia"],
+    "startDate": "2023-11-01",
+    "endDate": "2023-11-01"
+  },
+  {
+    "title": "Art Exhibition",
+    "type": ["virtus"],
+    "startDate": "2023-11-05",
+    "endDate": "2023-11-07"
+  },
+  {
+    "title": "Music Concert",
+    "type": ["virtus", "devotio"],
+    "startDate": "2023-11-10"
+  },
+  {
+    "title": "Sports Day",
+    "type": ["virtus"],
+    "startDate": "2023-11-15",
+    "endDate": "2023-11-15"
+  },
+  {
+    "title": "Book Fair",
+    "type": ["scientia"],
+    "startDate": "2023-11-20",
+    "endDate": "2023-11-22"
+  },
+  {
+    "title": "Community Service",
+    "type": ["devotio"],
+    "startDate": "2023-11-25"
+  },
+  {
+    "title": "Debate Competition",
+    "type": ["scientia", "virtus"],
+    "startDate": "2023-11-30",
+    "endDate": "2023-12-01"
+  }
+]
