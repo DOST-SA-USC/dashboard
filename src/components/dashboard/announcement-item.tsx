@@ -1,12 +1,10 @@
 import React from 'react';
 import type { AnnouncementType } from '@/type';
-import { Badge } from '@/components/ui/badge';
 
-import {
-  capitalizeFirstLetter,
-  truncateWithEllipsis,
-  formatDate,
-} from '@/lib/helpers';
+import RoleBadge from '@/components/dashboard/role-badge';
+import ImportantBadge from '@/components/dashboard/important-badge';
+
+import { truncateWithEllipsis, formatDate } from '@/lib/helpers';
 
 const AnnouncementItem = (props: { announcement: AnnouncementType }) => {
   let borderColor;
@@ -20,21 +18,16 @@ const AnnouncementItem = (props: { announcement: AnnouncementType }) => {
     default:
       borderColor = 'border-chart-3';
   }
+
   return (
     <div className={`border-l-4 md:space-y-2 ${borderColor} py-2 pl-4`}>
       <div className="text-muted-foreground flex items-center justify-between gap-4 text-xs">
-        <div className="space-x-2">
-          <Badge variant="outline" className="md:text-xs] text-[10px]">
-            {capitalizeFirstLetter(props.announcement.type)}
-          </Badge>
-          {props.announcement.priority === 'urgent' && (
-            <Badge variant="destructive" className="text-[10px] md:text-xs">
-              Urgent
-            </Badge>
-          )}
+        <div className="flex items-center gap-2">
+          <RoleBadge role={props.announcement.type} />
+          <ImportantBadge priority={props.announcement.priority} />
         </div>
         <span className="md:text-xs] text-[10px]">
-          {formatDate(props.announcement.date)}
+          {formatDate(new Date(props.announcement.createdAt))}
         </span>
       </div>
       <h2 className="text-md font-semibold md:text-xl">

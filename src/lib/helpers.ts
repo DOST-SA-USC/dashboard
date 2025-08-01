@@ -11,11 +11,41 @@ export function truncateWithEllipsis(
   return str.length > maxLength ? str.slice(0, maxLength) + '...' : str;
 }
 
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+export function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   });
+}
+
+export function getRelativeDate(date: Date): string {
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  const diffMonths = Math.floor(diffDays / 30);
+
+  if (diffMonths >= 1) {
+    return formatDate(date);
+  } else if (diffDays >= 1) {
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+  } else if (diffHours >= 1) {
+    return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+  } else if (diffMinutes >= 1) {
+    return `${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} ago`;
+  } else {
+    return 'just now';
+  }
+}
+
+export function getUserInitials(name: string) {
+  if (!name) return '';
+  const parts = name.trim().split(' ');
+  if (parts.length === 1) {
+    return parts[0].slice(0, 2).toUpperCase();
+  }
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }

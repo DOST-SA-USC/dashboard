@@ -20,6 +20,8 @@ import ScholarIDModal from '../scholar-id';
 import SettingsModal from '../settings';
 import { authState } from '@/type';
 
+import { getUserInitials } from '@/lib/helpers';
+
 const initialState: authState = { message: '', error: false };
 
 export function UserComponent({
@@ -34,15 +36,6 @@ export function UserComponent({
 
   const [openIDModal, setOpenIDModal] = useState(false);
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
-
-  function getUserInitials(name: string) {
-    if (!name) return '';
-    const parts = name.trim().split(' ');
-    if (parts.length === 1) {
-      return parts[0].slice(0, 2).toUpperCase();
-    }
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-  }
 
   function handleSignOut() {
     formAction();

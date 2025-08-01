@@ -1,72 +1,92 @@
 [
   {
-    "type": "officer",
-    "priority": "low",
-    "date": "2023-10-01",
-    "title": "Student Council Meeting",
-    "content": "The next student council meeting will be held on October 5th at 3:00 PM in Room 204. All representatives are required to attend."
-  },
-  {
-    "type": "faculty",
-    "priority": "urgent",
-    "date": "2023-10-02",
-    "title": "Class Suspension Notice",
-    "content": "All classes are suspended on October 6th due to scheduled maintenance of school facilities. Please check your emails for further updates."
-  },
-  {
-    "type": "officer",
-    "priority": "urgent",
-    "date": "2023-10-03",
-    "title": "Scholarship Application Deadline",
-    "content": "The deadline for submitting scholarship applications is October 10th. Submit all required documents to the registrar’s office."
-  },
-  {
-    "type": "facebook",
-    "priority": "low",
-    "date": "2023-10-04",
-    "title": "Campus Clean-Up Drive",
-    "content": "Join us for the campus clean-up drive this Saturday at 8:00 AM. Volunteers will receive certificates of participation."
-  },
-  {
+    "id": 10,
     "type": "faculty",
     "priority": "medium",
-    "date": "2023-10-05",
-    "title": "Parent-Teacher Conference",
-    "content": "Parent-teacher conferences will be held on October 12th. Please schedule your appointments with your child’s teachers."
-  },
-  {
-    "type": "officer",
-    "priority": "low",
-    "date": "2023-10-06",
-    "title": "Lost and Found",
-    "content": "A set of keys was found in the library. Please visit the administration office to claim your lost items."
-  },
-  {
-    "type": "faculty",
-    "priority": "urgent",
-    "date": "2023-10-07",
-    "title": "Fire Drill Announcement",
-    "content": "A fire drill is scheduled for October 9th at 10:00 AM. All students and staff must participate and follow safety protocols."
-  },
-  {
-    "type": "facebook",
-    "priority": "medium",
-    "date": "2023-10-08",
-    "title": "Sports Fest Registration",
-    "content": "Registration for the annual sports fest is now open. Sign up your teams at the gym office by October 15th."
-  },
-  {
-    "type": "officer",
-    "priority": "low",
-    "date": "2023-10-09",
-    "title": "Book Fair",
-    "content": "The school book fair will run from October 14th to 16th in the main hall. Discounts available on selected titles."
-  },
-  {
-    "type": "faculty",
-    "priority": "medium",
-    "date": "2023-10-10",
+    "createdAt": "2025-08-03T15:50:00Z",
+    "author": "Gabriel Torres",
     "title": "Midterm Exam Schedule",
-    "content": "Midterm exams will take place from October 20th to 24th. Check the bulletin board for your exam schedule."
+    "content": "Midterm exams will take place from October 20th to 24th. Please check the bulletin board for your specific exam schedule and room assignments. Students are reminded to bring their school IDs and necessary materials. Arrive at least 15 minutes before your scheduled exam time. Good luck to everyone, and please contact your subject teachers if you have any questions or concerns regarding the exam coverage or schedule."
+  },
+  {
+    "id": 9,
+    "type": "officer",
+    "priority": "low",
+    "createdAt": "2025-08-02T07:10:00Z",
+    "author": "Isabel Cruz",
+    "title": "Book Fair",
+    "content": "The school book fair will run from October 14th to 16th in the main hall. Discounts are available on selected titles, and there will be special sessions with guest authors and illustrators. Students and parents are encouraged to visit and explore a wide range of books for all ages and interests. Proceeds from the fair will go towards funding new library resources and reading programs. Don’t miss this opportunity to expand your personal library and support our school."
+  },
+  {
+    "id": 8,
+    "type": "facebook",
+    "priority": "medium",
+    "createdAt": "2025-08-01T16:20:00Z",
+    "author": "Paolo Ramos",
+    "title": "Sports Fest Registration",
+    "content": "Registration for the annual sports fest is now open. Sign up your teams at the gym office by October 15th. The event will feature basketball, volleyball, badminton, and track and field competitions. All students are encouraged to participate, whether as athletes or supporters. Team captains should submit their rosters and waiver forms before the deadline. Let’s make this year’s sports fest a memorable and exciting event for everyone!"
+  },
+  {
+    "id": 7,
+    "type": "faculty",
+    "priority": "important",
+    "createdAt": "2025-07-31T10:55:00Z",
+    "author": "Sofia Garcia",
+    "title": "Fire Drill Announcement",
+    "content": "A fire drill is scheduled for October 9th at 10:00 AM. All students and staff must participate and follow safety protocols. Please familiarize yourself with the nearest exits and evacuation routes in your area. Teachers are requested to review emergency procedures with their classes prior to the drill. Remember to remain calm, walk quickly but do not run, and assemble at the designated safety zones outside the building. Your cooperation ensures everyone’s safety."
+  },
+  {
+    "id": 6,
+    "type": "officer",
+    "priority": "low",
+    "createdAt": "2025-07-30T13:40:00Z",
+    "author": "Carlos Mendoza",
+    "title": "Lost and Found",
+    "content": "A set of keys was found in the library. Please visit the administration office to claim your lost items. If you have lost any other belongings, such as books, water bottles, or electronic devices, kindly check the lost and found box located near the main entrance. Unclaimed items will be donated to charity at the end of the semester. Remember to label your personal items to help us return them to you more easily."
+  },
+  {
+    "id": 5,
+    "type": "faculty",
+    "priority": "medium",
+    "createdAt": "2025-07-29T11:05:00Z",
+    "author": "Liza Reyes",
+    "title": "Parent-Teacher Conference",
+    "content": "Parent-teacher conferences will be held on October 12th. Please schedule your appointments with your child’s teachers in advance to ensure availability. This is an important opportunity to discuss your child’s academic progress, strengths, and areas for improvement. We encourage all parents and guardians to attend and actively participate in these discussions. For more information or to request a specific time slot, contact the school office or your child’s homeroom adviser."
+  },
+  {
+    "id": 4,
+    "type": "facebook",
+    "priority": "low",
+    "createdAt": "2025-07-28T17:30:00Z",
+    "author": "Miguel Lopez",
+    "title": "Campus Clean-Up Drive",
+    "content": "Join us for the campus clean-up drive this Saturday at 8:00 AM. Volunteers will receive certificates of participation and community service hours. We will be focusing on cleaning classrooms, hallways, gardens, and common areas. Please bring gloves, reusable bags, and any cleaning tools you can spare. Let’s work together to keep our school environment clean, green, and welcoming for everyone. Snacks and refreshments will be provided for all volunteers."
+  },
+  {
+    "id": 3,
+    "type": "officer",
+    "priority": "important",
+    "createdAt": "2025-07-27T08:45:00Z",
+    "author": "Ana Rodriguez",
+    "title": "Scholarship Application Deadline",
+    "content": "The deadline for submitting scholarship applications is October 10th. Submit all required documents to the registrar’s office before the cut-off date. Incomplete applications will not be considered, so please double-check your forms and supporting materials. For questions about eligibility or the application process, visit the guidance office or consult the scholarship guidelines posted on the school website. Don’t miss this chance to receive financial assistance for your studies."
+  },
+  {
+    "id": 2,
+    "type": "faculty",
+    "priority": "important",
+    "createdAt": "2025-07-26T14:22:00Z",
+    "author": "Juan Dela Cruz",
+    "title": "Class Suspension Notice",
+    "content": "All classes are suspended on October 6th due to scheduled maintenance of school facilities. Please check your emails for further updates and instructions from your teachers regarding assignments or alternative learning activities. The maintenance will include electrical, plumbing, and safety inspections to ensure a secure environment for everyone. We apologize for any inconvenience and appreciate your understanding and cooperation. Classes will resume as usual on October 7th."
+  },
+  {
+    "id": 1,
+    "type": "officer",
+    "priority": "low",
+    "createdAt": "2025-07-25T09:15:00Z",
+    "author": "Maria Santos",
+    "title": "Student Council Meeting",
+    "content": "The next student council meeting will be held on October 5th at 3:00 PM in Room 204. All representatives are required to attend and should prepare updates on their respective committees’ activities. The agenda includes planning for upcoming events, discussing student concerns, and reviewing proposals for new projects. Please bring your notebooks and any relevant documents. If you are unable to attend, inform the council secretary in advance and send a proxy."
   }
 ]

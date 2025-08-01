@@ -2,58 +2,58 @@
   {
     "title": "Science Fair",
     "type": ["scientia", "virtus"],
-    "startDate": "2023-10-15",
-    "endDate": "2023-10-16"
+    "startDate": "2024-06-01T09:00:00Z",
+    "endDate": "2024-06-02T17:00:00Z"
   },
   {
     "title": "Cultural Festival",
     "type": ["virtus", "devotio"],
-    "startDate": "2023-10-20",
-    "endDate": "2023-10-22"
+    "startDate": "2024-06-05T10:30:00Z",
+    "endDate": "2024-06-07T20:00:00Z"
   },
   {
     "title": "Charity Run",
     "type": ["devotio"],
-    "startDate": "2023-10-25"
+    "startDate": "2024-06-10T07:15:00Z"
   },
   {
     "title": "Math Olympiad",
     "type": ["scientia"],
-    "startDate": "2023-11-01",
-    "endDate": "2023-11-01"
+    "startDate": "2024-06-12T08:00:00Z",
+    "endDate": "2024-06-12T16:00:00Z"
   },
   {
     "title": "Art Exhibition",
     "type": ["virtus"],
-    "startDate": "2023-11-05",
-    "endDate": "2023-11-07"
+    "startDate": "2024-06-15T11:00:00Z",
+    "endDate": "2024-06-17T19:00:00Z"
   },
   {
     "title": "Music Concert",
     "type": ["virtus", "devotio"],
-    "startDate": "2023-11-10"
+    "startDate": "2024-06-20T18:30:00Z"
   },
   {
     "title": "Sports Day",
     "type": ["virtus"],
-    "startDate": "2023-11-15",
-    "endDate": "2023-11-15"
+    "startDate": "2024-06-22T09:00:00Z",
+    "endDate": "2024-06-22T17:00:00Z"
   },
   {
     "title": "Book Fair",
     "type": ["scientia"],
-    "startDate": "2023-11-20",
-    "endDate": "2023-11-22"
+    "startDate": "2024-06-25T10:00:00Z",
+    "endDate": "2024-06-27T18:00:00Z"
   },
   {
     "title": "Community Service",
     "type": ["devotio"],
-    "startDate": "2023-11-25"
+    "startDate": "2024-06-29T08:45:00Z"
   },
   {
     "title": "Debate Competition",
     "type": ["scientia", "virtus"],
-    "startDate": "2023-11-30",
-    "endDate": "2023-12-01"
+    "startDate": "2024-06-30T13:00:00Z",
+    "endDate": "2024-07-01T15:30:00Z"
   }
 ]
