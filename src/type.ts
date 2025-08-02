@@ -21,6 +21,7 @@ interface AnnouncementType {
 interface EventType {
   title: string;
   type: Array<'scientia' | 'virtus' | 'devotio'>;
+  description: string;
   startDate: TimestampString;
   endDate?: TimestampString;
 }

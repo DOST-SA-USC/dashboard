@@ -19,12 +19,15 @@ export default async function Dashboard() {
 
     return recentAnnouncements
       .slice()
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
       .slice(0, 3);
   }
 
   function getUpcomingEvents() {
-    // get the top 3 upcoming events
+    // get the top 4 upcoming events
     const upcomingEvents: EventType[] = EVENTS_DATA as EventType[];
     return upcomingEvents
       .slice()
@@ -32,7 +35,7 @@ export default async function Dashboard() {
         (a, b) =>
           new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
       )
-      .slice(0, 3);
+      .slice(0, 4);
   }
 
   return (
@@ -70,7 +73,7 @@ export default async function Dashboard() {
         <PageCard
           title="Upcoming Events"
           description="Don't miss out on important events"
-          link="/dashboard/events"
+          link="/dashboard/calendar"
         >
           <div className="space-y-2 md:space-y-4">
             {getUpcomingEvents().map((event, index) => (

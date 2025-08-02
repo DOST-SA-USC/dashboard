@@ -49,3 +49,29 @@ export function getUserInitials(name: string) {
   }
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
+
+export function formatDateStartEnd(
+  startDate: string,
+  endDate?: string
+): string {
+  const start = new Date(startDate);
+  const end = endDate ? new Date(endDate) : undefined;
+
+  const month = start.toLocaleString('en-US', { month: 'short' });
+  const startDay = start.getDate();
+
+  if (end) {
+    const sameMonth =
+      start.getMonth() === end.getMonth() &&
+      start.getFullYear() === end.getFullYear();
+    const endDay = end.getDate();
+    if (sameMonth) {
+      return `${month} ${startDay}-${endDay}`;
+    } else {
+      const endMonth = end.toLocaleString('en-US', { month: 'short' });
+      return `${month} ${startDay} - ${endMonth} ${endDay}`;
+    }
+  }
+
+  return `${month} ${startDay}`;
+}

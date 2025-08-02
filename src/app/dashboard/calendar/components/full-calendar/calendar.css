@@ -1,0 +1,12 @@
+.fc,
+.fc *,
+.fc .fc-daygrid-day,
+.fc .fc-timegrid-slot,
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section,
+.fc .fc-scrollgrid-sync-table,
+.fc .fc-scrollgrid-sync-inner,
+.fc .fc-scrollgrid-section-body td,
+.fc .fc-scrollgrid-section-body th {
+  border-color: var(--border) !important;
+}

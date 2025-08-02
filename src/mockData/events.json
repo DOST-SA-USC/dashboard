@@ -1,59 +1,49 @@
 [
   {
-    "title": "Science Fair",
-    "type": ["scientia", "virtus"],
-    "startDate": "2024-06-01T09:00:00Z",
-    "endDate": "2024-06-02T17:00:00Z"
-  },
-  {
-    "title": "Cultural Festival",
-    "type": ["virtus", "devotio"],
-    "startDate": "2024-06-05T10:30:00Z",
-    "endDate": "2024-06-07T20:00:00Z"
-  },
-  {
-    "title": "Charity Run",
+    "title": "Community Service",
     "type": ["devotio"],
-    "startDate": "2024-06-10T07:15:00Z"
-  },
-  {
-    "title": "Math Olympiad",
-    "type": ["scientia"],
-    "startDate": "2024-06-12T08:00:00Z",
-    "endDate": "2024-06-12T16:00:00Z"
-  },
-  {
-    "title": "Art Exhibition",
-    "type": ["virtus"],
-    "startDate": "2024-06-15T11:00:00Z",
-    "endDate": "2024-06-17T19:00:00Z"
-  },
-  {
-    "title": "Music Concert",
-    "type": ["virtus", "devotio"],
-    "startDate": "2024-06-20T18:30:00Z"
-  },
-  {
-    "title": "Sports Day",
-    "type": ["virtus"],
-    "startDate": "2024-06-22T09:00:00Z",
-    "endDate": "2024-06-22T17:00:00Z"
+    "startDate": "2025-08-25",
+    "description": "Make a difference through Community Service. Volunteers engage in projects that benefit local organizations and neighborhoods, fostering empathy and civic responsibility."
   },
   {
     "title": "Book Fair",
     "type": ["scientia"],
-    "startDate": "2024-06-25T10:00:00Z",
-    "endDate": "2024-06-27T18:00:00Z"
+    "startDate": "2025-08-20",
+    "endDate": "2025-08-22",
+    "description": "Explore a wide selection of books at the Book Fair, from fiction to educational resources. Meet authors, attend readings, and discover new favorites."
   },
   {
-    "title": "Community Service",
-    "type": ["devotio"],
-    "startDate": "2024-06-29T08:45:00Z"
+    "title": "Sports Day",
+    "type": ["virtus"],
+    "startDate": "2025-08-12",
+    "endDate": "2025-08-12",
+    "description": "Join Sports Day for exciting competitions and team challenges. Students participate in various athletic events, fostering sportsmanship, teamwork, and physical fitness."
+  },
+  {
+    "title": "Music Concert",
+    "type": ["virtus", "devotio"],
+    "startDate": "2025-08-05",
+    "description": "Enjoy an evening of live performances at the Music Concert. Talented musicians and vocalists present a diverse repertoire, from classical to contemporary genres."
+  },
+  {
+    "title": "Art Exhibition",
+    "type": ["virtus"],
+    "startDate": "2025-07-15",
+    "endDate": "2025-07-17",
+    "description": "Discover creativity at the Art Exhibition, featuring works from talented students and local artists. The event showcases paintings, sculptures, and mixed media, celebrating artistic expression and imagination."
+  },
+  {
+    "title": "Summer Science Fair",
+    "type": ["scientia", "virtus"],
+    "startDate": "2025-07-10",
+    "endDate": "2025-07-11",
+    "description": "Explore innovative science projects and experiments presented by students. The Summer Science Fair encourages curiosity, teamwork, and scientific thinking, providing a platform for young minds to showcase their research and creativity."
   },
   {
     "title": "Debate Competition",
     "type": ["scientia", "virtus"],
-    "startDate": "2024-06-30T13:00:00Z",
-    "endDate": "2024-07-01T15:30:00Z"
+    "startDate": "2025-07-01",
+    "endDate": "2025-07-02",
+    "description": "Showcase your public speaking and critical thinking skills at the Debate Competition. Teams argue diverse topics, developing persuasive arguments and respectful discourse. The event promotes intellectual growth, confidence, and collaboration, with judges recognizing outstanding debaters and constructive engagement."
   }
 ]

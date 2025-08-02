@@ -42,8 +42,8 @@ const navData = {
       icon: Megaphone,
     },
     {
-      title: 'Events & Activities',
-      url: '/dashboard/events',
+      title: 'Calendar',
+      url: '/dashboard/calendar',
       icon: Calendar,
     },
   ],
