@@ -1,17 +1,11 @@
 'use client';
 
-import {
-  Forward,
-  MoreHorizontal,
-  Download,
-  type LucideIcon,
-} from 'lucide-react';
+import { MoreHorizontal, Download, type LucideIcon } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -60,13 +54,8 @@ export default function NavResources({
                 align={isMobile ? 'end' : 'start'}
               >
                 <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
-                  <span>Share</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
                   <Download className="text-muted-foreground" />
-                  <span>Download</span>
+                  <span>Download as PDF</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
