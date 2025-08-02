@@ -2,7 +2,14 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { Command, Megaphone, Calendar, BookOpen } from 'lucide-react';
+import {
+  House,
+  Backpack,
+  Calendar,
+  BookOpen,
+  CreditCard,
+  Megaphone,
+} from 'lucide-react';
 
 import { NavMain } from './ui/nav-main';
 import {
@@ -14,35 +21,50 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import NavResources from './ui/nav-resources';
 
 const companyData = {
-  name: 'ISKOLA',
+  name: 'Scholar Portal',
   description: 'DOST SA USC',
   logo: '/logo.png',
 };
 
-const navData = [
-  {
-    title: 'Dashboard',
-    url: '/dashboard',
-    icon: Command,
-  },
-  {
-    title: 'Announcements',
-    url: '/dashboard/announcements',
-    icon: Megaphone,
-  },
-  {
-    title: 'Events',
-    url: '/dashboard/events',
-    icon: Calendar,
-  },
-  {
-    title: 'Resources',
-    url: '/dashboard/resources',
-    icon: BookOpen,
-  },
-];
+const navData = {
+  main: [
+    {
+      title: 'Dashboard',
+      url: '/dashboard',
+      icon: House,
+    },
+    {
+      title: 'Announcements',
+      url: '/dashboard/announcements',
+      icon: Megaphone,
+    },
+    {
+      title: 'Events',
+      url: '/dashboard/events',
+      icon: Calendar,
+    },
+  ],
+  resources: [
+    {
+      name: 'JLSS Application Guide',
+      url: '#',
+      icon: BookOpen,
+    },
+    {
+      name: 'iAccess Account',
+      url: '#',
+      icon: CreditCard,
+    },
+    {
+      name: 'Travel Clearance',
+      url: '#',
+      icon: Backpack,
+    },
+  ],
+};
 
 export function AppSidebar() {
   return (
@@ -70,9 +92,10 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navData} />
+        <NavMain items={navData.main} />
+        <NavResources projects={navData.resources} />
       </SidebarContent>
-      <SidebarFooter>{/* // dost sa usc socials */}</SidebarFooter>
+      <SidebarFooter>{/* dost sa usc socials */}</SidebarFooter>
     </Sidebar>
   );
 }
