@@ -1,16 +1,60 @@
 import React from 'react';
 
-import { LoginForm } from '@/components/login-form';
+import LoginForm from '@/components/login-form';
 import ModeToggle from '@/components/ThemeSwitch';
+import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+
+import { getSession } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
 
 export default async function Home() {
+  const session = await getSession();
+  if (session) {
+    redirect('/dashboard');
+  }
+
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <ModeToggle variant="default" />
       </div>
       <div className="w-full max-w-sm md:max-w-3xl">
-        <LoginForm />
+        <div className="flex flex-col gap-6">
+          <Card className="overflow-hidden p-0">
+            <CardContent className="grid p-0 md:grid-cols-2">
+              <div className="space-y-8 p-8 py-14">
+                <div className="flex flex-col items-center text-center">
+                  <Image
+                    width={64}
+                    height={64}
+                    src="/logo.png"
+                    alt="Logo"
+                    className="mb-2"
+                  />
+                  <h1 className="text-2xl font-bold">Welcome back</h1>
+                  <p className="text-muted-foreground text-balance">
+                    Sign In to your scholar account.
+                  </p>
+                </div>
+                <LoginForm />
+              </div>
+              <div className="bg-muted relative hidden md:block">
+                <Image
+                  width={500}
+                  height={500}
+                  src="/placeholder.jpg" // temporary
+                  alt="Image"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+            </CardContent>
+          </Card>
+          <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+            By clicking sign in, you agree to our{' '}
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+          </div>
+        </div>
       </div>
     </div>
   );

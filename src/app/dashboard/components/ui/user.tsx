@@ -1,10 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import { useActionState } from 'react';
 
 import { toast } from 'sonner';
 import { LogOut, IdCardLanyard, Settings } from 'lucide-react';
-import { signOut } from '@/lib/db/auth';
+import { signOut } from '@/lib/auth/client';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
@@ -15,14 +14,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { redirect } from 'next/navigation';
 
 import ScholarIDModal from '../scholar-id';
 import SettingsModal from '../settings';
-import { authState } from '@/type';
 
 import { getUserInitials } from '@/lib/helpers';
-
-const initialState: authState = { message: '', error: false };
 
 export function UserComponent({
   user,
@@ -32,16 +29,25 @@ export function UserComponent({
     email: string;
   };
 }) {
-  const [, formAction, isPending] = useActionState(signOut, initialState);
-
   const [openIDModal, setOpenIDModal] = useState(false);
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
 
+  const [isPending, setIsPending] = useState(false);
+
   function handleSignOut() {
-    formAction();
-    if (!isPending) {
-      toast.success('Successfully signed out');
-    }
+    setIsPending(true);
+    toast.promise(signOut(), {
+      loading: 'Signing out...',
+      success: () => {
+        return 'Signed out successfully!';
+      },
+      error: (error: Error) => {
+        return error.message || 'Sign out failed';
+      },
+    });
+    setIsPending(false);
+
+    redirect('/');
   }
 
   return (

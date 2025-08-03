@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { createClient } from '@/lib/supabase/server';
-
 import { AppSidebar } from '@/app/dashboard/components/app-sidebar';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -11,24 +9,32 @@ import {
 } from '@/components/ui/sidebar';
 import { UserComponent } from './components/ui/user';
 import ModeToggle from '@/components/ThemeSwitch';
-import RoleBadge from '../../components/dashboard/role-badge';
+import RoleBadge from '@/components/dashboard/role-badge';
 
-import { getUserByUUID } from '@/lib/db/user';
+import { getSession } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
+
+import type { UserRoles } from '@/type';
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-
-  const { data } = await supabase.auth.getUser();
-
-  if (!data?.user) {
-    return null;
+  const session = await getSession();
+  if (!session) {
+    redirect('/');
   }
 
-  const user = await getUserByUUID(data.user.id);
+  console.log('Session:', session);
+
+  const user = {
+    id: '12345',
+    email: 'user@example.com',
+    first_name: 'John',
+    last_name: 'Doe',
+    role: 'student' as UserRoles,
+  };
 
   function getCurrentDateTimeString() {
     const now = new Date();
@@ -69,7 +75,7 @@ export default async function RootLayout({
               <UserComponent
                 user={{
                   name: `${user.first_name} ${user.last_name}`,
-                  email: data.user.email as string,
+                  email: user.email as string,
                 }}
               />
             </div>

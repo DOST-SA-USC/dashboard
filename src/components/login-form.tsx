@@ -1,60 +1,87 @@
 'use client';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+
+import React, { useState } from 'react';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import { toast } from 'sonner';
 
-import { useActionState } from 'react';
-import { signIn } from '@/lib/db/auth';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
-import { LoaderCircle, Eye, EyeOff } from 'lucide-react';
-import type { authState } from '@/type';
+import { Eye, EyeOff } from 'lucide-react';
 
-const initialState: authState = { message: '', error: false };
+import { signIn } from '@/lib/auth/user';
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<'div'>) {
-  const [state, formAction, isPending] = useActionState(signIn, initialState);
+const formSchema = z.object({
+  email: z.email().min(2).max(50),
+  password: z.string().min(8).max(20),
+});
+
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    if (state.message) {
-      if (state.error) {
-        toast.error(state.message);
-      }
-    }
-  }, [state]);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    toast.promise(signIn(values.email, values.password), {
+      loading: 'Loading...',
+      success: 'Signed in successfully!',
+      error: (error: Error) => {
+        return error.message || 'Sign in failed';
+      },
+    });
+  }
 
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
-      <Card className="overflow-hidden p-0">
-        <CardContent className="grid p-0 md:grid-cols-2">
-          <div className="space-y-8 p-8 py-14">
-            <div className="flex flex-col items-center text-center">
-              <Image
-                width={64}
-                height={64}
-                src="/logo.png"
-                alt="Logo"
-                className="mb-2"
-              />
-              <h1 className="text-2xl font-bold">Welcome back</h1>
-              <p className="text-muted-foreground text-balance">
-                Sign In to your scholar account.
-              </p>
-            </div>
-            <form className="flex flex-col gap-2" action={formAction}>
-              <Label htmlFor="uscID">USC ID</Label>
-              <Input id="uscID" name="uscID" type="text" required />
+    <Form {...form}>
+      <form
+        className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  id="email"
+                  placeholder="Enter your email"
+                  type="email"
+                  required
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
               <div className="mt-2 flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <button
                   type="button"
                   className="text-muted-foreground cursor-pointer text-xs hover:underline"
@@ -62,51 +89,34 @@ export function LoginForm({
                   Forgot Password?
                 </button>
               </div>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    {...field}
+                    id="password"
+                    name="password"
+                    placeholder="*********"
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="text-muted-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-              <div className="relative">
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  className="text-muted-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-
-              <Button
-                type="submit"
-                className="mt-4 w-full cursor-pointer"
-                disabled={isPending}
-              >
-                {isPending ? (
-                  <LoaderCircle className="animate-spin" />
-                ) : (
-                  'Sign In'
-                )}
-              </Button>
-            </form>
-          </div>
-          <div className="bg-muted relative hidden md:block">
-            <Image
-              width={500}
-              height={500}
-              src="/placeholder.jpg" // temporary
-              alt="Image"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        </CardContent>
-      </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking sign in, you agree to our <a href="#">Terms of Service</a>{' '}
-        and <a href="#">Privacy Policy</a>.
-      </div>
-    </div>
+        <Button type="submit" className="mt-4 w-full cursor-pointer">
+          Sign In
+        </Button>
+      </form>
+    </Form>
   );
 }
