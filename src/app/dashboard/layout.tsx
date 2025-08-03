@@ -10,8 +10,10 @@ import {
 import { UserComponent } from './components/ui/user';
 import ModeToggle from '@/components/ThemeSwitch';
 import RoleBadge from '@/components/dashboard/role-badge';
+import Setup from './components/setup';
 
 import { getSession } from '@/lib/auth/server';
+import { getUserDataById } from '@/lib/db/users';
 import { redirect } from 'next/navigation';
 
 import type { UserRoles } from '@/type';
@@ -26,15 +28,7 @@ export default async function RootLayout({
     redirect('/');
   }
 
-  console.log('Session:', session);
-
-  const user = {
-    id: '12345',
-    email: 'user@example.com',
-    first_name: 'John',
-    last_name: 'Doe',
-    role: 'student' as UserRoles,
-  };
+  const userData = await getUserDataById(session.user.id);
 
   function getCurrentDateTimeString() {
     const now = new Date();
@@ -50,6 +44,10 @@ export default async function RootLayout({
     const formatted = now.toLocaleString('en-US', options);
     // Remove commas and rearrange to "Mon Jul 28 01:37 AM"
     return formatted.replace(/,/g, '');
+  }
+
+  if (!userData) {
+    return <Setup />;
   }
 
   return (
@@ -70,12 +68,12 @@ export default async function RootLayout({
               </span>
             </div>
             <div className="flex items-center gap-4 px-4">
-              <RoleBadge role={user.role} />
+              <RoleBadge role={userData.role as UserRoles} />
               <ModeToggle variant="outline" />
               <UserComponent
                 user={{
-                  name: `${user.first_name} ${user.last_name}`,
-                  email: user.email as string,
+                  name: `${userData.firstName} ${userData.lastName}`,
+                  email: userData.uscID,
                 }}
               />
             </div>

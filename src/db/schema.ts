@@ -1,8 +1,9 @@
-import { pgTable, text, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, date } from 'drizzle-orm/pg-core';
 
+// Better Auth Schemas
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
-  name: text('name').notNull(),
+  name: text('name'),
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified')
     .$defaultFn(() => false)
@@ -58,4 +59,31 @@ export const verification = pgTable('verification', {
   updatedAt: timestamp('updated_at').$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),
+});
+
+// DOST SA USC Schemas
+export const userData = pgTable('user_data', {
+  userId: text('user_id')
+    .notNull()
+    .primaryKey()
+    .references(() => user.id, { onDelete: 'cascade' }),
+  uscID: text('usc_id').notNull().unique(),
+  firstName: text('first_name').notNull(),
+  middleName: text('middle_name').notNull(),
+  lastName: text('last_name').notNull(),
+  image: text('image').notNull(),
+  program: text('program').notNull(),
+  yearLevel: text('year_level').notNull(),
+  contactNumber: text('contact_number').notNull(),
+  address: text('address').notNull(),
+  birthDate: date('birth_date').notNull(),
+  yearOfAward: text('year_of_award').notNull(),
+  scholarshipType: text('scholarship_type').notNull(),
+  role: text('role').notNull().default('student'),
+  createdAt: timestamp('created_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  updatedAt: timestamp('updated_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
 });

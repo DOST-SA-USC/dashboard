@@ -11,9 +11,10 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
+
 import { Button } from '@/components/ui/button';
 
-import { Pencil, Printer } from 'lucide-react';
+import { Printer } from 'lucide-react';
 
 const ScholarIDModal = (props: React.ComponentProps<typeof Dialog>) => {
   return (
@@ -43,13 +44,11 @@ const ScholarIDModal = (props: React.ComponentProps<typeof Dialog>) => {
             className="rounded-lg"
           />
         </div>
-        <DialogFooter className="flex w-full flex-col gap-2">
-          {/* Once set up, display print button and hide setup button */}
-          <Button variant="outline" className="px-8">
-            <Pencil className="mr-2 h-4 w-4" />
-            Set Up
-          </Button>
-          <Button variant="default" className="px-8" disabled>
+        <DialogFooter className="flex w-full flex-col-reverse gap-4">
+          <span className="text-muted-foreground flex items-center justify-center gap-2 text-xs md:text-sm">
+            To edit, contact DOST SA USC.
+          </span>
+          <Button variant="default" className="px-8">
             <Printer className="mr-2 h-4 w-4" />
             Print
           </Button>

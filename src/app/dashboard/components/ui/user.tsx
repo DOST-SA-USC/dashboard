@@ -41,7 +41,6 @@ export function UserComponent({
       loading: 'Signing out...',
       success: () => {
         router.push('/');
-        setIsPending(false);
         setOpenIDModal(false);
         setOpenSettingsModal(false);
         return 'Signed out successfully!';
