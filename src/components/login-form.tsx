@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
 
@@ -24,12 +25,20 @@ import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from '@/lib/auth/user';
 
 const formSchema = z.object({
-  email: z.email().min(2).max(50),
-  password: z.string().min(8).max(20),
+  email: z
+    .email('Please enter a valid email address')
+    .min(2, 'Email must be at least 2 characters')
+    .max(50, 'Email must be less than 50 characters'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(20, 'Password must be less than 20 characters'),
 });
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,10 +49,17 @@ export default function LoginForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsPending(true);
+    setShowPassword(false);
+
     toast.promise(signIn(values.email, values.password), {
       loading: 'Loading...',
-      success: 'Signed in successfully!',
+      success: () => {
+        router.push('/dashboard');
+        return 'Sign in successful';
+      },
       error: (error: Error) => {
+        setIsPending(false);
         return error.message || 'Sign in failed';
       },
     });
@@ -65,7 +81,7 @@ export default function LoginForm() {
                 <Input
                   {...field}
                   id="email"
-                  placeholder="Enter your email"
+                  placeholder="dostsausc@example.com"
                   type="email"
                   required
                 />
@@ -113,7 +129,11 @@ export default function LoginForm() {
           )}
         />
 
-        <Button type="submit" className="mt-4 w-full cursor-pointer">
+        <Button
+          type="submit"
+          className="mt-4 w-full cursor-pointer"
+          disabled={isPending}
+        >
           Sign In
         </Button>
       </form>

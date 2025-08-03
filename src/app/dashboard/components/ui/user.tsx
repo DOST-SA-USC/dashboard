@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import ScholarIDModal from '../scholar-id';
 import SettingsModal from '../settings';
@@ -29,6 +29,7 @@ export function UserComponent({
     email: string;
   };
 }) {
+  const router = useRouter();
   const [openIDModal, setOpenIDModal] = useState(false);
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
 
@@ -39,15 +40,17 @@ export function UserComponent({
     toast.promise(signOut(), {
       loading: 'Signing out...',
       success: () => {
+        router.push('/');
+        setIsPending(false);
+        setOpenIDModal(false);
+        setOpenSettingsModal(false);
         return 'Signed out successfully!';
       },
       error: (error: Error) => {
+        setIsPending(false);
         return error.message || 'Sign out failed';
       },
     });
-    setIsPending(false);
-
-    redirect('/');
   }
 
   return (
