@@ -1,5 +1,5 @@
 import { Toaster } from '@/components/ui/sonner';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/ui/theme-provider';
 import type { Metadata } from 'next';
 import '@/globals.css';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import OverviewCard from '@/components/dashboard/overview-card';
 import { Bell, Calendar } from 'lucide-react';
-import PageCard from '@/components/dashboard/PageCard';
+import PageCard from '@/components/dashboard/page-card';
 import AnnouncementItem from '@/components/dashboard/announcement-item';
 import EventItem from '@/components/dashboard/event-item';
 import StipendComponent from './components/stipend-component';

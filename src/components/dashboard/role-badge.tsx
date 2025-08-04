@@ -11,11 +11,11 @@ import type { UserRoles } from '@/type';
 
 export default function RoleBadge({ role }: { role: UserRoles }) {
   const icons = {
-    admin: <ShieldUser className="size-4" />,
-    faculty: <ContactRound className="size-4" />,
-    officer: <Contact className="size-4" />,
-    student: <FileUser className="size-4" />,
-    facebook: <ThumbsUp className="size-4" />,
+    admin: <ShieldUser className="size-6" />,
+    faculty: <ContactRound className="size-6" />,
+    officer: <Contact className="size-6" />,
+    student: <FileUser className="size-6" />,
+    facebook: <ThumbsUp className="size-6" />,
   };
 
   const colors = {
@@ -28,7 +28,7 @@ export default function RoleBadge({ role }: { role: UserRoles }) {
 
   return (
     <Badge
-      className={`flex items-center gap-1.5 border font-semibold ${colors[role]}`}
+      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[role]}`}
     >
       {icons[role]}
       {role}

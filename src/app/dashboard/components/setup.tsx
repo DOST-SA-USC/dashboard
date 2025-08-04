@@ -12,7 +12,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import ModeToggle from '@/components/ThemeSwitch';
+import ModeToggle from '@/components/theme-switch';
 
 import { LogOut } from 'lucide-react';
 

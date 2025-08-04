@@ -15,8 +15,8 @@ interface UserType {
   yearOfAward: string;
   scholarshipType: string;
   role: UserRoles;
-  createdAt: TimestampString;
-  updatedAt: TimestampString;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 type TimestampString =

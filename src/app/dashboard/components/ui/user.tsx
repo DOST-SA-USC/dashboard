@@ -21,7 +21,7 @@ import SettingsModal from '../settings';
 
 import { getUserInitials } from '@/lib/helpers';
 
-export function UserComponent({
+export default function UserComponent({
   user,
 }: {
   user: {
@@ -94,7 +94,7 @@ export function UserComponent({
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenSettingsModal(true)}>
             <Settings />
-            Account Settings
+            Account Password
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <form action={handleSignOut} className="w-full">

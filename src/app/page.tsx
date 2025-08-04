@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LoginForm from '@/components/login-form';
-import ModeToggle from '@/components/ThemeSwitch';
+import ModeToggle from '@/components/theme-switch';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 
