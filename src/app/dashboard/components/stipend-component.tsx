@@ -50,7 +50,7 @@ const StipendComponent = (props: { className?: string }) => {
         description="Click to view stipend details."
         icon={List}
         action={() => setOpen(true)}
-        className={`cursor-pointer transition-all duration-200 ease-in-out hover:opacity-60 ${props.className}`}
+        className={`cursor-pointer transition-all duration-200 ease-in-out hover:opacity-85 ${props.className}`}
       />
 
       <Dialog open={open} onOpenChange={setOpen}>

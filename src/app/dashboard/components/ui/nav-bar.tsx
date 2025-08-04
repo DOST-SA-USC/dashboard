@@ -29,7 +29,7 @@ const NavBarData = {
     href: '/dashboard',
   },
   menu: [
-    { title: 'Dashboard', href: '/dashboard' },
+    { title: 'Home', href: '/dashboard' },
     {
       title: 'Announcements',
       href: '/dashboard/announcements',
@@ -63,70 +63,75 @@ const NavBarData = {
 
 const NavBar = (props: { user: UserType }) => {
   return (
-    <div className="fixed top-0 left-0 z-50 flex min-h-10 w-full items-center justify-between p-2 px-4 backdrop-blur-xs md:p-4 md:px-16 lg:px-20">
-      {/* Brand */}
-      <div className="flex items-center gap-3">
-        <Link href={NavBarData.brand.href} className="flex items-center gap-2">
-          <Avatar className="size-10 rounded-lg">
-            <Image
-              src={NavBarData.brand.logo}
-              width="180"
-              height="180"
-              alt={NavBarData.brand.alt}
-            />
-            <AvatarFallback className="bg-accent rounded-lg">
-              {NavBarData.brand.fallback}
-            </AvatarFallback>
-          </Avatar>
-        </Link>
-        <div className="hidden md:block">
-          <h1 className="text-xl leading-4 font-bold">DOST SA USC</h1>
-          <p className="text-muted-foreground text-sm">Scholar Portal</p>
+    <div className="fixed top-0 left-0 z-50 flex w-full items-center justify-center">
+      <div className="flex min-h-10 w-full max-w-[1600px] items-center justify-between p-2 px-4 backdrop-blur-xs md:p-4 md:px-16 lg:px-20">
+        {/* Brand */}
+        <div className="flex items-center gap-3">
+          <Link
+            href={NavBarData.brand.href}
+            className="flex items-center gap-2"
+          >
+            <Avatar className="size-10 rounded-lg">
+              <Image
+                src={NavBarData.brand.logo}
+                width="180"
+                height="180"
+                alt={NavBarData.brand.alt}
+              />
+              <AvatarFallback className="bg-accent rounded-lg">
+                {NavBarData.brand.fallback}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
+          <div className="hidden md:block">
+            <h1 className="text-xl leading-4 font-bold">DOST SA USC</h1>
+            <p className="text-muted-foreground text-sm">Scholar Portal</p>
+          </div>
         </div>
-      </div>
-      {/* Nav Menu */}
-      <NavigationMenu viewport={false} className="hidden lg:block">
-        <NavigationMenuList>
-          {NavBarData.menu.map((item, index) => (
-            <NavigationMenuItem key={index}>
-              <NavigationMenuLink asChild>
-                <Link href={item.href}>{item.title}</Link>
-              </NavigationMenuLink>
+        {/* Nav Menu */}
+        <NavigationMenu viewport={false} className="hidden lg:block">
+          <NavigationMenuList>
+            {NavBarData.menu.map((item, index) => (
+              <NavigationMenuItem key={index}>
+                <NavigationMenuLink asChild>
+                  <Link href={item.href}>{item.title}</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent">
+                {NavBarData.resources.title}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[300px] grid-cols-1 gap-2">
+                  {NavBarData.resources.items.map((component) => (
+                    <ListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </ListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
             </NavigationMenuItem>
-          ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent">
-              {NavBarData.resources.title}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[300px] grid-cols-1 gap-2">
-                {NavBarData.resources.items.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
-                    {component.description}
-                  </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      {/* Actions */}
-      <div className="flex items-center gap-4">
-        <RoleBadge role={props.user.role} />
-        <ModeToggle variant="outline" />
-        <SearchComponent data={NavBarData} />
-        <UserComponent
-          user={{
-            name: `${props.user.firstName} ${props.user.lastName}`,
-            email: props.user.uscID,
-          }}
-        />
+        {/* Actions */}
+        <div className="flex items-center gap-4">
+          <RoleBadge role={props.user.role} />
+          <ModeToggle variant="outline" />
+          <SearchComponent data={NavBarData} />
+          <UserComponent
+            user={{
+              name: `${props.user.firstName} ${props.user.lastName}`,
+              email: props.user.uscID,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
