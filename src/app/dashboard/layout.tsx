@@ -27,7 +27,7 @@ export default async function RootLayout({
   }
 
   return (
-    <div>
+    <div className="h-full w-full bg-[url('/pattern-light.png')] bg-[length:200px_200px] bg-repeat dark:bg-[url('/pattern-dark.png')]">
       <NavBar user={userData as UserType} />
       <div className="mx-auto mt-14 md:px-4 md:py-6">{children}</div>
     </div>

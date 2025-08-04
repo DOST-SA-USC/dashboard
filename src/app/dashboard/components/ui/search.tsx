@@ -61,7 +61,11 @@ const SearchComponent = (props: {
               {props.data.menu.map((item) => {
                 return (
                   <CommandItem key={item.title} asChild>
-                    <Link href={item.href} className="flex items-center gap-2">
+                    <Link
+                      onClick={() => setOpen(false)}
+                      href={item.href}
+                      className="flex items-center gap-2"
+                    >
                       {item.title}
                     </Link>
                   </CommandItem>
@@ -76,14 +80,13 @@ const SearchComponent = (props: {
                   <CommandItem key={item.title} asChild>
                     <Link
                       href={item.href}
+                      onClick={() => setOpen(false)}
                       className="flex flex-col items-start"
                     >
                       <span className="flex items-center gap-2">
                         {item.title}
                       </span>
-                      <span className="text-muted-foreground text-xs">
-                        {item.description}
-                      </span>
+                      <span className="text-xs">{item.description}</span>
                     </Link>
                   </CommandItem>
                 );

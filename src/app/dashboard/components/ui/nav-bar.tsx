@@ -63,7 +63,7 @@ const NavBarData = {
 
 const NavBar = (props: { user: UserType }) => {
   return (
-    <div className="fixed top-0 left-0 z-50 flex min-h-10 w-full items-center justify-between p-2 px-4 backdrop-blur-md md:p-4 md:px-16 lg:px-20">
+    <div className="fixed top-0 left-0 z-50 flex min-h-10 w-full items-center justify-between p-2 px-4 backdrop-blur-xs md:p-4 md:px-16 lg:px-20">
       {/* Brand */}
       <div className="flex items-center gap-3">
         <Link href={NavBarData.brand.href} className="flex items-center gap-2">

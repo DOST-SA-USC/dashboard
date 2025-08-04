@@ -49,7 +49,7 @@ const AnnouncementContent = (props: {
       <div className="flex h-full w-full flex-col gap-4 md:w-3/5">
         <div className="border-border flex w-full gap-4 border-b py-3.5 md:p-3.5">
           <div className="flex w-full items-center gap-2">
-            <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none">
+            <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
               <Search className="text-muted-foreground size-4" />
               <input
                 placeholder="Search announcements..."

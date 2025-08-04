@@ -42,7 +42,7 @@ const EventList = (props: { events: EventType[] }) => {
   return (
     <>
       <div className="border-border flex w-full gap-2 border-b px-2 pb-3">
-        <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none">
+        <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xl transition-[color,box-shadow] outline-none">
           <Search className="text-muted-foreground size-4" />
           <input
             placeholder="Search events..."
