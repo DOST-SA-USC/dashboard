@@ -20,7 +20,7 @@ import Form2 from './step2';
 import Form3 from './step3';
 import Form4 from './step4';
 
-import type { FormType } from '@/type';
+import type { FormType, UserType } from '@/type';
 
 import { LogOut } from 'lucide-react';
 
@@ -47,7 +47,7 @@ const formSteps = [
   },
 ];
 
-const Setup = () => {
+const Form = (props: { userID: string; user: UserType }) => {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [step, setStep] = useState(0);
@@ -56,7 +56,7 @@ const Setup = () => {
     firstName: '',
     middleName: '',
     lastName: '',
-    image: '',
+    image: undefined,
     uscID: '',
     program: '',
     yearLevel: '',
@@ -89,7 +89,7 @@ const Setup = () => {
 
       setStep((prev) => prev + 1);
     } else {
-      console.log('Final Form Data:', formData);
+      // handleSubmit
     }
   }
 
@@ -132,6 +132,8 @@ const Setup = () => {
               {React.createElement(formSteps[step].component, {
                 prev: handlePrev,
                 data: formData,
+                formData: formData,
+                userID: props.userID,
                 update: handleFormDataChange,
               })}
             </div>
@@ -142,4 +144,4 @@ const Setup = () => {
   );
 };
 
-export default Setup;
+export default Form;

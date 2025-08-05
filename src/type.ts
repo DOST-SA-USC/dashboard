@@ -5,7 +5,7 @@ interface FormType {
   firstName?: string;
   middleName?: string;
   lastName?: string;
-  image?: string | File;
+  image?: File | string; // File for upload, string for URL
   program?: string;
   yearLevel?: string;
   contactNumber?: string;
