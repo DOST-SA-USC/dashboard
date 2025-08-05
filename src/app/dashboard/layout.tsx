@@ -22,14 +22,16 @@ export default async function RootLayout({
 
   const userData = await getUserDataById(session.user.id);
 
-  if (!userData) {
-    return <Setup />;
-  }
-
   return (
     <div className="m-auto h-full w-full bg-[url('/pattern-light.png')] bg-[length:160px_160px] bg-repeat md:bg-[length:180px_180px] lg:bg-[length:200px_200px] dark:bg-[url('/pattern-dark.png')]">
-      <NavBar user={userData as UserType} />
-      <div className="mx-auto max-w-[1600px] md:px-4">{children}</div>
+      {userData ? (
+        <>
+          <NavBar user={userData as UserType} />
+          <div className="mx-auto max-w-[1600px] md:px-4">{children}</div>
+        </>
+      ) : (
+        <Setup />
+      )}
     </div>
   );
 }
