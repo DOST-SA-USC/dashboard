@@ -91,8 +91,8 @@ const NavBar = () => {
           <NavigationMenuList>
             {NavBarData.menu.map((item, index) => (
               <NavigationMenuItem key={index}>
-                <NavigationMenuLink href={item.href}>
-                  {item.title}
+                <NavigationMenuLink asChild>
+                  <Link href={item.href}>{item.title}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}

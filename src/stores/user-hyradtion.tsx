@@ -10,7 +10,7 @@ export function UserHydration(props: { user: UserType | null }) {
 
   useEffect(() => {
     if (props.user) setUser(props.user);
-  }, [props.user]);
+  }, [props.user, setUser]);
 
   return null; // just hydrates Zustand, doesn't render anything
 }
