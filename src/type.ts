@@ -15,7 +15,7 @@ interface FormType {
   scholarshipType?: string;
 }
 
-interface UserType extends FormType {
+interface UserType extends Required<FormType> {
   userId: string;
   role: UserRoles;
   createdAt: Date;

@@ -1,3 +1,7 @@
+'use client';
+
+import { useUserStore } from '@/stores/userStore';
+
 import {
   FileUser,
   ShieldUser,
@@ -7,9 +11,10 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-import type { UserRoles } from '@/type';
+export default function RoleBadge() {
+  const user = useUserStore((state) => state.user);
+  if (!user || !user.role) return null;
 
-export default function RoleBadge({ role }: { role: UserRoles }) {
   const icons = {
     admin: <ShieldUser className="size-6" />,
     faculty: <ContactRound className="size-6" />,
@@ -28,10 +33,10 @@ export default function RoleBadge({ role }: { role: UserRoles }) {
 
   return (
     <Badge
-      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[role]}`}
+      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[user.role]}`}
     >
-      {icons[role]}
-      {role}
+      {icons[user.role]}
+      {user.role}
     </Badge>
   );
 }

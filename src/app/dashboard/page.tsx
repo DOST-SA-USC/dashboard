@@ -8,22 +8,12 @@ import PageCard from '@/components/dashboard/page-card';
 import AnnouncementItem from '@/components/dashboard/announcement-item';
 import EventItem from '@/components/dashboard/event-item';
 
-import { getSession } from '@/lib/auth/server';
-import { getUserDataById } from '@/lib/db/users';
-import { redirect } from 'next/navigation';
-
-import type { AnnouncementType, EventType, UserType } from '@/type';
+import type { AnnouncementType, EventType } from '@/type';
 
 import EVENTS_DATA from '@/mockData/events.json';
 import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
 
 export default async function Dashboard() {
-  const session = await getSession();
-  if (!session) {
-    redirect('/');
-  }
-  const userData = await getUserDataById(session.user.id);
-
   function getRecentAnnouncements() {
     // get the top 3 recent announcements
     const recentAnnouncements: AnnouncementType[] =
@@ -52,7 +42,7 @@ export default async function Dashboard() {
 
   return (
     <div className="relative z-10 flex min-h-screen w-full flex-1 flex-col gap-4 p-4 pt-20 md:px-10 md:pt-28 lg:px-20">
-      <HomeHeader user={userData as UserType} />
+      <HomeHeader />
 
       <hr />
 

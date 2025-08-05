@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useUserStore } from '@/stores/userStore';
 
 import {
   Calendar,
@@ -14,10 +15,12 @@ import { Button } from '@/components/ui/button';
 import ScholarIDModal from '../scholar-id';
 import { capitalizeFirstLetter } from '@/lib/helpers';
 
-import type { UserType } from '@/type';
-
-const HomeHeader = (props: { user: UserType }) => {
+const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const user = useUserStore((state) => state.user);
+  if (!user || !user.uscID) return null;
+
   return (
     <>
       <ScholarIDModal
@@ -28,7 +31,7 @@ const HomeHeader = (props: { user: UserType }) => {
       <div className="flex w-full items-start justify-between px-2 sm:px-10 lg:px-20">
         <div>
           <h1 className="w-full text-xl font-extrabold sm:text-2xl md:text-4xl">
-            Greetings, {capitalizeFirstLetter(props.user.firstName)}!{' '}
+            Greetings, {capitalizeFirstLetter(user.firstName)}!{' '}
             <span className="animate-wiggle inline-block">👋</span>
           </h1>
           <p className="text-xs md:mt-1 md:text-sm">
@@ -37,19 +40,19 @@ const HomeHeader = (props: { user: UserType }) => {
           <div className="text-muted-foreground mt-4 flex w-full items-center justify-center gap-4 text-xs font-semibold md:mt-6 md:text-sm">
             <div className="flex items-center gap-2">
               <GraduationCap className="size-4" />
-              BS {capitalizeFirstLetter(props.user.program)}
+              BS {capitalizeFirstLetter(user.program)}
             </div>
             <div className="flex items-center gap-2">
               <TrendingUp className="size-4" />
-              Year {props.user.yearLevel}
+              Year {user.yearLevel}
             </div>
             <div className="flex items-center gap-2">
               <Award className="size-4" />
-              {props.user.scholarshipType.toUpperCase()}
+              {user.scholarshipType.toUpperCase()}
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="size-4" />
-              {props.user.yearOfAward}
+              {user.yearOfAward}
             </div>
           </div>
         </div>

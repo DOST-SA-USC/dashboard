@@ -18,8 +18,6 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 
-import type { UserType } from '@/type';
-
 const NavBarData = {
   brand: {
     name: 'DOST SA USC',
@@ -61,7 +59,7 @@ const NavBarData = {
   },
 };
 
-const NavBar = (props: { user: UserType }) => {
+const NavBar = () => {
   return (
     <div className="fixed top-0 left-0 z-50 flex w-full items-center justify-center">
       <div className="flex min-h-10 w-full max-w-[1600px] items-center justify-between p-2 px-4 backdrop-blur-xs md:p-4 md:px-16 lg:px-20">
@@ -93,12 +91,11 @@ const NavBar = (props: { user: UserType }) => {
           <NavigationMenuList>
             {NavBarData.menu.map((item, index) => (
               <NavigationMenuItem key={index}>
-                <NavigationMenuLink asChild>
-                  <Link href={item.href}>{item.title}</Link>
+                <NavigationMenuLink href={item.href}>
+                  {item.title}
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
-
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent">
                 {NavBarData.resources.title}
@@ -122,16 +119,10 @@ const NavBar = (props: { user: UserType }) => {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <RoleBadge role={props.user.role} />
+          <RoleBadge />
           <ModeToggle variant="outline" />
           <SearchComponent data={NavBarData} />
-          <UserComponent
-            user={{
-              name: `${props.user.firstName} ${props.user.lastName}`,
-              uscID: props.user.uscID || 'N/A',
-              image: props.user.image || '/default-avatar.png',
-            }}
-          />
+          <UserComponent />
         </div>
       </div>
     </div>

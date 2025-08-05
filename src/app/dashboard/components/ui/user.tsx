@@ -5,6 +5,8 @@ import { toast } from 'sonner';
 import { LogOut, IdCardLanyard, Settings } from 'lucide-react';
 import { signOut } from '@/lib/auth/client';
 
+import { useUserStore } from '@/stores/userStore';
+
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -21,20 +23,15 @@ import SettingsModal from '../settings';
 
 import { getUserInitials } from '@/lib/helpers';
 
-export default function UserComponent({
-  user,
-}: {
-  user: {
-    name: string;
-    uscID: string;
-    image: File | string;
-  };
-}) {
+export default function UserComponent() {
   const router = useRouter();
   const [openIDModal, setOpenIDModal] = useState(false);
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
 
   const [isPending, setIsPending] = useState(false);
+
+  const user = useUserStore((state) => state.user);
+  if (!user || !user.uscID) return null;
 
   function handleSignOut() {
     setIsPending(true);
@@ -66,12 +63,12 @@ export default function UserComponent({
           <Avatar className="h-8 w-8 rounded-lg">
             <Image
               src={user.image as string}
-              alt={user.name}
+              alt={user.uscID}
               width={32}
               height={32}
             />
             <AvatarFallback className="bg-accent rounded-lg">
-              {getUserInitials(user.name)}
+              {getUserInitials(`${user.firstName} ${user.lastName}`)}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -86,16 +83,18 @@ export default function UserComponent({
               <Avatar className="h-8 w-8 rounded-lg">
                 <Image
                   src={user.image as string}
-                  alt={user.name}
+                  alt={user.uscID}
                   width={32}
                   height={32}
                 />
                 <AvatarFallback className="rounded-lg">
-                  {getUserInitials(user.name)}
+                  {getUserInitials(`${user.firstName} ${user.lastName}`)}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">
+                  {user.firstName} {user.lastName}
+                </span>
                 <span className="truncate text-xs">{user.uscID}</span>
               </div>
             </div>

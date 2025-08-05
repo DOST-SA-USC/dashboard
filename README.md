@@ -6,4 +6,4 @@
 
 ## Tech Stack
 
-![Tech Stack](https://skills-icons.vercel.app/api/icons?i=nextjs,ts,tailwind,shadcnui,lucide,supabase,betterauth,drizzle)
+![Tech Stack](https://skills-icons.vercel.app/api/icons?i=nextjs,ts,tailwind,shadcnui,supabase,betterauth,drizzle,zustand)
