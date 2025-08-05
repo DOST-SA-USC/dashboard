@@ -128,7 +128,8 @@ const NavBar = (props: { user: UserType }) => {
           <UserComponent
             user={{
               name: `${props.user.firstName} ${props.user.lastName}`,
-              email: props.user.uscID,
+              uscID: props.user.uscID || 'N/A',
+              image: props.user.image || '/default-avatar.png',
             }}
           />
         </div>

@@ -80,7 +80,15 @@ export async function insertUserData(userID: string, data: FormType) {
 
     return result[0];
   } catch (error) {
-    console.error('Error inserting user data:', error);
-    throw error;
+    if (error instanceof Error) {
+      const errorMsg = error.message || '';
+      if (errorMsg.includes('Failed query: insert into "user_data"')) {
+        throw new Error('User already exists with this USC ID.');
+      }
+
+      throw new Error('An unknown error occurred, please try again later.');
+    } else {
+      throw new Error('An unknown error occurred, please try again later.');
+    }
   }
 }

@@ -35,9 +35,10 @@ const Form4 = (props: {
     } catch (error) {
       return {
         success: false,
-        message: error
-          ? 'Something went wrong while submitting user data, please try again later.'
-          : 'An unknown error occurred.',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'An error occurred while inserting user data',
       };
     }
   }, initialState);
