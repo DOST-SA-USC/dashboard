@@ -1,0 +1,32 @@
+{
+  "programs": {
+    "School of Arts and Sciences": [
+      "BS Applied Physics",
+      "BS Chemistry",
+      "BS Computer Science",
+      "BS Information Systems",
+      "BS Information Technology",
+      "BS Marine Biology",
+      "BS Psychology"
+    ],
+    "School of Engineering": [
+      "BS Chemical Engineering",
+      "BS Civil Engineering",
+      "BS Computer Engineering",
+      "BS Electrical Engineering",
+      "BS Electronics Engineering",
+      "BS Industrial Engineering",
+      "BS Mechanical Engineering"
+    ],
+    "School of Health Care Professions": ["BS Pharmacy"]
+  },
+  "scholarshipTypes": [
+    "MERIT",
+    "RA 7687",
+    "JLSS RA 7687",
+    "JLSS MERIT",
+    "JLSS RA 10612"
+  ],
+  "yearLevels": ["1", "2", "3", "4", "5"],
+  "yearOfAwards": ["2020", "2021", "2022", "2023", "2024", "2025"]
+}

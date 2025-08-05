@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 
 import {
   Dialog,
@@ -11,14 +10,11 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
-import HoverCard from '@/components/dashboard/hover-card';
 import { Button } from '@/components/ui/button';
-
+import IDComponent from './ui/id-component';
 import { Printer } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const ScholarIDModal = (props: React.ComponentProps<typeof Dialog>) => {
-  const isMobile = useIsMobile();
   return (
     <Dialog {...props}>
       <DialogContent className="!max-w-2xl">
@@ -30,47 +26,9 @@ const ScholarIDModal = (props: React.ComponentProps<typeof Dialog>) => {
             the scholarship.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-row items-center gap-4 overflow-x-auto md:gap-8 md:p-8">
-          {!isMobile ? (
-            <>
-              <HoverCard>
-                <Image
-                  src="/scholar_id/idSkinFront.png"
-                  alt="Scholar ID"
-                  width={300}
-                  height={100}
-                  className="rounded-lg"
-                />
-              </HoverCard>
-              <HoverCard>
-                <Image
-                  src="/scholar_id/idSkinBack.png"
-                  alt="Scholar ID"
-                  width={300}
-                  height={100}
-                  className="rounded-lg"
-                />
-              </HoverCard>
-            </>
-          ) : (
-            <>
-              <Image
-                src="/scholar_id/idSkinFront.png"
-                alt="Scholar ID"
-                width={300}
-                height={100}
-                className="rounded-lg"
-              />
-              <Image
-                src="/scholar_id/idSkinBack.png"
-                alt="Scholar ID"
-                width={300}
-                height={100}
-                className="rounded-lg"
-              />
-            </>
-          )}
-        </div>
+
+        <IDComponent />
+
         <DialogFooter className="flex w-full flex-col-reverse gap-4">
           <span className="text-muted-foreground flex items-center justify-center gap-2 text-xs md:text-sm">
             To edit, contact DOST SA USC.

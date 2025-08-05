@@ -1,19 +1,22 @@
 type UserRoles = 'admin' | 'faculty' | 'officer' | 'student' | 'facebook'; // facebook is not a user role, but used for announcements
 
-interface UserType {
+interface FormType {
+  uscID?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  image?: string | File;
+  program?: string;
+  yearLevel?: string;
+  contactNumber?: string;
+  address?: string;
+  birthDate?: string;
+  yearOfAward?: string;
+  scholarshipType?: string;
+}
+
+interface UserType extends FormType {
   userId: string;
-  uscID: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  image: string;
-  program: string;
-  yearLevel: string;
-  contactNumber: string;
-  address: string;
-  birthDate: string;
-  yearOfAward: string;
-  scholarshipType: string;
   role: UserRoles;
   createdAt: Date;
   updatedAt: Date;
@@ -41,6 +44,7 @@ interface EventType {
 }
 
 export type {
+  FormType,
   UserRoles,
   AnnouncementType,
   EventType,

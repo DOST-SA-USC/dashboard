@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Setup from './components/setup';
+import Setup from './setup/form';
 
 import NavBar from './components/ui/nav-bar';
 
