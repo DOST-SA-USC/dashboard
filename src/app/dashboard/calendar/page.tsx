@@ -10,27 +10,19 @@ import type { EventInput } from '@fullcalendar/core';
 
 export default async function Events() {
   return (
-    <div className="flex w-full flex-1 flex-col gap-4 p-4 pt-0">
-      <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-        Events & Activities
-      </h1>
-      <p className="text-muted-foreground text-xs md:text-sm">
-        Stay updated with the latest events and activities.
-      </p>
-      <div className="border-border flex h-full max-h-[80vh] flex-col-reverse items-start justify-between overflow-hidden border-0 md:flex-row md:border-t">
-        <CurrentEvents events={EVENTS_DATA as EventType[]} />
-        <Calendar
-          events={EVENTS_DATA.map((event: EventInput) => ({
-            title: event.title,
-            start: event.startDate,
-            end: event.endDate,
-            allDay: true,
-            extendedProps: {
-              type: event.type,
-            },
-          }))}
-        />
-      </div>
+    <div className="flex h-full max-h-[80vh] min-h-screen w-full flex-col-reverse items-start justify-between gap-4 overflow-hidden p-4 pt-20 md:flex-row md:pt-28 lg:px-20">
+      <CurrentEvents events={EVENTS_DATA as EventType[]} />
+      <Calendar
+        events={EVENTS_DATA.map((event: EventInput) => ({
+          title: event.title,
+          start: event.startDate,
+          end: event.endDate,
+          allDay: true,
+          extendedProps: {
+            type: event.type,
+          },
+        }))}
+      />
     </div>
   );
 }

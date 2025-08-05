@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import type { AnnouncementType } from '@/type';
 
+import { Card } from '@/components/ui/card';
+
 import {
   getRelativeDate,
   truncateWithEllipsis,
@@ -18,8 +20,8 @@ const AnnouncementItem = (
   const { announcement, ...rest } = props;
 
   return (
-    <div
-      className="border-border hover:bg-accent hover:text-accent-foreground dark:border-input/30 dark:hover:bg-accent/30 cursor-pointer space-y-2 rounded-md border-1 p-4"
+    <Card
+      className="hover:bg-accent hover:text-accent-foreground cursor-pointer gap-0 space-y-2 border-1 p-4"
       {...rest}
     >
       <div className="flex items-center justify-between gap-4">
@@ -47,7 +49,7 @@ const AnnouncementItem = (
         <ImportantBadge priority={announcement.priority} />
         <RoleBadge role={announcement.type} />
       </div>
-    </div>
+    </Card>
   );
 };
 

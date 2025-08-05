@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Loading() {
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+    <div className="flex min-h-screen w-full flex-col gap-4 p-4 pt-20 md:pt-28 lg:px-20">
       <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">Loading...</h1>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <Skeleton className="bg-muted/50 aspect-video rounded-xl" />

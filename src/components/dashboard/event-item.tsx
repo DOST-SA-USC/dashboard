@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import EventBadge from './event-badge';
 
 import { formatDateStartEnd } from '@/lib/helpers';
+import { Card } from '../ui/card';
 
 const EventItem = (
   props: { event: EventType } & React.HTMLProps<HTMLDivElement>
@@ -12,13 +13,7 @@ const EventItem = (
   const { event, className, ...rest } = props;
 
   return (
-    <div
-      {...rest}
-      className={cn(
-        'border-border dark:border-input/30 flex items-center justify-between space-y-2 rounded-md border p-4',
-        className
-      )}
-    >
+    <Card {...rest} className={cn('space-y-2 p-4', className)}>
       <div>
         <h2 className="text-md font-semibold">{event.title}</h2>
         <p className="text-muted-foreground text-xs md:text-sm">
@@ -30,7 +25,7 @@ const EventItem = (
           <EventBadge key={index} type={type} />
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

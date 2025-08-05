@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
-
+import { Card } from '@/components/ui/card';
 import { Avatar } from '@/components/ui/avatar';
 import { getUserInitials } from '@/lib/helpers';
 
@@ -74,10 +74,10 @@ const SelectedAnnouncement = (props: {
   }
 
   return (
-    <div className="border-border hidden h-full w-full border-l p-0 md:flex md:flex-col">
+    <div className="hidden h-full min-h-[80vh] w-full flex-4/5 p-0 md:flex md:flex-col">
       {props.announcement ? (
-        <>
-          <div className="flex items-center justify-between gap-3 border-b px-6 py-4">
+        <Card className="h-full w-full flex-1 gap-0 p-0">
+          <div className="flex items-center justify-between gap-3 border-b p-4">
             <div>
               <div className="flex items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
@@ -103,14 +103,14 @@ const SelectedAnnouncement = (props: {
               {props.announcement.content}
             </p>
           </div>
-        </>
+        </Card>
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+        <Card className="flex h-full w-full flex-1 flex-col items-center justify-center gap-2">
           <MousePointerClick className="text-muted-foreground size-8" />
           <span className="text-muted-foreground text-sm">
-            No Selected Announcement
+            No Announcement Selected
           </span>
-        </div>
+        </Card>
       )}
     </div>
   );

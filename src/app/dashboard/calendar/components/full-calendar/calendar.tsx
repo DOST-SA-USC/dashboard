@@ -1,6 +1,8 @@
 'use client';
 import { useRef, useState } from 'react';
 
+import { Card } from '@/components/ui/card';
+
 import FullCalendar from '@fullcalendar/react';
 import type { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -27,8 +29,8 @@ const Calendar = (props: { events: EventInput[] }) => {
   const goToToday = () => calendarRef.current?.getApi().today();
 
   return (
-    <div className="border-border h-full w-full md:border-l">
-      <div className="border-border flex items-center justify-between p-[0.7rem] md:border-b">
+    <Card className="h-[80vh] max-h-[850px] w-full gap-0 p-0">
+      <div className="flex items-center justify-between p-[0.7rem]">
         <h2 className="text-xl font-semibold">{currentTitle}</h2>
 
         <div className="flex gap-4">
@@ -46,7 +48,7 @@ const Calendar = (props: { events: EventInput[] }) => {
         </div>
       </div>
 
-      <div className="h-[90%] w-full md:p-2">
+      <div className="h-full w-full md:p-2">
         <FullCalendar
           ref={calendarRef}
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -70,7 +72,7 @@ const Calendar = (props: { events: EventInput[] }) => {
           })}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

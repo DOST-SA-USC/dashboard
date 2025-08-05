@@ -45,9 +45,9 @@ const AnnouncementContent = (props: {
   }, [activeFilter, searchQuery, props.announcementData]);
 
   return (
-    <div className="border-border flex h-full max-h-[80vh] items-start justify-between overflow-hidden border-t">
-      <div className="flex h-full w-full flex-col gap-4 md:w-3/5">
-        <div className="border-border flex w-full gap-4 border-b py-3.5 md:p-3.5">
+    <div className="flex h-full max-h-[90vh] w-full flex-1 items-start justify-between gap-4 overflow-hidden md:max-h-[80vh]">
+      <div className="flex h-full w-full flex-col gap-4 md:flex-4/5">
+        <div className="flex w-full gap-4 py-3.5 md:p-3.5">
           <div className="flex w-full items-center gap-2">
             <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
               <Search className="text-muted-foreground size-4" />
@@ -78,7 +78,7 @@ const AnnouncementContent = (props: {
             </SelectContent>
           </Select>
         </div>
-        <div className="h-full w-full space-y-4 overflow-y-auto px-0 md:px-2">
+        <div className="h-full max-h-[90vh] w-full space-y-4 overflow-y-auto px-0 md:px-2">
           {filteredAnnouncements.map((announcement, index) => (
             <AnnouncementItem
               key={index}

@@ -25,10 +25,11 @@ const HomeHeader = (props: { user: UserType }) => {
         onOpenChange={() => setIsModalOpen(false)}
       />
 
-      <div className="mt-10 flex w-full items-start justify-between px-2 sm:px-10 lg:px-20">
+      <div className="flex w-full items-start justify-between px-2 sm:px-10 lg:px-20">
         <div>
           <h1 className="w-full text-xl font-extrabold sm:text-2xl md:text-4xl">
-            Greetings, {capitalizeFirstLetter(props.user.firstName)}! 👋
+            Greetings, {capitalizeFirstLetter(props.user.firstName)}!{' '}
+            <span className="animate-wiggle inline-block">👋</span>
           </h1>
           <p className="text-xs md:mt-1 md:text-sm">
             Welcome to the Scholars&apos; Dashboard

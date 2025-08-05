@@ -39,7 +39,7 @@ export default async function Dashboard() {
   }
 
   function getUpcomingEvents() {
-    // get the top 4 upcoming events
+    // get the top 3 upcoming events
     const upcomingEvents: EventType[] = EVENTS_DATA as EventType[];
     return upcomingEvents
       .slice()
@@ -47,11 +47,11 @@ export default async function Dashboard() {
         (a, b) =>
           new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
       )
-      .slice(0, 4);
+      .slice(0, 3);
   }
 
   return (
-    <div className="relative z-10 flex min-h-screen w-full flex-1 flex-col gap-4 p-4 pt-0 md:px-10 lg:px-20">
+    <div className="relative z-10 flex min-h-screen w-full flex-1 flex-col gap-4 p-4 pt-20 md:px-10 md:pt-28 lg:px-20">
       <HomeHeader user={userData as UserType} />
 
       <hr />

@@ -3,11 +3,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { EventItem, EventModal } from './event-item';
-
 import { EventType } from '@/type';
 import { Button } from '@/components/ui/button';
-import { List, Search, ChevronLeft, ChevronRight } from 'lucide-react';
-import { ButtonGroup } from '@/components/ui/button-group';
+import { List, Search } from 'lucide-react';
 
 import {
   Drawer,
@@ -41,7 +39,7 @@ const EventList = (props: { events: EventType[] }) => {
 
   return (
     <>
-      <div className="border-border flex w-full gap-2 border-b px-2 pb-3">
+      <div className="flex w-full gap-2 px-2 pb-3">
         <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xl transition-[color,box-shadow] outline-none">
           <Search className="text-muted-foreground size-4" />
           <input
@@ -52,34 +50,25 @@ const EventList = (props: { events: EventType[] }) => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-
-        {filteredEvents.length > 5 && (
-          <ButtonGroup orientation="horizontal">
-            <Button variant="outline">
-              <ChevronLeft className="size-4" />
-            </Button>
-            <Button variant="outline">
-              <ChevronRight className="size-4" />
-            </Button>
-          </ButtonGroup>
-        )}
       </div>
 
-      {filteredEvents.length > 0 ? (
-        <div className="mt-2 h-full space-y-2 overflow-y-auto px-2 text-left md:m-0">
-          {filteredEvents.map((event, index) => (
-            <EventItem
-              key={index}
-              event={event}
-              onClick={() => handleClickEvent(event)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="text-muted-foreground mt-10 px-2 text-center">
-          No events found.
-        </div>
-      )}
+      <div className="h-full max-h-[72vh] w-full space-y-4 overflow-y-auto px-0 md:px-2">
+        {filteredEvents.length > 0 ? (
+          <div className="mt-2 h-full space-y-2 overflow-y-auto px-2 text-left md:m-0">
+            {filteredEvents.map((event, index) => (
+              <EventItem
+                key={index}
+                event={event}
+                onClick={() => handleClickEvent(event)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-muted-foreground mt-10 px-2 text-center">
+            No events found.
+          </div>
+        )}
+      </div>
 
       {selectedEvent && (
         <EventModal
@@ -104,12 +93,12 @@ const CurrentEvents = (props: { events: EventType[] }) => {
 
   return (
     <>
-      <div className="mt-2.5 hidden h-full w-3/5 flex-col gap-4 md:flex lg:w-1/4">
+      <div className="mt-2.5 hidden h-full w-3/5 flex-col gap-4 md:flex lg:w-2/5">
         <EventList events={props.events} />
       </div>
 
       <Button
-        className="mt-4 flex w-full items-center justify-center md:hidden"
+        className="flex w-full items-center justify-center md:hidden"
         variant="outline"
         onClick={() => setIsDrawerOpen(true)}
       >
