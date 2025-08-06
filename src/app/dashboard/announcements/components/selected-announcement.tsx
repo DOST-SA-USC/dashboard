@@ -4,12 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { formatDate, getUserInitials } from '@/lib/helpers';
 import { AnnouncementType } from '@/type';

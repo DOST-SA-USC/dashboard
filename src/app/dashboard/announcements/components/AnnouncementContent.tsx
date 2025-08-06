@@ -9,16 +9,11 @@ import { Search } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
+    Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue
 } from '@/components/ui/select';
 
 import AnnouncementItem from './annoucement-item';
+import NewAnnouncement from './new-announcement';
 import SelectedAnnouncement from './selected-announcement';
 
 import type { AnnouncementType } from '@/type';
@@ -93,11 +88,16 @@ const AnnouncementContent = (props: {
           )}
         </div>
       </div>
+      <div className="flex h-full flex-col gap-4 md:w-full">
+        <div className="flex w-full items-center justify-end gap-2 py-3.5 md:p-3.5">
+          <NewAnnouncement />
+        </div>
 
-      <SelectedAnnouncement
-        announcement={selectedAnnouncement}
-        setAnnouncement={setSelectedAnnouncement}
-      />
+        <SelectedAnnouncement
+          announcement={selectedAnnouncement}
+          setAnnouncement={setSelectedAnnouncement}
+        />
+      </div>
     </div>
   );
 };

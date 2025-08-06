@@ -4,11 +4,7 @@ import ImportantBadge from '@/components/dashboard/important-badge';
 import RoleBadge from '@/components/dashboard/role-badge';
 import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-import {
-  getRelativeDate,
-  getUserInitials,
-  truncateWithEllipsis,
-} from '@/lib/helpers';
+import { getRelativeDate, getUserInitials, truncateWithEllipsis } from '@/lib/helpers';
 
 import type { AnnouncementType } from '@/type';
 
