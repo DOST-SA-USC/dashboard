@@ -1,4 +1,12 @@
-import { boolean, date, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  date,
+  pgTable,
+  text,
+  timestamp,
+  jsonb,
+  uuid,
+} from 'drizzle-orm/pg-core';
 
 // Better Auth Schemas
 export const user = pgTable('user', {
@@ -15,7 +23,7 @@ export const user = pgTable('user', {
   updatedAt: timestamp('updated_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-});
+}).enableRLS();
 
 export const session = pgTable('session', {
   id: text('id').primaryKey(),
@@ -28,7 +36,7 @@ export const session = pgTable('session', {
   userId: text('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
-});
+}).enableRLS();
 
 export const account = pgTable('account', {
   id: text('id').primaryKey(),
@@ -46,7 +54,7 @@ export const account = pgTable('account', {
   password: text('password'),
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
-});
+}).enableRLS();
 
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(),
@@ -59,7 +67,7 @@ export const verification = pgTable('verification', {
   updatedAt: timestamp('updated_at').$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),
-});
+}).enableRLS();
 
 // DOST SA USC Schemas
 export const userData = pgTable('user_data', {
@@ -86,4 +94,19 @@ export const userData = pgTable('user_data', {
   updatedAt: timestamp('updated_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-});
+}).enableRLS();
+
+export const announcement = pgTable('announcements', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  content: jsonb('content').notNull(),
+  createdAt: timestamp('created_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  updatedAt: timestamp('updated_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  authorId: text('author_id').references(() => user.id, {
+    onDelete: 'set null',
+  }),
+}).enableRLS();
