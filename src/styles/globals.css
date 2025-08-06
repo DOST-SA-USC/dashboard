@@ -195,5 +195,5 @@ body {
   }
 }
 
-@import './styles/_variables.scss';
-@import './styles/_keyframe-animations.scss';
+@import './_variables.scss';
+@import './_keyframe-animations.scss';

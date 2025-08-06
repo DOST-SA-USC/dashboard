@@ -16,29 +16,33 @@ import * as React from 'react';
 import { ArrowLeftIcon } from '@/components/tiptap/tiptap-icons/arrow-left-icon';
 import { HighlighterIcon } from '@/components/tiptap/tiptap-icons/highlighter-icon';
 import { LinkIcon } from '@/components/tiptap/tiptap-icons/link-icon';
-import {
-    HorizontalRule
-} from '@/components/tiptap/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension';
+import { HorizontalRule } from '@/components/tiptap/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension';
 // --- Tiptap Node ---
-import {
-    ImageUploadNode
-} from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node-extension';
+import { ImageUploadNode } from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node-extension';
 // --- Components ---
 // --- UI Primitives ---
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import { Spacer } from '@/components/tiptap/tiptap-ui-primitive/spacer';
 import {
-    Toolbar, ToolbarGroup, ToolbarSeparator
+  Toolbar,
+  ToolbarGroup,
+  ToolbarSeparator,
 } from '@/components/tiptap/tiptap-ui-primitive/toolbar';
 import { BlockquoteButton } from '@/components/tiptap/tiptap-ui/blockquote-button';
 import { CodeBlockButton } from '@/components/tiptap/tiptap-ui/code-block-button';
 import {
-    ColorHighlightPopover, ColorHighlightPopoverButton, ColorHighlightPopoverContent
+  ColorHighlightPopover,
+  ColorHighlightPopoverButton,
+  ColorHighlightPopoverContent,
 } from '@/components/tiptap/tiptap-ui/color-highlight-popover';
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from '@/components/tiptap/tiptap-ui/heading-dropdown-menu';
 import { ImageUploadButton } from '@/components/tiptap/tiptap-ui/image-upload-button';
-import { LinkButton, LinkContent, LinkPopover } from '@/components/tiptap/tiptap-ui/link-popover';
+import {
+  LinkButton,
+  LinkContent,
+  LinkPopover,
+} from '@/components/tiptap/tiptap-ui/link-popover';
 import { ListDropdownMenu } from '@/components/tiptap/tiptap-ui/list-dropdown-menu';
 import { MarkButton } from '@/components/tiptap/tiptap-ui/mark-button';
 import { TextAlignButton } from '@/components/tiptap/tiptap-ui/text-align-button';
@@ -55,7 +59,12 @@ import { Superscript } from '@tiptap/extension-superscript';
 import { TextAlign } from '@tiptap/extension-text-align';
 import { Typography } from '@tiptap/extension-typography';
 import { Selection } from '@tiptap/extensions';
-import { Content, EditorContent, EditorContext, useEditor } from '@tiptap/react';
+import {
+  Content,
+  EditorContent,
+  EditorContext,
+  useEditor,
+} from '@tiptap/react';
 // --- Tiptap Core Extensions ---
 import { StarterKit } from '@tiptap/starter-kit';
 
@@ -225,39 +234,37 @@ export function SimpleEditor(props: {
   }, [isMobile, mobileView]);
 
   return (
-    <div className="simple-editor-wrapper !w-full">
-      <EditorContext.Provider value={{ editor }}>
-        <Toolbar
-          ref={toolbarRef}
-          className="absolute bottom-0"
-          style={{
-            ...(isMobile
-              ? {
-                  bottom: '0',
-                }
-              : {}),
-          }}
-        >
-          {mobileView === 'main' ? (
-            <MainToolbarContent
-              onHighlighterClick={() => setMobileView('highlighter')}
-              onLinkClick={() => setMobileView('link')}
-              isMobile={isMobile}
-            />
-          ) : (
-            <MobileToolbarContent
-              type={mobileView === 'highlighter' ? 'highlighter' : 'link'}
-              onBack={() => setMobileView('main')}
-            />
-          )}
-        </Toolbar>
+    <EditorContext.Provider value={{ editor }}>
+      <Toolbar
+        ref={toolbarRef}
+        className="absolute bottom-0"
+        style={{
+          ...(isMobile
+            ? {
+                bottom: '0',
+              }
+            : {}),
+        }}
+      >
+        {mobileView === 'main' ? (
+          <MainToolbarContent
+            onHighlighterClick={() => setMobileView('highlighter')}
+            onLinkClick={() => setMobileView('link')}
+            isMobile={isMobile}
+          />
+        ) : (
+          <MobileToolbarContent
+            type={mobileView === 'highlighter' ? 'highlighter' : 'link'}
+            onBack={() => setMobileView('main')}
+          />
+        )}
+      </Toolbar>
 
-        <EditorContent
-          editor={editor}
-          role="presentation"
-          className="simple-editor-content"
-        />
-      </EditorContext.Provider>
-    </div>
+      <EditorContent
+        editor={editor}
+        role="presentation"
+        className="simple-editor-content"
+      />
+    </EditorContext.Provider>
   );
 }
