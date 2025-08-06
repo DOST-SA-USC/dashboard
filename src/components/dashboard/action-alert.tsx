@@ -4,8 +4,15 @@ import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
 import {
-    AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
-    AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
 import { Button } from '../ui/button';
@@ -16,6 +23,7 @@ const ActionAlert = (props: {
     onClick: () => void;
     icon?: LucideIcon;
     variant?: 'default' | 'destructive' | 'outline';
+    disable?: boolean;
   };
   body: {
     title: string;
@@ -27,7 +35,7 @@ const ActionAlert = (props: {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant={buttonVariant}>
+        <Button disabled={props.button.disable} variant={buttonVariant}>
           {props.button.icon && <props.button.icon />} {props.button.label}
         </Button>
       </AlertDialogTrigger>

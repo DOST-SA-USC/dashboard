@@ -17,6 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useIsMobile } from '@/hooks/use-mobile';
+import AlertAction from '@/components/dashboard/action-alert';
 
 import type { Content } from '@tiptap/react';
 
@@ -25,10 +26,6 @@ const NewAnnouncement = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState<Content | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    console.log('Content initialized:', content);
-  }, [content]);
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -98,10 +95,20 @@ const NewAnnouncement = () => {
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               Close
             </Button>
-            <Button>
-              <Upload />
-              Post
-            </Button>
+            <AlertAction
+              button={{
+                label: 'Post',
+                icon: Upload,
+                onClick: () => console.log('post triggered'),
+                variant: 'default',
+                disable: title === '' || !content,
+              }}
+              body={{
+                title: 'Post Announcement',
+                description:
+                  'Make sure all information is correct before posting. This action will notify all relevant users and cannot be undone.',
+              }}
+            />
           </DialogFooter>
         </DialogContent>
       </Dialog>
