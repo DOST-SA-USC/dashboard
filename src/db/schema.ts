@@ -97,9 +97,10 @@ export const userData = pgTable('user_data', {
 }).enableRLS();
 
 export const announcement = pgTable('announcements', {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: uuid('id').primaryKey(),
   title: text('title').notNull(),
   content: jsonb('content').notNull(),
+  urgent: boolean('urgent').notNull().default(false),
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),

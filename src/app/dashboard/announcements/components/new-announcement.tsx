@@ -2,7 +2,10 @@
 
 import { Plus, Upload } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import { v4 as uuidv4 } from 'uuid';
 
+import AlertAction from '@/components/dashboard/action-alert';
 import { SimpleEditor } from '@/components/tiptap/tiptap-templates/simple/simple-editor';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -16,20 +19,27 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import { useIsMobile } from '@/hooks/use-mobile';
-import AlertAction from '@/components/dashboard/action-alert';
+import { createAnnouncement } from '@/lib/db/announcements';
+import { replaceBlobUrls } from '@/lib/db/storage';
+import { useUserStore } from '@/stores/userStore';
+import { AnnouncementType } from '@/type';
 
 import type { Content } from '@tiptap/react';
-
 const NewAnnouncement = () => {
+  const { user } = useUserStore();
   const isMobile = useIsMobile();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState<Content | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+
+  const [title, setTitle] = useState('');
+  const [isUrgent, setIsUrgent] = useState(false);
+  const [content, setContent] = useState<Content | null>(null);
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (title !== '' || content !== null) {
+      if (title !== '' || content !== null || isUrgent) {
         e.preventDefault();
         return 'Are you sure you want to refresh? Unsaved changes will be lost.';
       }
@@ -39,7 +49,39 @@ const NewAnnouncement = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [title, content]);
+  }, [title, isUrgent, content]);
+
+  const handleSubmit = async () => {
+    if (!user || user?.role === 'student') {
+      console.error('You are not authorized to post announcements.');
+      return;
+    }
+
+    setIsPending(true);
+
+    const userRole = user.role === 'admin' ? 'officer' : user.role;
+    const announcementId = uuidv4();
+
+    const newContent = await replaceBlobUrls(announcementId, content);
+
+    const body: AnnouncementType = {
+      id: announcementId,
+      type: userRole,
+      urgent: isUrgent,
+      title: title,
+      content: newContent,
+      authorID: user.userId,
+      createdAt: new Date(),
+    };
+
+    await createAnnouncement(body);
+    setIsPending(false);
+    setIsOpen(false);
+
+    setTitle('');
+    setIsUrgent(false);
+    setContent(null);
+  };
 
   return (
     <>
@@ -64,19 +106,31 @@ const NewAnnouncement = () => {
               Create a new announcement to share with your team or organization.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex h-full w-full flex-1 flex-col overflow-hidden">
-            <Label className="mb-2" htmlFor="title">
-              Title
-            </Label>
-            <Input
-              id="title"
-              placeholder="Announcement Title"
-              className="mb-4 w-full"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              autoFocus
-            />
+          <div className="flex h-full w-full flex-1 flex-col overflow-hidden md:px-2">
+            <div className="flex w-full items-center justify-center gap-4">
+              <div className="w-full">
+                <Label className="mb-2" htmlFor="title">
+                  Title
+                </Label>
+                <Input
+                  id="title"
+                  placeholder="Announcement Title"
+                  className="mb-4 w-full"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+              <div className="flex space-x-2">
+                <Switch
+                  id="urgent"
+                  checked={isUrgent}
+                  onCheckedChange={setIsUrgent}
+                />
+                <Label htmlFor="urgent">Urgent</Label>
+              </div>
+            </div>
             <Label className="mb-2" htmlFor="content">
               Content
             </Label>
@@ -91,7 +145,7 @@ const NewAnnouncement = () => {
               </div>
             </Card>
           </div>
-          <DialogFooter>
+          <DialogFooter className="md:px-2">
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               Close
             </Button>
@@ -99,9 +153,15 @@ const NewAnnouncement = () => {
               button={{
                 label: 'Post',
                 icon: Upload,
-                onClick: () => console.log('post triggered'),
+                onClick: () =>
+                  toast.promise(handleSubmit(), {
+                    loading: 'Posting announcement...',
+                    success: 'Announcement posted successfully!',
+                    error: (err) => `Failed to post announcement: ${err}`,
+                  }),
                 variant: 'default',
-                disable: title === '' || !content,
+                disable:
+                  title === '' || !content || content === null || isPending,
               }}
               body={{
                 title: 'Post Announcement',

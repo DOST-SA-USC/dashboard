@@ -9,9 +9,15 @@ import { Search } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
 import {
-    Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-
+import { Card } from '@/components/ui/card';
 import AnnouncementItem from './annoucement-item';
 import NewAnnouncement from './new-announcement';
 import SelectedAnnouncement from './selected-announcement';
@@ -19,7 +25,7 @@ import SelectedAnnouncement from './selected-announcement';
 import type { AnnouncementType } from '@/type';
 
 const AnnouncementContent = (props: {
-  announcementData: AnnouncementType[];
+  announcementData: AnnouncementType[] | null;
 }) => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedAnnouncement, setSelectedAnnouncement] =
@@ -27,6 +33,7 @@ const AnnouncementContent = (props: {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredAnnouncements = useMemo(() => {
+    if (!props.announcementData) return [];
     return props.announcementData
       .filter((announcement) => {
         if (activeFilter === 'all') return true;
@@ -82,9 +89,9 @@ const AnnouncementContent = (props: {
             />
           ))}
           {filteredAnnouncements.length === 0 && (
-            <div className="flex h-full w-full items-center justify-center">
+            <Card className="flex h-40 w-full items-center justify-center">
               <p className="text-muted-foreground">No announcements found.</p>
-            </div>
+            </Card>
           )}
         </div>
       </div>

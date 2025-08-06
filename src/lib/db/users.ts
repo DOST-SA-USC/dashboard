@@ -3,7 +3,8 @@
 import { db } from '../db';
 import { userData } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import supabase from '@/lib/supabaseClient';
+
+import { uploadUserImage } from '@/lib/db/storage';
 
 import type { FormType } from '@/type';
 
@@ -22,37 +23,11 @@ export async function getUserDataById(userId: string) {
   }
 }
 
-export async function uploadFile(file: File, userId: string) {
-  try {
-    const { data, error } = await supabase.storage
-      .from('users')
-      .upload(userId, file, {
-        cacheControl: '3600',
-        upsert: true,
-      });
-
-    if (error) {
-      throw error;
-    }
-
-    if (data) {
-      const { data: publicUrlData } = supabase.storage
-        .from('users')
-        .getPublicUrl(userId);
-      return publicUrlData.publicUrl;
-    }
-    throw new Error('No Public URL returned');
-  } catch (error) {
-    console.error('Error uploading file to Supabase Storage:', error);
-    throw error;
-  }
-}
-
 export async function insertUserData(userID: string, data: FormType) {
   try {
     let imageUrl: string | null = null;
     if (typeof data.image === 'object' && userID) {
-      imageUrl = await uploadFile(data.image, userID);
+      imageUrl = await uploadUserImage(data.image, userID);
     } else {
       throw new Error(
         'Image must be a File object and userID must be provided'
