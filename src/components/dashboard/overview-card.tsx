@@ -1,6 +1,6 @@
+import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
-import { type LucideIcon } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 const OverviewCard = (props: {

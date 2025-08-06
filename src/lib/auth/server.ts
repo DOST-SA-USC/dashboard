@@ -1,7 +1,8 @@
 'use server';
 
-import { auth } from '../auth'; // path to your Better Auth server instance
 import { headers } from 'next/headers';
+
+import { auth } from '../auth'; // path to your Better Auth server instance
 
 export async function signIn(email: string, password: string) {
   const response = await auth.api.signInEmail({

@@ -1,11 +1,7 @@
 import React from 'react';
 
-import type { EventType } from '@/type';
-
+import EventBadge from '@/components/dashboard/event-badge';
 import Event from '@/components/dashboard/event-item';
-
-import { formatDateStartEnd } from '@/lib/helpers';
-
 import {
   Dialog,
   DialogContent,
@@ -13,9 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { formatDateStartEnd } from '@/lib/helpers';
 import { DialogProps } from '@radix-ui/react-dialog';
 
-import EventBadge from '@/components/dashboard/event-badge';
+import type { EventType } from '@/type';
 
 const EventModal = (
   props: { event: EventType } & React.ComponentProps<React.FC<DialogProps>>

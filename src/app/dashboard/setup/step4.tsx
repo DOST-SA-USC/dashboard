@@ -1,16 +1,14 @@
 'use client';
-import React, { useEffect } from 'react';
+import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import React, { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { useActionState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
-
-import IDComponent from '../components/ui/id-component';
+import { insertUserData } from '@/lib/db/users';
 import { FormType } from '@/type';
 
-import { insertUserData } from '@/lib/db/users';
+import IDComponent from '../components/ui/id-component';
 
 const initialState = {
   success: false,

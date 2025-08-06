@@ -1,10 +1,10 @@
 import React from 'react';
 
+import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
+
 import AnnouncementContent from './components/AnnouncementContent';
 
 import type { AnnouncementType } from '@/type';
-
-import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
 
 export default async function Announcements() {
   return (

@@ -5,21 +5,21 @@
 
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import { Search } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
 
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
-  SelectLabel,
-  SelectGroup,
 } from '@/components/ui/select';
+
 import AnnouncementItem from './annoucement-item';
 import SelectedAnnouncement from './selected-announcement';
-
-import { Search } from 'lucide-react';
 
 import type { AnnouncementType } from '@/type';
 

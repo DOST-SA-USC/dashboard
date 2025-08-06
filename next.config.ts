@@ -2,7 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['cnfbjdozpfkqlxtqoudy.supabase.co'], // replace with your image domain
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cnfbjdozpfkqlxtqoudy.supabase.co',
+      },
+    ],
   },
 };
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import type { EventType } from '@/type';
-import { cn } from '@/lib/utils';
-
-import EventBadge from './event-badge';
 
 import { formatDateStartEnd } from '@/lib/helpers';
-import { Card } from '../ui/card';
+import { cn } from '@/lib/utils';
 
+import { Card } from '../ui/card';
+import EventBadge from './event-badge';
+
+import type { EventType } from '@/type';
 const EventItem = (
   props: { event: EventType } & React.HTMLProps<HTMLDivElement>
 ) => {

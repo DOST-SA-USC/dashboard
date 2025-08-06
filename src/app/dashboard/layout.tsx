@@ -1,13 +1,12 @@
+import { redirect } from 'next/navigation';
 import React from 'react';
-
-import NavBar from './components/ui/nav-bar';
-import Setup from './setup/setup';
 
 import { getSession } from '@/lib/auth/server';
 import { getUserDataById } from '@/lib/db/users';
-import { redirect } from 'next/navigation';
-
 import { UserHydration } from '@/stores/user-hyradtion';
+
+import NavBar from './components/ui/nav-bar';
+import Setup from './setup/setup';
 
 import type { UserType } from '@/type';
 

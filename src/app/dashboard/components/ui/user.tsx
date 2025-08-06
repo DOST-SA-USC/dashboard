@@ -1,11 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import { IdCardLanyard, LogOut, Settings } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { toast } from 'sonner';
-import { LogOut, IdCardLanyard, Settings } from 'lucide-react';
-import { signOut } from '@/lib/auth/client';
-
-import { useUserStore } from '@/stores/userStore';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
@@ -16,12 +14,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from 'next/navigation';
+import { signOut } from '@/lib/auth/client';
+import { getUserInitials } from '@/lib/helpers';
+import { useUserStore } from '@/stores/userStore';
 
 import ScholarIDModal from '../scholar-id';
 import SettingsModal from '../settings';
-
-import { getUserInitials } from '@/lib/helpers';
 
 export default function UserComponent() {
   const router = useRouter();

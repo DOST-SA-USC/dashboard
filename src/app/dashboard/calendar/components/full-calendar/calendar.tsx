@@ -1,24 +1,21 @@
 'use client';
+import './calendar.css';
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState } from 'react';
 
-import { Card } from '@/components/ui/card';
-
-import FullCalendar from '@fullcalendar/react';
-import type { EventInput } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { Button } from '@/components/ui/button';
 // import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 // import { EventClickArg } from '@fullcalendar/core';
-
 import { ButtonGroup } from '@/components/ui/button-group';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from '@fullcalendar/react';
 
 import CalendarItem from './calendar-item';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import './calendar.css';
-
+import type { EventInput } from '@fullcalendar/core';
 const Calendar = (props: { events: EventInput[] }) => {
   const calendarRef = useRef<FullCalendar>(null); // Calendar reference
   const [events] = useState<EventInput[]>(props.events);

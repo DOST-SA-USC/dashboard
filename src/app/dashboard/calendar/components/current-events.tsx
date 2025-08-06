@@ -1,21 +1,20 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
-
-import { EventItem, EventModal } from './event-item';
-import { EventType } from '@/type';
-import { Button } from '@/components/ui/button';
 import { List, Search } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
 
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-  DrawerDescription,
 } from '@/components/ui/drawer';
-
 import { useIsMobile } from '@/hooks/use-mobile';
+import { EventType } from '@/type';
+
+import { EventItem, EventModal } from './event-item';
 
 const EventList = (props: { events: EventType[] }) => {
   const [searchQuery, setSearchQuery] = useState('');

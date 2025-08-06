@@ -1,14 +1,10 @@
-import React from 'react';
-import UserComponent from '../ui/user';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-
-import ModeToggle from '@/components/theme-switch';
-import SearchComponent from './search';
 import RoleBadge from '@/components/dashboard/role-badge';
-
+import ModeToggle from '@/components/theme-switch';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,6 +13,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
+
+import UserComponent from '../ui/user';
+import SearchComponent from './search';
 
 const NavBarData = {
   brand: {

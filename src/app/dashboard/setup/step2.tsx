@@ -1,17 +1,18 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
 import {
   Select,
   SelectContent,
@@ -21,14 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import data from './data.json';
-import type { FormType } from '@/type';
-import { toast } from 'sonner';
 
+import type { FormType } from '@/type';
 const formSchema = z.object({
   uscID: z
     .string()

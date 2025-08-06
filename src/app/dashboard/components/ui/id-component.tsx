@@ -1,5 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
+
 import HoverCard from '@/components/dashboard/hover-card';
 import { useIsMobile } from '@/hooks/use-mobile';
 

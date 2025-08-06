@@ -1,19 +1,21 @@
 'use client';
 
+import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import { signOut } from '@/lib/auth/client';
-import { useRouter } from 'next/navigation';
+
+import ModeToggle from '@/components/theme-switch';
+import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardHeader,
   CardContent,
-  CardTitle,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import ModeToggle from '@/components/theme-switch';
 import { Progress } from '@/components/ui/progress';
+import { signOut } from '@/lib/auth/client';
 
 import Form1 from './step1';
 import Form2 from './step2';
@@ -21,8 +23,6 @@ import Form3 from './step3';
 import Form4 from './step4';
 
 import type { FormType, UserType } from '@/type';
-
-import { LogOut } from 'lucide-react';
 
 const formSteps = [
   {

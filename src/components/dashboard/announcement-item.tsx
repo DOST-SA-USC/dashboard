@@ -1,10 +1,10 @@
 import React from 'react';
-import type { AnnouncementType } from '@/type';
 
-import RoleBadge from '@/components/dashboard/role-badge';
 import ImportantBadge from '@/components/dashboard/important-badge';
+import RoleBadge from '@/components/dashboard/role-badge';
+import { formatDate, truncateWithEllipsis } from '@/lib/helpers';
 
-import { truncateWithEllipsis, formatDate } from '@/lib/helpers';
+import type { AnnouncementType } from '@/type';
 
 const AnnouncementItem = (props: { announcement: AnnouncementType }) => {
   let borderColor;

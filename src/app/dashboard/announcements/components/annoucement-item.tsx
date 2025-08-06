@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
-import type { AnnouncementType } from '@/type';
 
+import ImportantBadge from '@/components/dashboard/important-badge';
+import RoleBadge from '@/components/dashboard/role-badge';
+import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-
 import {
   getRelativeDate,
-  truncateWithEllipsis,
   getUserInitials,
+  truncateWithEllipsis,
 } from '@/lib/helpers';
-import { Avatar } from '@/components/ui/avatar';
-import RoleBadge from '@/components/dashboard/role-badge';
-import ImportantBadge from '@/components/dashboard/important-badge';
+
+import type { AnnouncementType } from '@/type';
 
 const AnnouncementItem = (
   props: {

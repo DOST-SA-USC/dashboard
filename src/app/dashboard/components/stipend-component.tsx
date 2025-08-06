@@ -1,22 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
-import OverviewCard from '@/components/dashboard/overview-card';
+import { Link as LinkIcon, List } from 'lucide-react';
 import Link from 'next/link';
-import { List, Link as LinkIcon } from 'lucide-react';
+import React, { useState } from 'react';
 
+import OverviewCard from '@/components/dashboard/overview-card';
+import { Card } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
-
-import { Card } from '@/components/ui/card';
-
-import { STIPEND_DATA, DBM_DATA } from '@/mockData/stipend';
+import { DBM_DATA, STIPEND_DATA } from '@/mockData/stipend';
 
 const StipendCard = (props: {
   title: string;

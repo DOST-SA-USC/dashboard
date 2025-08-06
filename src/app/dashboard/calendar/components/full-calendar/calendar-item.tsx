@@ -1,9 +1,9 @@
 import React from 'react';
-import type { EventContentArg } from '@fullcalendar/core';
-import { cn } from '@/lib/utils';
 
 import { getBadgeClass } from '@/components/dashboard/event-badge';
+import { cn } from '@/lib/utils';
 
+import type { EventContentArg } from '@fullcalendar/core';
 const CalendarItem = (props: { arg: EventContentArg }) => {
   return (
     <div

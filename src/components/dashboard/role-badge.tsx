@@ -1,15 +1,15 @@
 'use client';
 
-import { useUserStore } from '@/stores/userStore';
-
 import {
-  FileUser,
-  ShieldUser,
   Contact,
   ContactRound,
+  FileUser,
+  ShieldUser,
   ThumbsUp,
 } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
+import { useUserStore } from '@/stores/userStore';
 import { UserRoles } from '@/type';
 
 export default function RoleBadge(props: { role?: UserRoles }) {

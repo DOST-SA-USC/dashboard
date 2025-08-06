@@ -1,18 +1,19 @@
 'use client';
 
+import { Printer } from 'lucide-react';
 import React from 'react';
 
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+
 import IDComponent from './ui/id-component';
-import { Printer } from 'lucide-react';
 
 const ScholarIDModal = (props: React.ComponentProps<typeof Dialog>) => {
   return (

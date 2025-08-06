@@ -1,21 +1,17 @@
 'use client';
-import { useIsMobile } from '@/hooks/use-mobile';
-import React, { useState, useEffect } from 'react';
+import { MousePointerClick } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
+import { Avatar } from '@/components/ui/avatar';
+import { Card } from '@/components/ui/card';
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
-import { Card } from '@/components/ui/card';
-import { Avatar } from '@/components/ui/avatar';
-import { getUserInitials } from '@/lib/helpers';
-
-import { formatDate } from '@/lib/helpers';
-
-import { MousePointerClick } from 'lucide-react';
-
+import { useIsMobile } from '@/hooks/use-mobile';
+import { formatDate, getUserInitials } from '@/lib/helpers';
 import { AnnouncementType } from '@/type';
 
 const SelectedAnnouncement = (props: {

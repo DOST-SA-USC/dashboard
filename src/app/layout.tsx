@@ -1,8 +1,9 @@
-import { Toaster } from '@/components/ui/sonner';
-import { ThemeProvider } from '@/components/ui/theme-provider';
-import type { Metadata } from 'next';
 import '@/globals.css';
 
+import { Toaster } from '@/components/ui/sonner';
+import { ThemeProvider } from '@/components/ui/theme-provider';
+
+import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Dashboard | DOST SA USC',
   description: 'Official scholar dashboard for DOST SA USC.',

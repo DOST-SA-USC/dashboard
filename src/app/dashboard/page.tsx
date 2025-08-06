@@ -1,17 +1,17 @@
+import { Bell, Calendar } from 'lucide-react';
 import React from 'react';
 
-import { Bell, Calendar } from 'lucide-react';
-import OverviewCard from '@/components/dashboard/overview-card';
-import HomeHeader from './components/ui/home-header';
-import StipendComponent from './components/stipend-component';
-import PageCard from '@/components/dashboard/page-card';
 import AnnouncementItem from '@/components/dashboard/announcement-item';
 import EventItem from '@/components/dashboard/event-item';
+import OverviewCard from '@/components/dashboard/overview-card';
+import PageCard from '@/components/dashboard/page-card';
+import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
+import EVENTS_DATA from '@/mockData/events.json';
+
+import StipendComponent from './components/stipend-component';
+import HomeHeader from './components/ui/home-header';
 
 import type { AnnouncementType, EventType } from '@/type';
-
-import EVENTS_DATA from '@/mockData/events.json';
-import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
 
 export default async function Dashboard() {
   function getRecentAnnouncements() {

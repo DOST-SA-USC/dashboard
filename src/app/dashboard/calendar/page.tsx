@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Calendar from './components/full-calendar/calendar';
-import CurrentEvents from './components/current-events';
-
 import EVENTS_DATA from '@/mockData/events.json';
+
+import CurrentEvents from './components/current-events';
+import Calendar from './components/full-calendar/calendar';
 
 import type { EventType } from '@/type';
 import type { EventInput } from '@fullcalendar/core';

@@ -1,6 +1,8 @@
-import React from 'react';
-import { Badge } from '../ui/badge';
 import { CircleAlert } from 'lucide-react';
+import React from 'react';
+
+import { Badge } from '../ui/badge';
+
 import type { AnnouncementType } from '@/type';
 
 const ImportantBadge = (props: { priority: AnnouncementType['priority'] }) => {

@@ -1,16 +1,15 @@
-import React from 'react';
-import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  CardAction,
 } from '@/components/ui/card';
-
 import {
   Tooltip,
   TooltipContent,

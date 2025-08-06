@@ -1,19 +1,19 @@
 'use client';
 
+import {
+  Award,
+  Calendar,
+  GraduationCap,
+  IdCardLanyard,
+  TrendingUp,
+} from 'lucide-react';
 import React, { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { capitalizeFirstLetter } from '@/lib/helpers';
 import { useUserStore } from '@/stores/userStore';
 
-import {
-  Calendar,
-  IdCardLanyard,
-  Award,
-  TrendingUp,
-  GraduationCap,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
 import ScholarIDModal from '../scholar-id';
-import { capitalizeFirstLetter } from '@/lib/helpers';
 
 const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
