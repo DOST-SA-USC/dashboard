@@ -10,8 +10,9 @@ import {
   ThumbsUp,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { UserRoles } from '@/type';
 
-export default function RoleBadge() {
+export default function RoleBadge(props: { role?: UserRoles }) {
   const user = useUserStore((state) => state.user);
   if (!user || !user.role) return null;
 
@@ -31,12 +32,14 @@ export default function RoleBadge() {
     facebook: 'bg-chart-3/30 text-chart-3 border-chart-3 dark:bg-chart-3/20',
   };
 
+  const role = props.role ?? user.role;
+
   return (
     <Badge
-      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[user.role]}`}
+      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[role]}`}
     >
-      {icons[user.role]}
-      {user.role}
+      {icons[role]}
+      {role}
     </Badge>
   );
 }

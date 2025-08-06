@@ -20,7 +20,8 @@ import {
 
 const NavBarData = {
   brand: {
-    name: 'DOST SA USC',
+    title: 'DOST SA USC',
+    subtitle: "Scholars' Dashboard",
     logo: '/logo.png',
     alt: 'DOST SA USC Logo',
     fallback: 'DSU',
@@ -82,8 +83,12 @@ const NavBar = () => {
             </Avatar>
           </Link>
           <div className="hidden md:block">
-            <h1 className="text-xl leading-4 font-bold">DOST SA USC</h1>
-            <p className="text-muted-foreground text-sm">Scholar Portal</p>
+            <h1 className="text-xl leading-5 font-bold">
+              {NavBarData.brand.title}
+            </h1>
+            <p className="text-muted-foreground text-xs">
+              {NavBarData.brand.subtitle}
+            </p>
           </div>
         </div>
         {/* Nav Menu */}

@@ -18,7 +18,11 @@
       "BS Industrial Engineering",
       "BS Mechanical Engineering"
     ],
-    "School of Health Care Professions": ["BS Pharmacy"]
+    "School of Health Care Professions": [
+      "BS Pharmacy",
+      "BS Nutrition and Dietetics"
+    ],
+    "School of Health Care Professionss": ["BS Architecture"]
   },
   "scholarshipTypes": [
     "MERIT",

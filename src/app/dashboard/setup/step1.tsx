@@ -21,9 +21,14 @@ const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required.'),
   middleName: z.string().min(1, 'Middle name is required.'),
   lastName: z.string().min(1, 'Last name is required.'),
-  image: z.any().refine((file) => file instanceof File && file.size > 0, {
-    message: 'Image is required.',
-  }),
+  image: z
+    .any()
+    .refine((file) => file instanceof File && file.size > 0, {
+      message: 'Image is required.',
+    })
+    .refine((file) => file instanceof File && file.size <= 500 * 1024, {
+      message: 'Image must be less than 500KB.',
+    }),
 });
 
 const Form1 = (props: {

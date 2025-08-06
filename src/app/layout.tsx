@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import '@/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Iskola | DOST SA USC',
-  description: 'Official scholar portal for DOST SA USC.',
+  title: 'Dashboard | DOST SA USC',
+  description: 'Official scholar dashboard for DOST SA USC.',
 };
 
 export default function RootLayout({

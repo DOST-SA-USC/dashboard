@@ -20,7 +20,8 @@ import {
 const SearchComponent = (props: {
   data: {
     brand: {
-      name: string;
+      title: string;
+      subtitle: string;
       logo: string;
       alt: string;
       fallback: string;
