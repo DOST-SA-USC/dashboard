@@ -41,7 +41,7 @@ const AnnouncementContent = (props: {
   });
 
   const fetchAnnouncements = useMemo(
-    () => (query: string, type: string) => {
+    () => (query?: string, type?: string) => {
       setIsLoading(true);
       const filter =
         type === 'all' ? undefined : (type as AnnouncementType['type']);
@@ -49,10 +49,12 @@ const AnnouncementContent = (props: {
       getAnnouncements(currentPage.page, query, filter)
         .then(({ announcements, size }) => {
           setAnnouncements(announcements);
-          setCurrentPage((prev) => ({
-            ...prev,
-            totalPages: size,
-          }));
+          setCurrentPage((prev) => {
+            return {
+              page: prev.page > size ? size : prev.page,
+              total: size,
+            };
+          });
         })
         .catch((error) => {
           console.error('Error fetching announcements:', error);
@@ -69,7 +71,7 @@ const AnnouncementContent = (props: {
       debounce((...args: unknown[]) => {
         const [query, type] = args as [string, string];
         fetchAnnouncements(query, type);
-      }, 300),
+      }),
     [fetchAnnouncements]
   );
 
@@ -99,8 +101,8 @@ const AnnouncementContent = (props: {
   ]);
 
   return (
-    <div className="flex h-full w-full flex-1 items-start justify-between gap-4 overflow-hidden md:max-h-[80vh]">
-      <div className="flex h-full max-h-[80vh] w-full flex-col gap-4 overflow-auto md:flex-4/5">
+    <div className="flex h-full w-full flex-1 gap-4">
+      <div className="h-full w-full flex-1">
         <div className="flex w-full gap-4 py-3.5 md:p-3.5">
           <div className="flex w-full items-center gap-2">
             <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
@@ -131,10 +133,10 @@ const AnnouncementContent = (props: {
             </SelectContent>
           </Select>
         </div>
-        <div className="h-full w-full flex-1 space-y-4 overflow-y-auto px-0 md:px-2">
+        <div className="h-[80vh] w-full flex-1 space-y-4 overflow-auto px-0 md:px-2">
           {isLoading ? (
             <>
-              {[...Array(2)].map((_, idx) => (
+              {[...Array(4)].map((_, idx) => (
                 <Skeleton key={idx} className="bg-transparent">
                   <Card className="!bg-background flex h-40 w-full items-center justify-center" />
                 </Skeleton>
@@ -161,15 +163,17 @@ const AnnouncementContent = (props: {
           <Pagination page={currentPage} onPageChange={setCurrentPage} />
         </div>
       </div>
-      <div className="flex h-full flex-col gap-4 md:w-full">
+      <div className="hidden h-full flex-2 flex-col md:flex md:w-full">
         <div className="flex h-16 w-full items-center justify-end gap-2 py-3.5 md:p-3.5">
-          <NewAnnouncement />
+          <NewAnnouncement updateData={fetchAnnouncements} />
         </div>
 
-        <SelectedAnnouncement
-          announcement={selectedAnnouncement}
-          setAnnouncement={setSelectedAnnouncement}
-        />
+        <div className="h-[80vh]">
+          <SelectedAnnouncement
+            announcement={selectedAnnouncement}
+            setAnnouncement={setSelectedAnnouncement}
+          />
+        </div>
       </div>
     </div>
   );

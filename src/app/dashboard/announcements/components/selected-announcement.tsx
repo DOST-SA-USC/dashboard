@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
+import { EditorContent, JSONContent } from '@tiptap/react';
 import {
   Drawer,
   DrawerContent,
@@ -14,6 +15,22 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { formatDate, getUserInitials } from '@/lib/helpers';
 import { AnnouncementType } from '@/type';
 
+import { useEditor } from '@tiptap/react';
+
+import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils';
+import { Highlight } from '@tiptap/extension-highlight';
+import { Image } from '@tiptap/extension-image';
+import { TaskItem, TaskList } from '@tiptap/extension-list';
+import { Subscript } from '@tiptap/extension-subscript';
+import { Superscript } from '@tiptap/extension-superscript';
+import { TextAlign } from '@tiptap/extension-text-align';
+import { Typography } from '@tiptap/extension-typography';
+import { Selection } from '@tiptap/extensions';
+import { ImageUploadNode } from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node-extension';
+
+import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
+import { StarterKit } from '@tiptap/starter-kit';
+
 const SelectedAnnouncement = (props: {
   announcement: AnnouncementType | null;
   setAnnouncement: (arg: null) => void;
@@ -21,11 +38,46 @@ const SelectedAnnouncement = (props: {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
 
+  const editor = useEditor({
+    immediatelyRender: false,
+    content: props.announcement?.content as JSONContent,
+    editable: false,
+    extensions: [
+      StarterKit.configure({
+        horizontalRule: false,
+        link: {
+          openOnClick: false,
+          enableClickSelection: true,
+        },
+      }),
+      HorizontalRule,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      TaskList,
+      TaskItem.configure({ nested: true }),
+      Highlight.configure({ multicolor: true }),
+      Image,
+      Typography,
+      Superscript,
+      Subscript,
+      Selection,
+      ImageUploadNode.configure({
+        accept: 'image/*',
+        maxSize: MAX_FILE_SIZE,
+        limit: 3,
+        upload: handleImageUpload,
+        onError: (error) => console.error('Upload failed:', error),
+      }),
+    ],
+  });
+
   useEffect(() => {
-    if (props.announcement) {
+    if (editor && props.announcement?.content) {
+      editor.commands.setContent(props.announcement?.content as JSONContent);
+    }
+    if (props.announcement && isMobile) {
       setIsOpen(true);
     }
-  }, [props.announcement, isMobile]);
+  }, [props.announcement?.content, editor, props.announcement, isMobile]);
 
   if (isMobile) {
     return (
@@ -38,9 +90,9 @@ const SelectedAnnouncement = (props: {
           <DrawerHeader className="sr-only">
             <DrawerTitle>{props.announcement?.title}</DrawerTitle>
           </DrawerHeader>
-          <div className="border-border mt-4 flex items-center justify-between border-y px-6 py-4">
-            <div>
-              <div className="flex items-center gap-3">
+          <div className="border-border mt-2 flex w-full flex-col border-y">
+            <div className="border-border flex w-full items-center justify-between border-b p-4">
+              <div className="flex w-full flex-1 items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
                   {getUserInitials(props.announcement?.authorID || '')}
                 </Avatar>
@@ -51,24 +103,20 @@ const SelectedAnnouncement = (props: {
                   <span className="text-xs">DOST SA USC President</span>
                 </div>
               </div>
+              <span className="text-muted-foreground text-xs">
+                {formatDate(new Date(props.announcement?.createdAt || ''))}
+              </span>
             </div>
-            <span className="text-muted-foreground text-xs">
-              {formatDate(new Date(props.announcement?.createdAt || ''))}
-            </span>
+            <div className="p-2 px-4">
+              <p className="text-base font-bold">
+                Subject: {props.announcement?.title}
+              </p>
+            </div>
           </div>
-          <div className="p-4">
-            <h1 className="text-center text-xl font-extrabold">
-              {props.announcement?.title}
-            </h1>
-            <p className="mt-2 text-justify text-sm">
-              lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+          <div className="overflow-y-auto p-4">
+            <div className="mt-2 text-justify text-sm">
+              {editor && <EditorContent editor={editor} />}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>
@@ -76,12 +124,13 @@ const SelectedAnnouncement = (props: {
   }
 
   return (
-    <div className="hidden h-full min-h-[71vh] w-full overflow-hidden p-0 md:flex md:flex-col">
+    <div className="hidden h-full w-full overflow-hidden p-0 md:flex md:flex-col">
       {props.announcement ? (
         <Card className="h-full w-full flex-1 gap-0 p-0">
-          <div className="flex items-center justify-between gap-3 border-b p-4">
-            <div>
-              <div className="flex items-center gap-3">
+          {/* header */}
+          <div className="border-border flex w-full flex-col border-b">
+            <div className="border-border flex w-full items-center justify-between border-b p-4">
+              <div className="flex w-full flex-1 items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
                   {getUserInitials(props.announcement?.authorID || '')}
                 </Avatar>
@@ -92,20 +141,21 @@ const SelectedAnnouncement = (props: {
                   <span className="text-xs">DOST SA USC President</span>
                 </div>
               </div>
+              <span className="text-muted-foreground text-xs">
+                {formatDate(new Date(props.announcement?.createdAt || ''))}
+              </span>
             </div>
-            <span className="text-muted-foreground text-xs">
-              {formatDate(new Date(props.announcement?.createdAt || ''))}
-            </span>
+            <div className="p-2 px-4">
+              <p className="text-base font-bold">
+                Subject: {props.announcement?.title}
+              </p>
+            </div>
           </div>
-          <div className="p-4">
-            <h1 className="text-2xl font-extrabold">
-              {props.announcement.title}
-            </h1>
-            <p className="text-justify text-base">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            </p>
+          {/* body */}
+          <div className="h-[60vh] flex-1 overflow-y-auto p-4">
+            <div className="prose prose-sm max-w-none">
+              {editor && <EditorContent editor={editor} />}
+            </div>
           </div>
         </Card>
       ) : (

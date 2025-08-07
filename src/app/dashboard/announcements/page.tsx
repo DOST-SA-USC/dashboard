@@ -8,7 +8,7 @@ export default async function Announcements() {
   const { announcements, size } = await getAnnouncements();
 
   return (
-    <div className="flex min-h-screen w-full flex-col gap-4 p-4 pt-20 md:pt-28 lg:px-20">
+    <div className="mx-auto flex max-h-screen w-full max-w-[1600px] overflow-hidden pt-20 md:px-4">
       <AnnouncementContent announcementData={announcements} totalPages={size} />
     </div>
   );
