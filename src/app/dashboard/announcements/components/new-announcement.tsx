@@ -72,10 +72,14 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
       title: title,
       content: newContent,
       authorID: user.userId,
+      authorName: `${user.firstName} ${user.lastName}`,
+      authorPosition: user.position || 'N/A',
+      authorImageURL: user.image as string,
       createdAt: new Date(),
     };
 
     await createAnnouncement(body);
+
     setIsPending(false);
     setIsOpen(false);
 

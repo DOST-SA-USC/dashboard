@@ -22,6 +22,9 @@ export const createAnnouncement = async (
         title: announcementContent.title,
         content: announcementContent.content,
         authorId: announcementContent.authorID,
+        authorName: announcementContent.authorName,
+        authorPosition: announcementContent.authorPosition,
+        authorImageURL: announcementContent.authorImageURL,
         createdAt: announcementContent.createdAt,
       } as typeof announcement.$inferInsert)
       .returning();
@@ -70,15 +73,21 @@ export const getAnnouncements = async (
 
     const result = await query;
 
-    const data = result.map((item) => ({
-      id: item.id,
-      type: item.type as AnnouncementType['type'],
-      urgent: item.urgent,
-      title: item.title,
-      content: item.content as Content,
-      authorID: item.authorId ?? '',
-      createdAt: item.createdAt,
-    }));
+    const data = result.map(
+      (item) =>
+        ({
+          id: item.id,
+          type: item.type as AnnouncementType['type'],
+          urgent: item.urgent,
+          title: item.title,
+          content: item.content as Content,
+          authorID: item.authorId ?? '',
+          authorName: item.authorName ?? 'Unknown',
+          authorPosition: item.authorPosition ?? 'N/A',
+          authorImageURL: item.authorImageURL ?? '',
+          createdAt: item.createdAt,
+        }) as AnnouncementType
+    );
 
     // Get the total count of announcements for pagination
     const totalCountQuery = db

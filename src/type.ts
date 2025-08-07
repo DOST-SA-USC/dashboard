@@ -20,6 +20,7 @@ interface FormType {
 interface UserType extends Required<FormType> {
   userId: string;
   role: UserRoles;
+  position?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -34,6 +35,9 @@ interface AnnouncementType {
   title: string;
   content: Content;
   authorID: string;
+  authorName: string;
+  authorPosition: string;
+  authorImageURL: string;
   createdAt: string | Date;
 }
 

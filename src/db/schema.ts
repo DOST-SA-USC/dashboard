@@ -88,6 +88,7 @@ export const userData = pgTable('user_data', {
   yearOfAward: text('year_of_award').notNull(),
   scholarshipType: text('scholarship_type').notNull(),
   role: text('role').notNull().default('student'),
+  position: text('position'),
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
@@ -105,10 +106,10 @@ export const announcement = pgTable('announcements', {
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-  updatedAt: timestamp('updated_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
   authorId: text('author_id').references(() => user.id, {
     onDelete: 'set null',
   }),
+  authorName: text('author_name').notNull(),
+  authorPosition: text('author_position'),
+  authorImageURL: text('author_image_url'),
 }).enableRLS();

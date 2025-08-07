@@ -37,7 +37,7 @@ const AnnouncementContent = (props: {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState({
     page: 1,
-    total: props.totalPages,
+    total: props.totalPages || 1,
   });
 
   const fetchAnnouncements = useMemo(

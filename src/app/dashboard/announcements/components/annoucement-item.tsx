@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import ImportantBadge from '@/components/dashboard/important-badge';
 import RoleBadge from '@/components/dashboard/role-badge';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import {
   getRelativeDate,
   getUserInitials,
-  // truncateWithEllipsis,
+  truncateWithEllipsis,
 } from '@/lib/helpers';
 
 import type { AnnouncementType } from '@/type';
@@ -19,6 +19,22 @@ const AnnouncementItem = (
 ) => {
   const { announcement, ...rest } = props;
 
+  const extractFirstTextNode = useMemo(() => {
+    if (
+      announcement.content &&
+      typeof announcement.content === 'object' &&
+      'content' in announcement.content &&
+      Array.isArray(announcement.content.content)
+    ) {
+      const paragraphNode = announcement.content.content.find(
+        (node: { type?: string; content?: Array<{ text?: string }> }) =>
+          node.type === 'paragraph'
+      );
+      return paragraphNode?.content?.[0]?.text;
+    }
+    return '';
+  }, [announcement.content]);
+
   return (
     <Card
       className="hover:bg-accent hover:text-accent-foreground cursor-pointer gap-0 space-y-2 border-1 p-4"
@@ -26,10 +42,16 @@ const AnnouncementItem = (
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Avatar className="bg-accent flex size-6 items-center justify-center text-xs">
-            {getUserInitials(announcement.authorID)}
+          <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
+            <AvatarImage
+              src={props.announcement?.authorImageURL as string}
+              alt={props.announcement?.authorName}
+            />
+            <AvatarFallback>
+              {getUserInitials(props.announcement?.authorName || '')}
+            </AvatarFallback>
           </Avatar>
-          <span className="text-xs md:text-sm">{announcement.authorID}</span>
+          <span className="text-xs md:text-sm">{announcement.authorName}</span>
         </div>
 
         <span className="text-muted-foreground text-[10px] md:text-xs">
@@ -42,9 +64,7 @@ const AnnouncementItem = (
       </h2>
 
       <p className="text-xs md:text-sm">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo ex
-        provident magnam reiciendis deleniti at harum delectus, commodi est
-        dicta.
+        {truncateWithEllipsis(extractFirstTextNode || 'No content available.')}
       </p>
 
       <div className="flex items-center gap-2">

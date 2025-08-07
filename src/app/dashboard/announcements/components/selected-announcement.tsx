@@ -1,8 +1,7 @@
 'use client';
 import { MousePointerClick } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { EditorContent, JSONContent } from '@tiptap/react';
 import {
@@ -94,13 +93,21 @@ const SelectedAnnouncement = (props: {
             <div className="border-border flex w-full items-center justify-between border-b p-4">
               <div className="flex w-full flex-1 items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
-                  {getUserInitials(props.announcement?.authorID || '')}
+                  <AvatarImage
+                    src={props.announcement?.authorImageURL as string}
+                    alt={props.announcement?.authorName}
+                  />
+                  <AvatarFallback>
+                    {getUserInitials(props.announcement?.authorName || '')}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
                   <p className="text-base leading-4 font-semibold">
-                    {props.announcement?.authorID}
+                    {props.announcement?.authorName}
                   </p>
-                  <span className="text-xs">DOST SA USC President</span>
+                  <span className="text-xs">
+                    {props.announcement?.authorPosition}
+                  </span>
                 </div>
               </div>
               <span className="text-muted-foreground text-xs">
@@ -113,7 +120,7 @@ const SelectedAnnouncement = (props: {
               </p>
             </div>
           </div>
-          <div className="overflow-y-auto p-4">
+          <div className="overflow-x-hidden overflow-y-auto p-4">
             <div className="mt-2 text-justify text-sm">
               {editor && <EditorContent editor={editor} />}
             </div>
@@ -132,13 +139,21 @@ const SelectedAnnouncement = (props: {
             <div className="border-border flex w-full items-center justify-between border-b p-4">
               <div className="flex w-full flex-1 items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
-                  {getUserInitials(props.announcement?.authorID || '')}
+                  <AvatarImage
+                    src={props.announcement?.authorImageURL as string}
+                    alt={props.announcement?.authorName}
+                  />
+                  <AvatarFallback>
+                    {getUserInitials(props.announcement?.authorName || '')}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
                   <p className="text-base leading-4 font-semibold">
-                    {props.announcement?.authorID}
+                    {props.announcement?.authorName}
                   </p>
-                  <span className="text-xs">DOST SA USC President</span>
+                  <span className="text-xs">
+                    {props.announcement?.authorPosition}
+                  </span>
                 </div>
               </div>
               <span className="text-muted-foreground text-xs">
