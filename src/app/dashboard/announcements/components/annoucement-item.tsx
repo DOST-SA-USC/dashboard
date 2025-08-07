@@ -4,7 +4,11 @@ import ImportantBadge from '@/components/dashboard/important-badge';
 import RoleBadge from '@/components/dashboard/role-badge';
 import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-import { getRelativeDate, getUserInitials, truncateWithEllipsis } from '@/lib/helpers';
+import {
+  getRelativeDate,
+  getUserInitials,
+  // truncateWithEllipsis,
+} from '@/lib/helpers';
 
 import type { AnnouncementType } from '@/type';
 
@@ -23,9 +27,9 @@ const AnnouncementItem = (
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <Avatar className="bg-accent flex size-6 items-center justify-center text-xs">
-            {getUserInitials(announcement.author)}
+            {getUserInitials(announcement.authorID)}
           </Avatar>
-          <span className="text-xs md:text-sm">{announcement.author}</span>
+          <span className="text-xs md:text-sm">{announcement.authorID}</span>
         </div>
 
         <span className="text-muted-foreground text-[10px] md:text-xs">
@@ -38,11 +42,13 @@ const AnnouncementItem = (
       </h2>
 
       <p className="text-xs md:text-sm">
-        {truncateWithEllipsis(announcement.content)}
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo ex
+        provident magnam reiciendis deleniti at harum delectus, commodi est
+        dicta.
       </p>
 
       <div className="flex items-center gap-2">
-        <ImportantBadge priority={announcement.priority} />
+        <ImportantBadge priority={announcement.urgent} />
         <RoleBadge role={announcement.type} />
       </div>
     </Card>

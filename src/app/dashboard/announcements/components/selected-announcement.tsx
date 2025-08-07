@@ -4,7 +4,12 @@ import React, { useEffect, useState } from 'react';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { formatDate, getUserInitials } from '@/lib/helpers';
 import { AnnouncementType } from '@/type';
@@ -37,11 +42,11 @@ const SelectedAnnouncement = (props: {
             <div>
               <div className="flex items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
-                  {getUserInitials(props.announcement?.author || '')}
+                  {getUserInitials(props.announcement?.authorID || '')}
                 </Avatar>
                 <div className="flex flex-col">
                   <p className="text-base leading-4 font-semibold">
-                    {props.announcement?.author}
+                    {props.announcement?.authorID}
                   </p>
                   <span className="text-xs">DOST SA USC President</span>
                 </div>
@@ -56,7 +61,13 @@ const SelectedAnnouncement = (props: {
               {props.announcement?.title}
             </h1>
             <p className="mt-2 text-justify text-sm">
-              {props.announcement?.content}
+              lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           </div>
         </DrawerContent>
@@ -65,25 +76,25 @@ const SelectedAnnouncement = (props: {
   }
 
   return (
-    <div className="hidden h-full min-h-[80vh] w-full flex-4/5 p-0 md:flex md:flex-col">
+    <div className="hidden h-full min-h-[71vh] w-full overflow-hidden p-0 md:flex md:flex-col">
       {props.announcement ? (
         <Card className="h-full w-full flex-1 gap-0 p-0">
           <div className="flex items-center justify-between gap-3 border-b p-4">
             <div>
               <div className="flex items-center gap-3">
                 <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
-                  {getUserInitials(props.announcement.author)}
+                  {getUserInitials(props.announcement?.authorID || '')}
                 </Avatar>
                 <div className="flex flex-col">
                   <p className="text-base leading-4 font-semibold">
-                    {props.announcement.author}
+                    {props.announcement?.authorID}
                   </p>
                   <span className="text-xs">DOST SA USC President</span>
                 </div>
               </div>
             </div>
             <span className="text-muted-foreground text-xs">
-              {formatDate(new Date(props.announcement.createdAt))}
+              {formatDate(new Date(props.announcement?.createdAt || ''))}
             </span>
           </div>
           <div className="p-4">
@@ -91,7 +102,9 @@ const SelectedAnnouncement = (props: {
               {props.announcement.title}
             </h1>
             <p className="text-justify text-base">
-              {props.announcement.content}
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
             </p>
           </div>
         </Card>

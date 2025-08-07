@@ -3,7 +3,7 @@ import React from 'react';
 
 import { getSession } from '@/lib/auth/server';
 import { getUserDataById } from '@/lib/db/users';
-import { UserHydration } from '@/stores/user-hyradtion';
+import { UserHydration } from '@/stores/user-hydration';
 
 import NavBar from './components/ui/nav-bar';
 import Setup from './setup/setup';

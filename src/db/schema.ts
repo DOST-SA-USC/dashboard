@@ -100,6 +100,7 @@ export const announcement = pgTable('announcements', {
   id: uuid('id').primaryKey(),
   title: text('title').notNull(),
   content: jsonb('content').notNull(),
+  type: text('type').notNull(),
   urgent: boolean('urgent').notNull().default(false),
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())

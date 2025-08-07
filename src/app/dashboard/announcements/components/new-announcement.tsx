@@ -26,9 +26,13 @@ import { replaceBlobUrls } from '@/lib/db/storage';
 import { useUserStore } from '@/stores/userStore';
 import { AnnouncementType } from '@/type';
 
+import { useAnnouncementStore } from '@/stores/announcementStore';
+
 import type { Content } from '@tiptap/react';
 const NewAnnouncement = () => {
+  const { announcements, setAnnouncements } = useAnnouncementStore();
   const { user } = useUserStore();
+
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
@@ -81,7 +85,20 @@ const NewAnnouncement = () => {
     setTitle('');
     setIsUrgent(false);
     setContent(null);
+
+    // optimistically update the store
+    setAnnouncements([
+      ...announcements,
+      {
+        ...body,
+        content: newContent,
+      },
+    ]);
   };
+
+  if (!user || user?.role === 'student') {
+    return null;
+  }
 
   return (
     <>

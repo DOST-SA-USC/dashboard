@@ -78,3 +78,17 @@ export function formatDateStartEnd(
 
   return `${month} ${startDay}`;
 }
+
+export function debounce<T extends (...args: unknown[]) => void>(
+  func: T,
+  wait: number = 400
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout>;
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
