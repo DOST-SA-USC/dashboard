@@ -51,7 +51,10 @@ export const getAnnouncements = async (
 
     // Search by title (case-insensitive)
     if (search) {
-      whereClauses.push(ilike(announcement.title, `%${search}%`));
+      const sanitizedSearch = search.replace(/[%_]/g, '').trim();
+      if (sanitizedSearch.length > 0) {
+        whereClauses.push(ilike(announcement.title, `%${sanitizedSearch}%`));
+      }
     }
 
     const whereCondition =

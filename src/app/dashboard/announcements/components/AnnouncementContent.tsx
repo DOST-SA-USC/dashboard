@@ -50,9 +50,11 @@ const AnnouncementContent = (props: {
         .then(({ announcements, size }) => {
           setAnnouncements(announcements);
           setCurrentPage((prev) => {
+            const safeTotal = Math.max(1, size); // ensure at least 1 total page
+            const safePage = Math.min(prev.page, safeTotal); // clamp page
             return {
-              page: prev.page > size ? size : prev.page,
-              total: size,
+              page: safePage,
+              total: safeTotal,
             };
           });
         })
@@ -90,8 +92,13 @@ const AnnouncementContent = (props: {
       debouncedFetch(searchQuery, activeFilter);
     } else {
       fetchAnnouncements(searchQuery, activeFilter);
+      setCurrentPage({
+        page: currentPage.page,
+        total: props.totalPages,
+      });
     }
   }, [
+    props.totalPages,
     searchQuery,
     activeFilter,
     fetchAnnouncements,
