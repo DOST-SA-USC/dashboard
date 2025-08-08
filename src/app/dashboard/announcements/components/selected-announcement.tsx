@@ -3,7 +3,6 @@ import { MousePointerClick } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
-import { EditorContent, JSONContent } from '@tiptap/react';
 import {
   Drawer,
   DrawerContent,
@@ -14,21 +13,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { formatDate, getUserInitials } from '@/lib/helpers';
 import { AnnouncementType } from '@/type';
 
-import { useEditor } from '@tiptap/react';
-
-import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils';
-import { Highlight } from '@tiptap/extension-highlight';
-import { Image } from '@tiptap/extension-image';
-import { TaskItem, TaskList } from '@tiptap/extension-list';
-import { Subscript } from '@tiptap/extension-subscript';
-import { Superscript } from '@tiptap/extension-superscript';
-import { TextAlign } from '@tiptap/extension-text-align';
-import { Typography } from '@tiptap/extension-typography';
-import { Selection } from '@tiptap/extensions';
-import { ImageUploadNode } from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node-extension';
-
-import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
-import { StarterKit } from '@tiptap/starter-kit';
+import { tiptapToHTML } from '@/lib/tiptap-to-html';
 
 const SelectedAnnouncement = (props: {
   announcement: AnnouncementType | null;
@@ -37,46 +22,11 @@ const SelectedAnnouncement = (props: {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
 
-  const editor = useEditor({
-    immediatelyRender: false,
-    content: props.announcement?.content as JSONContent,
-    editable: false,
-    extensions: [
-      StarterKit.configure({
-        horizontalRule: false,
-        link: {
-          openOnClick: false,
-          enableClickSelection: true,
-        },
-      }),
-      HorizontalRule,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      TaskList,
-      TaskItem.configure({ nested: true }),
-      Highlight.configure({ multicolor: true }),
-      Image,
-      Typography,
-      Superscript,
-      Subscript,
-      Selection,
-      ImageUploadNode.configure({
-        accept: 'image/*',
-        maxSize: MAX_FILE_SIZE,
-        limit: 3,
-        upload: handleImageUpload,
-        onError: (error) => console.error('Upload failed:', error),
-      }),
-    ],
-  });
-
   useEffect(() => {
-    if (editor && props.announcement?.content) {
-      editor.commands.setContent(props.announcement?.content as JSONContent);
-    }
     if (props.announcement && isMobile) {
       setIsOpen(true);
     }
-  }, [props.announcement?.content, editor, props.announcement, isMobile]);
+  }, [props.announcement, isMobile]);
 
   if (isMobile) {
     return (
@@ -121,8 +71,18 @@ const SelectedAnnouncement = (props: {
             </div>
           </div>
           <div className="overflow-x-hidden overflow-y-auto p-4">
-            <div className="mt-2 text-justify text-sm">
-              {editor && <EditorContent editor={editor} />}
+            <div
+              className="simple-editor-content mt-2 text-justify text-sm"
+              role="presentation"
+            >
+              {props.announcement?.content && (
+                <div
+                  className="prose prose-sm tiptap ProseMirror max-w-none"
+                  dangerouslySetInnerHTML={{
+                    __html: tiptapToHTML(props.announcement?.content) || '',
+                  }}
+                />
+              )}
             </div>
           </div>
         </DrawerContent>
@@ -168,9 +128,12 @@ const SelectedAnnouncement = (props: {
           </div>
           {/* body */}
           <div className="h-[60vh] flex-1 overflow-y-auto p-4">
-            <div className="prose prose-sm max-w-none">
-              {editor && <EditorContent editor={editor} />}
-            </div>
+            <div
+              className="prose prose-sm tiptap ProseMirror simple-editor max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: tiptapToHTML(props.announcement?.content) || '',
+              }}
+            />
           </div>
         </Card>
       ) : (

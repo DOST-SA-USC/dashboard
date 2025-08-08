@@ -12,16 +12,16 @@ import { Badge } from '@/components/ui/badge';
 import { useUserStore } from '@/stores/userStore';
 import { UserRoles } from '@/type';
 
-export default function RoleBadge(props: { role?: UserRoles }) {
+export default function RoleBadge(props: { role?: UserRoles; xs?: true }) {
   const user = useUserStore((state) => state.user);
   if (!user || !user.role) return null;
 
   const icons = {
-    admin: <ShieldUser className="size-6" />,
-    faculty: <ContactRound className="size-6" />,
-    officer: <Contact className="size-6" />,
-    student: <FileUser className="size-6" />,
-    facebook: <ThumbsUp className="size-6" />,
+    admin: ShieldUser,
+    faculty: ContactRound,
+    officer: Contact,
+    student: FileUser,
+    facebook: ThumbsUp,
   };
 
   const colors = {
@@ -34,11 +34,13 @@ export default function RoleBadge(props: { role?: UserRoles }) {
 
   const role = props.role ?? user.role;
 
+  const Icon = icons[role];
+
   return (
     <Badge
-      className={`flex items-center gap-1.5 border p-1 px-2 text-xs font-semibold ${colors[role]}`}
+      className={`flex items-center border font-semibold ${colors[role]} ${props.xs ? 'gap-1 text-[8px]' : 'gap-1.5 p-1 px-2 text-xs'}`}
     >
-      {icons[role]}
+      <Icon className={props.xs ? 'size-4' : 'size-6'} />
       {role}
     </Badge>
   );

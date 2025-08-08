@@ -30,22 +30,11 @@ import {
 } from '@/components/tiptap/tiptap-ui-primitive/toolbar';
 import { BlockquoteButton } from '@/components/tiptap/tiptap-ui/blockquote-button';
 import { CodeBlockButton } from '@/components/tiptap/tiptap-ui/code-block-button';
-import {
-  ColorHighlightPopover,
-  ColorHighlightPopoverButton,
-  ColorHighlightPopoverContent,
-} from '@/components/tiptap/tiptap-ui/color-highlight-popover';
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from '@/components/tiptap/tiptap-ui/heading-dropdown-menu';
 import { ImageUploadButton } from '@/components/tiptap/tiptap-ui/image-upload-button';
-import {
-  LinkButton,
-  LinkContent,
-  LinkPopover,
-} from '@/components/tiptap/tiptap-ui/link-popover';
 import { ListDropdownMenu } from '@/components/tiptap/tiptap-ui/list-dropdown-menu';
 import { MarkButton } from '@/components/tiptap/tiptap-ui/mark-button';
-import { TextAlignButton } from '@/components/tiptap/tiptap-ui/text-align-button';
 import { UndoRedoButton } from '@/components/tiptap/tiptap-ui/undo-redo-button';
 // --- Hooks ---
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -68,15 +57,7 @@ import {
 // --- Tiptap Core Extensions ---
 import { StarterKit } from '@tiptap/starter-kit';
 
-const MainToolbarContent = ({
-  onHighlighterClick,
-  onLinkClick,
-  isMobile,
-}: {
-  onHighlighterClick: () => void;
-  onLinkClick: () => void;
-  isMobile: boolean;
-}) => {
+const MainToolbarContent = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <>
       <Spacer />
@@ -106,12 +87,6 @@ const MainToolbarContent = ({
         <MarkButton type="strike" />
         <MarkButton type="code" />
         <MarkButton type="underline" />
-        {!isMobile ? (
-          <ColorHighlightPopover />
-        ) : (
-          <ColorHighlightPopoverButton onClick={onHighlighterClick} />
-        )}
-        {!isMobile ? <LinkPopover /> : <LinkButton onClick={onLinkClick} />}
       </ToolbarGroup>
 
       <ToolbarSeparator />
@@ -119,15 +94,6 @@ const MainToolbarContent = ({
       <ToolbarGroup>
         <MarkButton type="superscript" />
         <MarkButton type="subscript" />
-      </ToolbarGroup>
-
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
-        <TextAlignButton align="left" />
-        <TextAlignButton align="center" />
-        <TextAlignButton align="right" />
-        <TextAlignButton align="justify" />
       </ToolbarGroup>
 
       <ToolbarSeparator />
@@ -161,14 +127,6 @@ const MobileToolbarContent = ({
         )}
       </Button>
     </ToolbarGroup>
-
-    <ToolbarSeparator />
-
-    {type === 'highlighter' ? (
-      <ColorHighlightPopoverContent />
-    ) : (
-      <LinkContent />
-    )}
   </>
 );
 
@@ -200,6 +158,12 @@ export function SimpleEditor(props: {
         link: {
           openOnClick: false,
           enableClickSelection: true,
+          autolink: true,
+          linkOnPaste: false,
+          HTMLAttributes: {
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          },
         },
       }),
       HorizontalRule,
@@ -247,11 +211,7 @@ export function SimpleEditor(props: {
         }}
       >
         {mobileView === 'main' ? (
-          <MainToolbarContent
-            onHighlighterClick={() => setMobileView('highlighter')}
-            onLinkClick={() => setMobileView('link')}
-            isMobile={isMobile}
-          />
+          <MainToolbarContent isMobile={isMobile} />
         ) : (
           <MobileToolbarContent
             type={mobileView === 'highlighter' ? 'highlighter' : 'link'}

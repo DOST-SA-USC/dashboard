@@ -52,6 +52,10 @@ const AnnouncementItem = (
             </AvatarFallback>
           </Avatar>
           <span className="text-xs md:text-sm">{announcement.authorName}</span>
+          <span className="text-muted-foreground mx-1 text-xl font-bold">
+            ·
+          </span>
+          <RoleBadge xs={true} role={announcement.type} />
         </div>
 
         <span className="text-muted-foreground text-[10px] md:text-xs">
@@ -69,7 +73,6 @@ const AnnouncementItem = (
 
       <div className="flex items-center gap-2">
         <ImportantBadge priority={announcement.urgent} />
-        <RoleBadge role={announcement.type} />
       </div>
     </Card>
   );

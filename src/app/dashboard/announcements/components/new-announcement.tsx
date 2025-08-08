@@ -26,6 +26,10 @@ import { replaceBlobUrls } from '@/lib/db/storage';
 import { useUserStore } from '@/stores/userStore';
 import { AnnouncementType } from '@/type';
 
+import { sendEmail } from '@/lib/email';
+
+import { tiptapToHTML } from '@/lib/tiptap-to-html';
+
 import type { Content } from '@tiptap/react';
 const NewAnnouncement = (props: { updateData: () => void }) => {
   const { user } = useUserStore();
@@ -78,6 +82,25 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
       createdAt: new Date(),
     };
 
+    toast.promise(
+      sendEmail(
+        {
+          to: ['24100907@usc.edu.ph'],
+          cc: ['24100907@usc.edu.ph'],
+          bcc: ['epanto.gg@gmail.com', 'gianepanto@gmail.com'],
+        },
+        `${title}`,
+        tiptapToHTML(newContent)
+      ),
+      {
+        loading: 'Emailing recipients, might take a while...',
+        success: 'Email sent successfully!',
+        error: (err) => {
+          throw new Error(`Failed to send email: ${err}`);
+        },
+      }
+    );
+
     await createAnnouncement(body);
 
     setIsPending(false);
@@ -97,7 +120,7 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
   return (
     <>
       <Button
-        variant={isMobile ? 'default' : 'outline'}
+        variant="default"
         className={isMobile ? 'absolute right-8 bottom-8 scale-120' : ''}
         size={isMobile ? 'icon' : 'default'}
         onClick={() => setIsOpen(true)}
@@ -114,7 +137,7 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
           <DialogHeader>
             <DialogTitle>New Announcement</DialogTitle>
             <DialogDescription>
-              Create a new announcement to share with your team or organization.
+              Have something to share? Let&apos;s create a new announcement.
             </DialogDescription>
           </DialogHeader>
           <div className="flex h-full w-full flex-1 flex-col overflow-hidden md:px-2">
