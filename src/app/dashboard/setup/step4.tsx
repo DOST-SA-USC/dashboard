@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { insertUserData } from '@/lib/db/users';
 import { FormType } from '@/type';
 
-import IDComponent from '../components/ui/id-component';
+import IDComponent from '../../../components/dashboard/id/id-component';
 
 const initialState = {
   success: false,

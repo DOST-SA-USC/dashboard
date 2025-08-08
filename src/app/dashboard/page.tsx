@@ -1,52 +1,19 @@
 import { Bell, Calendar } from 'lucide-react';
 import React from 'react';
 
-import AnnouncementItem from '@/components/dashboard/announcement-item';
-import EventItem from '@/components/dashboard/event-item';
-import OverviewCard from '@/components/dashboard/overview-card';
-import PageCard from '@/components/dashboard/page-card';
-import ANNOUNCEMENTS_DATA from '@/mockData/announcements.json';
-import EVENTS_DATA from '@/mockData/events.json';
+import OverviewCard from '@/components/dashboard/home/overview-card';
 
-import StipendComponent from './components/stipend-component';
-import HomeHeader from './components/ui/home-header';
-
-import type { AnnouncementType, EventType } from '@/type';
+import StipendComponent from '../../components/dashboard/stipend/stipend-component';
+import HomeHeader from '../../components/dashboard/home/home-header';
 
 export default async function Dashboard() {
-  function getRecentAnnouncements() {
-    // get the top 3 recent announcements
-    const recentAnnouncements: AnnouncementType[] =
-      ANNOUNCEMENTS_DATA as AnnouncementType[];
-
-    return recentAnnouncements
-      .slice()
-      .sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-      .slice(0, 3);
-  }
-
-  function getUpcomingEvents() {
-    // get the top 3 upcoming events
-    const upcomingEvents: EventType[] = EVENTS_DATA as EventType[];
-    return upcomingEvents
-      .slice()
-      .sort(
-        (a, b) =>
-          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-      )
-      .slice(0, 3);
-  }
-
   return (
-    <div className="relative z-10 flex min-h-screen w-full flex-1 flex-col gap-4 p-4 pt-20 md:px-10 md:pt-28 lg:px-20">
+    <>
       <HomeHeader />
 
       <hr />
 
-      <div className="grid grid-cols-2 grid-rows-2 gap-4 md:mt-6 lg:grid-cols-3 lg:grid-rows-1">
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 lg:grid-cols-3 lg:grid-rows-1">
         <StipendComponent className="col-span-2 lg:col-span-1" />
         <OverviewCard
           title="New Announcements"
@@ -63,31 +30,6 @@ export default async function Dashboard() {
           className="row-span-1"
         />
       </div>
-
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <PageCard
-          title="Recent Announcements"
-          description="Stay updated with the latest news and updates"
-          link="/dashboard/announcements"
-        >
-          <div className="space-y-2 md:space-y-4">
-            {getRecentAnnouncements().map((announcement, index) => (
-              <AnnouncementItem key={index} announcement={announcement} />
-            ))}
-          </div>
-        </PageCard>
-        <PageCard
-          title="Upcoming Events"
-          description="Don't miss out on important events"
-          link="/dashboard/calendar"
-        >
-          <div className="space-y-2 md:space-y-4">
-            {getUpcomingEvents().map((event, index) => (
-              <EventItem key={index} event={event} />
-            ))}
-          </div>
-        </PageCard>
-      </div>
-    </div>
+    </>
   );
 }

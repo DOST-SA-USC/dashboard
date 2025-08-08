@@ -1,5 +1,5 @@
-import Loader from '@/components/loading-screen';
+import { MainLoading } from '@/components/dashboard/core/';
 
 export default function Loading() {
-  return <Loader />;
+  return <MainLoading />;
 }

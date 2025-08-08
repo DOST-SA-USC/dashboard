@@ -1,12 +1,11 @@
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
-import LoginForm from '@/components/login-form';
-import ModeToggle from '@/components/theme-switch';
+import { ThemeSwitch } from '@/components/dashboard/core';
+import LoginForm from '@/components/dashboard/login/form';
 import { Card, CardContent } from '@/components/ui/card';
-import Image from 'next/image';
-
 import { getSession } from '@/lib/auth/server';
-import { redirect } from 'next/navigation';
 
 export default async function Home() {
   const session = await getSession();
@@ -17,7 +16,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-[url('/pattern-light.png')] bg-[length:160px_160px] bg-repeat p-6 md:bg-[length:180px_180px] md:p-10 lg:bg-[length:200px_200px] dark:bg-[url('/pattern-dark.png')]">
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
-        <ModeToggle variant="default" />
+        <ThemeSwitch variant="default" />
       </div>
       <div className="w-full max-w-sm md:max-w-3xl">
         <div className="flex flex-col gap-6">
