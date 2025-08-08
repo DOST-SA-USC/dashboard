@@ -42,7 +42,7 @@ const AnnouncementItem = (
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
+          <Avatar className="bg-accent flex size-6 items-center justify-center text-base font-medium">
             <AvatarImage
               src={props.announcement?.authorImageURL as string}
               alt={props.announcement?.authorName}
