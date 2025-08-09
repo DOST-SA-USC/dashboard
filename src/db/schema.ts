@@ -113,3 +113,23 @@ export const announcement = pgTable('announcements', {
   authorPosition: text('author_position'),
   authorImageURL: text('author_image_url'),
 }).enableRLS();
+
+export const events = pgTable('events', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  type: text('type').array().notNull(),
+  description: text('description').notNull(),
+  startDate: date('start_date').notNull(),
+  endDate: date('end_date'),
+  createdAt: timestamp('created_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  authorId: text('author_id')
+    .references(() => user.id, {
+      onDelete: 'set null',
+    })
+    .notNull(),
+  authorName: text('author_name').notNull(),
+  authorPosition: text('author_position').notNull(),
+  authorImageURL: text('author_image_url').notNull(),
+}).enableRLS();

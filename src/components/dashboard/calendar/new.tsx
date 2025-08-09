@@ -26,9 +26,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { createEvent } from '@/lib/db/events';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { DateSelectArg } from '@fullcalendar/core';
+import { useUserStore } from '@/stores/userStore';
+import type { EventType } from '@/type';
 
 const OPTIONS = ['scientia', 'virtus', 'devotio'] as const;
 
@@ -51,7 +54,10 @@ const New = (props: {
   info: DateSelectArg | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  setEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
 }) => {
+  const { user } = useUserStore();
+
   const form = useForm<EventForm>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -80,8 +86,34 @@ const New = (props: {
   }, [props.info, form]);
 
   const onSubmit = (data: EventForm) => {
+    if (!user || user?.role === 'student') {
+      console.error('You are not authorized to post announcements.');
+      return;
+    }
+
     // handle form submission here
-    console.log(data);
+    const body: EventType = {
+      title: data.title,
+      type: data.type as EventType['type'],
+      description: data.description,
+      startDate: data.start as EventType['startDate'],
+      endDate: data.end ? (data.end as EventType['endDate']) : undefined,
+      authorID: user.userId,
+      authorName: `${user.firstName} ${user.lastName}`,
+      authorPosition: user.position || 'N/A',
+      authorImageURL: user.image as string,
+    };
+
+    toast.promise(createEvent(body), {
+      loading: 'Creating event...',
+      success: 'Event created successfully!',
+      error: (err) => err.message,
+    });
+
+    props.setEvents((prev) => [
+      ...prev,
+      { id: new Date().toISOString(), ...body }, // temp id for optimistic UI
+    ]);
     props.onOpenChange(false);
 
     form.reset();

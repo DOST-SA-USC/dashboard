@@ -10,16 +10,16 @@ import type { EventInput, DateSelectArg } from '@fullcalendar/core';
 
 import type { EventType } from '@/type';
 export default function Content(props: { data: EventType[] }) {
+  const [events, setEvents] = useState<EventType[]>(props.data);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [newEvent, setNewEvent] = useState<{
     info: DateSelectArg | null;
     open: boolean;
   }>({ info: null, open: false });
 
-  const currentEvent = React.useMemo(
-    () => props.data.find((event) => event.id === selectedEvent),
-    [props.data, selectedEvent]
-  );
+  const currentEvent = React.useMemo(() => {
+    return events.find((event) => event.id === selectedEvent);
+  }, [events, selectedEvent]);
 
   return (
     <>
@@ -30,6 +30,7 @@ export default function Content(props: { data: EventType[] }) {
       />
 
       <New
+        setEvents={setEvents}
         info={newEvent.info}
         open={newEvent.open}
         onOpenChange={() => setNewEvent({ info: null, open: false })}
@@ -37,9 +38,10 @@ export default function Content(props: { data: EventType[] }) {
 
       <div className="flex h-full w-full">
         <Calendar
+          key={events.length}
           onNewDate={setNewEvent}
           onEventClick={setSelectedEvent}
-          events={props.data.map((event: EventInput) => ({
+          events={events.map((event: EventInput) => ({
             title: event.title,
             start: event.startDate,
             end: event.endDate,

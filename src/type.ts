@@ -45,7 +45,7 @@ interface AnnouncementType extends AuthorType {
 }
 
 interface EventType extends AuthorType {
-  id: string;
+  id?: string;
   title: string;
   type: Array<'scientia' | 'virtus' | 'devotio'>;
   description: string;

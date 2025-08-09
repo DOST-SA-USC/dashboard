@@ -5,9 +5,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import interactionPlugin from '@fullcalendar/interaction';
 import { ButtonGroup } from '@/components/ui/button-group';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 
 import CalendarItem from './calendar-item';

@@ -1,28 +1,27 @@
 'use client';
 
-import React from 'react';
+import { Calendar } from 'lucide-react';
 import Link from 'next/link';
+import React from 'react';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
+import { formatDateStartEnd, getUserInitials } from '@/lib/helpers';
 import { EventType } from '@/type';
-import { Button } from '@/components/ui/button';
 
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { getUserInitials, formatDateStartEnd } from '@/lib/helpers';
+import { GoogleCalendarIcon } from '../ui/icons';
 import EventBadge from './badge';
 
-import { Calendar } from 'lucide-react';
-import { GoogleCalendarIcon } from '../ui/icons';
-
 const Selected = (props: {
-  event: EventType | undefined;
+  event: EventType | undefined | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) => {
