@@ -6,5 +6,5 @@ import React from 'react';
 export default async function Announcements() {
   // const { announcements, size } = await getAnnouncements();
 
-  return <div>Stipend</div>;
+  return <div>Announcement</div>;
 }

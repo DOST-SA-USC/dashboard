@@ -33,7 +33,7 @@ const SearchComponent = (props: { data: NavDataType }) => {
 
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
-          <CommandInput placeholder="Search..." />
+          <CommandInput placeholder="Search..." autoFocus={false} />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Main Navigation">
@@ -51,21 +51,35 @@ const SearchComponent = (props: { data: NavDataType }) => {
                 );
               })}
             </CommandGroup>
+
             <CommandSeparator />
 
             <CommandGroup heading="Resources">
-              {props.data.resources.items.map((item) => {
+              <CommandItem asChild>
+                <Link
+                  href={props.data.resources.href}
+                  onClick={() => setOpen(false)}
+                  className="flex flex-col items-start"
+                >
+                  <span className="flex items-center gap-2">
+                    {props.data.resources.title}
+                  </span>
+                </Link>
+              </CommandItem>
+            </CommandGroup>
+
+            <CommandSeparator />
+
+            <CommandGroup heading="Socials">
+              {props.data.socials.items.map((item) => {
                 return (
                   <CommandItem key={item.title} asChild>
                     <Link
-                      href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex flex-col items-start"
+                      href={item.href}
+                      className="flex items-center gap-2"
                     >
-                      <span className="flex items-center gap-2">
-                        {item.title}
-                      </span>
-                      <span className="text-xs">{item.description}</span>
+                      {item.title}
                     </Link>
                   </CommandItem>
                 );

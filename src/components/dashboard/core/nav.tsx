@@ -6,6 +6,12 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -36,6 +42,42 @@ const Nav = () => {
           </TooltipContent>
         </Tooltip>
       ))}
+
+      <hr className="w-4/5" />
+
+      <Tooltip>
+        <TooltipTrigger asChild className="h-full w-full">
+          <Button variant="ghost" className="h-full w-full py-3" asChild>
+            <navData.resources.icon />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="right">
+          <p>{navData.resources.title}</p>
+        </TooltipContent>
+      </Tooltip>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Tooltip>
+            <TooltipTrigger asChild className="h-full w-full">
+              <Button variant="ghost" className="h-full w-full py-3" asChild>
+                <navData.socials.icon />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>{navData.socials.title}</p>
+            </TooltipContent>
+          </Tooltip>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="right" align="start">
+          {navData.socials.items.map((item) => (
+            <DropdownMenuItem key={item.title}>
+              <item.icon className="size-3" />
+              {item.title}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };

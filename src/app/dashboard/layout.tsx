@@ -29,7 +29,7 @@ export default async function RootLayout({
 
       {userData ? (
         <div className="flex h-screen w-full gap-2 sm:h-[90vh] sm:w-[90%] md:h-[80vh] md:w-4/5 lg:h-[70vh] lg:w-3/5">
-          <Card className="hidden h-fit flex-col items-center gap-4 p-1 py-2 shadow-sm md:flex">
+          <Card className="hidden h-fit flex-col items-center gap-2 p-1 shadow-sm md:flex">
             <Nav />
           </Card>
           <Card className="h-full w-full !gap-0 !p-0 shadow-sm">

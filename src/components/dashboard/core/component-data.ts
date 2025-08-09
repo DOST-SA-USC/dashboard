@@ -5,7 +5,15 @@ import {
   BookOpen,
   IdCardLanyard,
   PhilippinePeso,
+  Ellipsis,
 } from 'lucide-react';
+
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  GithubIcon,
+} from '../ui/icons';
 
 export const brandData = {
   title: 'DOST SA USC',
@@ -35,22 +43,16 @@ export const navData = {
   resources: {
     title: 'Resources',
     icon: BookOpen,
+    href: '#',
+  },
+  socials: {
+    title: 'Socials',
+    icon: Ellipsis,
     items: [
-      {
-        title: 'JLSS Application Guide',
-        href: '#',
-        description: 'magna incididunt minim occaecat adipisicing',
-      },
-      {
-        title: 'Set Up iAccess',
-        href: '#',
-        description: 'magna incididunt minim occaecat adipisicing',
-      },
-      {
-        title: 'Travel Clearance Guide',
-        href: '#',
-        description: 'magna incididunt minim occaecat adipisicing',
-      },
+      { title: 'Facebook', href: '#', icon: FacebookIcon },
+      { title: 'Instagram', href: '#', icon: InstagramIcon },
+      { title: 'LinkedIn', href: '#', icon: LinkedinIcon },
+      { title: 'GitHub', href: '#', icon: GithubIcon },
     ],
   },
 };
