@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
+import { useUserStore } from '@/stores/userStore';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
@@ -13,12 +14,13 @@ import FullCalendar from '@fullcalendar/react';
 import CalendarItem from './calendar-item';
 
 import type { EventInput, DateSelectArg } from '@fullcalendar/core';
-
 const Calendar = (props: {
   events: EventInput[];
   onEventClick: (arg: string | null) => void;
   onNewDate: (arg: { info: DateSelectArg | null; open: boolean }) => void;
 }) => {
+  const { user } = useUserStore();
+
   const calendarRef = useRef<FullCalendar>(null); // Calendar reference
   const [events] = useState<EventInput[]>(props.events);
   const [currentTitle, setCurrentTitle] = useState('');
@@ -56,7 +58,9 @@ const Calendar = (props: {
           editable={false}
           selectable={true}
           selectMirror={true}
-          select={(info) => props.onNewDate({ info, open: true })}
+          select={(info) =>
+            user?.role !== 'student' && props.onNewDate({ info, open: true })
+          }
           dayMaxEvents={true}
           height="100%"
           eventContent={(arg) => (

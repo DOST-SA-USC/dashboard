@@ -15,14 +15,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { deleteEventById } from '@/lib/db/events';
 import { formatDateStartEnd, getUserInitials } from '@/lib/helpers';
+import { useUserStore } from '@/stores/userStore';
 import { EventType } from '@/type';
 
+import ActionAlert from '../ui/action-alert';
 import { GoogleCalendarIcon } from '../ui/icons';
 import EventBadge from './badge';
-import { deleteEventById } from '@/lib/db/events';
-
-import ActionAlert from '../ui/action-alert';
 
 const Selected = (props: {
   event: EventType | undefined | null;
@@ -30,8 +30,12 @@ const Selected = (props: {
   onOpenChange: (open: boolean) => void;
   setEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
 }) => {
+  const { user } = useUserStore();
+
   const handleDelete = async () => {
-    if (!props.event?.id) return;
+    if (!props.event?.id || user?.role === 'student') {
+      throw new Error('You are not authorized to delete events.');
+    }
 
     try {
       await deleteEventById(props.event.id);
@@ -104,27 +108,29 @@ const Selected = (props: {
               </Button>
             )}
 
-            <ActionAlert
-              button={{
-                label: 'Delete',
-                icon: Trash,
-                onClick: () =>
-                  toast.promise(handleDelete(), {
-                    loading: 'Deleting Event...',
-                    success: 'Event deleted successfully!',
-                    error: (err) => `Failed to delete event: ${err}`,
-                  }),
-                variant: 'outline',
-                className: 'text-destructive w-full',
-                size: 'sm',
-              }}
-              body={{
-                title: 'Delete Event',
-                variant: 'destructive',
-                description:
-                  'Are you sure you want to delete this event? This action cannot be undone.',
-              }}
-            />
+            {user?.role !== 'student' && (
+              <ActionAlert
+                button={{
+                  label: 'Delete',
+                  icon: Trash,
+                  onClick: () =>
+                    toast.promise(handleDelete(), {
+                      loading: 'Deleting Event...',
+                      success: 'Event deleted successfully!',
+                      error: (err) => `Failed to delete event: ${err}`,
+                    }),
+                  variant: 'outline',
+                  className: 'text-destructive w-full',
+                  size: 'sm',
+                }}
+                body={{
+                  title: 'Delete Event',
+                  variant: 'destructive',
+                  description:
+                    'Are you sure you want to delete this event? This action cannot be undone.',
+                }}
+              />
+            )}
           </div>
         </DialogFooter>
       </DialogContent>

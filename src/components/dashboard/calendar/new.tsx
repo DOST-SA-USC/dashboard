@@ -87,7 +87,7 @@ const New = (props: {
 
   const onSubmit = (data: EventForm) => {
     if (!user || user?.role === 'student') {
-      console.error('You are not authorized to post announcements.');
+      toast.error('You are not authorized to post events.');
       return;
     }
 
