@@ -91,9 +91,9 @@ const SelectedAnnouncement = (props: {
   }
 
   return (
-    <div className="hidden h-full w-full overflow-hidden p-0 md:flex md:flex-col">
+    <>
       {props.announcement ? (
-        <Card className="h-full w-full flex-1 gap-0 p-0">
+        <Card className="flex h-full w-full flex-col gap-0 p-0">
           {/* header */}
           <div className="border-border flex w-full flex-col border-b">
             <div className="border-border flex w-full items-center justify-between border-b p-4">
@@ -127,7 +127,7 @@ const SelectedAnnouncement = (props: {
             </div>
           </div>
           {/* body */}
-          <div className="h-[60vh] flex-1 overflow-y-auto p-4">
+          <div className="overflow-x-hidden p-4">
             <div
               className="prose prose-sm tiptap ProseMirror simple-editor max-w-none"
               dangerouslySetInnerHTML={{
@@ -137,14 +137,14 @@ const SelectedAnnouncement = (props: {
           </div>
         </Card>
       ) : (
-        <Card className="flex h-full w-full flex-1 flex-col items-center justify-center gap-2">
+        <Card className="flex h-full w-full items-center justify-center gap-2">
           <MousePointerClick className="text-muted-foreground size-8" />
           <span className="text-muted-foreground text-sm">
             No Announcement Selected
           </span>
         </Card>
       )}
-    </div>
+    </>
   );
 };
 

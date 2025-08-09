@@ -31,7 +31,10 @@ import { sendEmail } from '@/lib/email';
 import { tiptapToHTML } from '@/lib/tiptap-to-html';
 
 import type { Content } from '@tiptap/react';
-const NewAnnouncement = (props: { updateData: () => void }) => {
+const NewAnnouncement = (props: {
+  updateData: () => void;
+  className?: string;
+}) => {
   const { user } = useUserStore();
 
   const isMobile = useIsMobile();
@@ -121,7 +124,7 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
     <>
       <Button
         variant="default"
-        className={isMobile ? 'absolute right-8 bottom-8 scale-120' : ''}
+        className={`${isMobile ? 'absolute right-8 bottom-20 scale-120' : ''} ${props.className}`}
         size={isMobile ? 'icon' : 'default'}
         onClick={() => setIsOpen(true)}
       >
@@ -136,7 +139,7 @@ const NewAnnouncement = (props: { updateData: () => void }) => {
         >
           <DialogHeader>
             <DialogTitle>New Announcement</DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="sr-only">
               Have something to share? Let&apos;s create a new announcement.
             </DialogDescription>
           </DialogHeader>

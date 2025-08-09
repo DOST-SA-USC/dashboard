@@ -29,7 +29,6 @@ import {
   ToolbarSeparator,
 } from '@/components/tiptap/tiptap-ui-primitive/toolbar';
 import { BlockquoteButton } from '@/components/tiptap/tiptap-ui/blockquote-button';
-import { CodeBlockButton } from '@/components/tiptap/tiptap-ui/code-block-button';
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from '@/components/tiptap/tiptap-ui/heading-dropdown-menu';
 import { ImageUploadButton } from '@/components/tiptap/tiptap-ui/image-upload-button';
@@ -76,7 +75,6 @@ const MainToolbarContent = ({ isMobile }: { isMobile: boolean }) => {
           portal={isMobile}
         />
         <BlockquoteButton />
-        <CodeBlockButton />
       </ToolbarGroup>
 
       <ToolbarSeparator />

@@ -20,13 +20,14 @@ const Pagination = (props: {
             total: props.page.total,
           })
         }
+        size="sm"
         disabled={props.page.page === 1}
       >
         <ChevronLeft />
         Previous
       </Button>
-      <span className="text-sm font-medium">
-        Page {props.page.page} of {props.page.total}
+      <span className="text-xs font-medium">
+        {props.page.page}/{props.page.total}
       </span>
       <Button
         variant="outline"
@@ -36,6 +37,7 @@ const Pagination = (props: {
             total: props.page.total,
           })
         }
+        size="sm"
         disabled={props.page.page === props.page.total}
       >
         Next

@@ -110,14 +110,14 @@ const AnnouncementContent = (props: {
   ]);
 
   return (
-    <div className="flex h-full w-full flex-1 gap-4">
-      <div className="h-full w-full flex-1">
+    <div className="flex h-full w-full flex-1 gap-4 overflow-hidden">
+      <div className="flex h-full w-full flex-col md:w-1/2">
         <div className="flex w-full gap-4 py-3.5 md:p-3.5">
           <div className="flex w-full items-center gap-2">
             <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
               <Search className="text-muted-foreground size-4" />
               <input
-                placeholder="Search announcements..."
+                placeholder="Search..."
                 type="search"
                 className="placeholder:text-muted-foreground w-full p-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                 value={searchQuery}
@@ -142,7 +142,7 @@ const AnnouncementContent = (props: {
             </SelectContent>
           </Select>
         </div>
-        <div className="h-[80vh] w-full flex-1 space-y-4 overflow-auto px-0 md:px-2">
+        <div className="h-full w-full space-y-2 overflow-auto">
           {isLoading ? (
             <>
               {[...Array(4)].map((_, idx) => (
@@ -172,18 +172,17 @@ const AnnouncementContent = (props: {
           <Pagination page={currentPage} onPageChange={setCurrentPage} />
         </div>
       </div>
-      <div className="hidden h-full flex-2 flex-col md:flex md:w-full">
-        <div className="flex h-16 w-full items-center justify-end gap-2 py-3.5 md:p-3.5">
+      <div className="hidden h-full max-w-full flex-col md:flex md:w-full">
+        <div className="flex w-full justify-end gap-4 py-3.5 md:p-3.5">
           <NewAnnouncement updateData={fetchAnnouncements} />
         </div>
-
-        <div className="h-[80vh]">
-          <SelectedAnnouncement
-            announcement={selectedAnnouncement}
-            setAnnouncement={setSelectedAnnouncement}
-          />
-        </div>
+        <SelectedAnnouncement
+          announcement={selectedAnnouncement}
+          setAnnouncement={setSelectedAnnouncement}
+        />
       </div>
+
+      <NewAnnouncement className="md:hidden" updateData={fetchAnnouncements} />
     </div>
   );
 };

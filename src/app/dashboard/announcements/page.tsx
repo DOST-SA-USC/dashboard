@@ -1,10 +1,12 @@
 import React from 'react';
 
-// import AnnouncementContent from './components/AnnouncementContent';
-// import { getAnnouncements } from '@/lib/db/announcements';
+import AnnouncementContent from './content';
+import { getAnnouncements } from '@/lib/db/announcements';
 
 export default async function Announcements() {
-  // const { announcements, size } = await getAnnouncements();
+  const { announcements, size } = await getAnnouncements();
 
-  return <div>Announcement</div>;
+  return (
+    <AnnouncementContent announcementData={announcements} totalPages={size} />
+  );
 }
