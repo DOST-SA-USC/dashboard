@@ -23,12 +23,11 @@ import { Switch } from '@/components/ui/switch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { createAnnouncement } from '@/lib/db/announcements';
 import { replaceBlobUrls } from '@/lib/db/storage';
+import { getAllUserEmails } from '@/lib/db/users';
+import { sendEmail } from '@/lib/email';
+import { tiptapToHTML } from '@/lib/tiptap-to-html';
 import { useUserStore } from '@/stores/userStore';
 import { AnnouncementType } from '@/type';
-
-import { sendEmail } from '@/lib/email';
-
-import { tiptapToHTML } from '@/lib/tiptap-to-html';
 
 import type { Content } from '@tiptap/react';
 const NewAnnouncement = (props: {
@@ -85,14 +84,15 @@ const NewAnnouncement = (props: {
       createdAt: new Date(),
     };
 
+    const recipients = await getAllUserEmails();
+
     toast.promise(
       sendEmail(
         {
-          to: ['24100907@usc.edu.ph'],
-          cc: ['24100907@usc.edu.ph'],
-          bcc: ['epanto.gg@gmail.com', 'gianepanto@gmail.com'],
+          to: process.env.NEXT_PUBLIC_EMAIL_TO!,
+          bcc: recipients,
         },
-        `${title}`,
+        `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
         tiptapToHTML(newContent)
       ),
       {
@@ -165,7 +165,7 @@ const NewAnnouncement = (props: {
                   checked={isUrgent}
                   onCheckedChange={setIsUrgent}
                 />
-                <Label htmlFor="urgent">Urgent</Label>
+                <Label htmlFor="urgent">Important</Label>
               </div>
             </div>
             <Label className="mb-2" htmlFor="content">

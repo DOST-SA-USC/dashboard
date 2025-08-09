@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '../db';
-import { userData } from '@/db/schema';
+import { userData, user } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 import { uploadUserImage } from '@/lib/db/storage';
@@ -65,5 +65,15 @@ export async function insertUserData(userID: string, data: FormType) {
     } else {
       throw new Error('An unknown error occurred, please try again later.');
     }
+  }
+}
+
+export async function getAllUserEmails() {
+  try {
+    const result = await db.select({ email: user.email }).from(user);
+    return result.map((u) => u.email);
+  } catch (error) {
+    console.error('Error fetching all user emails:', error);
+    throw error;
   }
 }

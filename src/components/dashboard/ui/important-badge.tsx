@@ -16,7 +16,7 @@ const ImportantBadge = (props: { priority: AnnouncementType['urgent'] }) => {
       className="bg-destructive text-destructive-foreground flex items-center gap-1.5 font-semibold"
     >
       <CircleAlert />
-      URGENT
+      IMPORTANT
     </Badge>
   );
 };
