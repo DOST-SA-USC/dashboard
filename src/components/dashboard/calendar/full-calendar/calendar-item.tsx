@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getBadgeClass } from '@/components/dashboard/calendar/event-badge';
+import { getBadgeClass } from '../badge';
 import { cn } from '@/lib/utils';
 
 import type { EventContentArg } from '@fullcalendar/core';

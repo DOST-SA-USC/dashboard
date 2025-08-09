@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { getUserInitials, formatDateStartEnd } from '@/lib/helpers';
-import EventBadge from './event-badge';
+import EventBadge from './badge';
 
 import { Calendar } from 'lucide-react';
 import { GoogleCalendarIcon } from '../ui/icons';

@@ -5,20 +5,19 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-// import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
-// import { EventClickArg } from '@fullcalendar/core';
+import interactionPlugin from '@fullcalendar/interaction';
 import { ButtonGroup } from '@/components/ui/button-group';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 
 import CalendarItem from './calendar-item';
 
-import type { EventInput } from '@fullcalendar/core';
+import type { EventInput, DateSelectArg } from '@fullcalendar/core';
 
 const Calendar = (props: {
   events: EventInput[];
   onEventClick: (arg: string | null) => void;
+  onNewDate: (arg: { info: DateSelectArg | null; open: boolean }) => void;
 }) => {
   const calendarRef = useRef<FullCalendar>(null); // Calendar reference
   const [events] = useState<EventInput[]>(props.events);
@@ -57,6 +56,7 @@ const Calendar = (props: {
           editable={false}
           selectable={true}
           selectMirror={true}
+          select={(info) => props.onNewDate({ info, open: true })}
           dayMaxEvents={true}
           height="100%"
           eventContent={(arg) => (
@@ -79,23 +79,3 @@ const Calendar = (props: {
 };
 
 export default Calendar;
-
-// const handleDateClick = (arg: DateClickArg) => {
-//   const title = prompt('Enter event title');
-//   if (title) {
-//     const newEvent: EventInput = {
-//       title,
-//       start: arg.date,
-//       allDay: arg.allDay,
-//     };
-//     setEvents((prev) => [...prev, newEvent]);
-//   }
-// };
-
-// const handleEventClick = (arg: EventClickArg) => {
-//   const confirmDelete = confirm(`Delete event '${arg.event.title}'?`);
-//   if (confirmDelete) {
-//     arg.event.remove();
-//     setEvents((prev) => prev.filter((e) => e.title !== arg.event.title));
-//   }
-// };
