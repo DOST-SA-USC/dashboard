@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function MainLoading() {
   return (
-    <div className="bg-primary dark:bg-background animate-fade-slide-up flex h-screen w-full flex-col items-center justify-center p-8 text-white">
+    <div className="bg-primary dark:bg-background animate-fade-slide-up flex h-screen w-full flex-col items-center justify-center text-white">
       <Image
         src="/loading.gif"
         width={128}

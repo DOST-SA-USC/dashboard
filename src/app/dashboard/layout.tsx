@@ -24,7 +24,7 @@ export default async function RootLayout({
   const userData = await getUserDataById(session.user.id);
 
   return (
-    <div className="m-auto flex min-h-screen min-w-screen flex-col items-center justify-center bg-[url('/pattern-light.png')] bg-[length:160px_160px] bg-repeat md:bg-[length:180px_180px] lg:bg-[length:200px_200px] dark:bg-[url('/pattern-dark.png')]">
+    <>
       <UserHydration user={userData as UserType} />
 
       {userData ? (
@@ -42,6 +42,6 @@ export default async function RootLayout({
       ) : (
         <Setup userID={session.user.id} user={userData as UserType} />
       )}
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "Community Service",
     "type": ["devotio"],
     "startDate": "2025-08-25",
@@ -11,7 +11,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 2,
+    "id": "2",
     "title": "Book Fair",
     "type": ["scientia"],
     "startDate": "2025-08-20",
@@ -23,7 +23,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 3,
+    "id": "3",
     "title": "Sports Day",
     "type": ["virtus"],
     "startDate": "2025-08-12",
@@ -35,7 +35,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 4,
+    "id": "4",
     "title": "Music Concert",
     "type": ["virtus", "devotio"],
     "startDate": "2025-08-05",
@@ -46,7 +46,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 5,
+    "id": "5",
     "title": "Art Exhibition",
     "type": ["virtus"],
     "startDate": "2025-07-15",
@@ -58,7 +58,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 6,
+    "id": "6",
     "title": "Summer Science Fair",
     "type": ["scientia", "virtus"],
     "startDate": "2025-07-10",
@@ -70,7 +70,7 @@
     "authorImageURL": "#"
   },
   {
-    "id": 7,
+    "id": "7",
     "title": "Debate Competition",
     "type": ["scientia", "virtus"],
     "startDate": "2025-07-01",

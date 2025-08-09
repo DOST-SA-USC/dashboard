@@ -100,7 +100,7 @@ const Form = (props: { userID: string; user: UserType }) => {
   }
 
   return (
-    <div className="flex h-screen items-center justify-center p-4">
+    <div className="flex h-full w-full items-center justify-center p-4">
       <div className="flex w-xl flex-col gap-2">
         <div className="flex w-full items-center justify-between gap-4">
           <Button

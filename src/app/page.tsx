@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-[url('/pattern-light.png')] bg-[length:160px_160px] bg-repeat p-6 md:bg-[length:180px_180px] md:p-10 lg:bg-[length:200px_200px] dark:bg-[url('/pattern-dark.png')]">
+    <>
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <ThemeSwitch variant="default" />
       </div>
@@ -55,6 +55,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
