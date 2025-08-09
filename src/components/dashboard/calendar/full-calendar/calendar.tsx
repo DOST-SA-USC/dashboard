@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 // import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 // import { EventClickArg } from '@fullcalendar/core';
 import { ButtonGroup } from '@/components/ui/button-group';
-import { Card } from '@/components/ui/card';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
@@ -16,7 +15,11 @@ import FullCalendar from '@fullcalendar/react';
 import CalendarItem from './calendar-item';
 
 import type { EventInput } from '@fullcalendar/core';
-const Calendar = (props: { events: EventInput[] }) => {
+
+const Calendar = (props: {
+  events: EventInput[];
+  onEventClick: (arg: string | null) => void;
+}) => {
   const calendarRef = useRef<FullCalendar>(null); // Calendar reference
   const [events] = useState<EventInput[]>(props.events);
   const [currentTitle, setCurrentTitle] = useState('');
@@ -26,7 +29,7 @@ const Calendar = (props: { events: EventInput[] }) => {
   const goToToday = () => calendarRef.current?.getApi().today();
 
   return (
-    <Card className="h-[80vh] max-h-[850px] w-full gap-0 p-0">
+    <div className="flex h-full w-full flex-col gap-0 p-0">
       <div className="flex items-center justify-between p-[0.7rem]">
         <h2 className="text-xl font-semibold">{currentTitle}</h2>
 
@@ -56,7 +59,9 @@ const Calendar = (props: { events: EventInput[] }) => {
           selectMirror={true}
           dayMaxEvents={true}
           height="100%"
-          eventContent={(arg) => <CalendarItem arg={arg} />}
+          eventContent={(arg) => (
+            <CalendarItem onEventClick={props.onEventClick} arg={arg} />
+          )}
           datesSet={(arg) => setCurrentTitle(arg.view.title)}
           events={events.map((event) => {
             // Make end date inclusive for all-day events
@@ -69,7 +74,7 @@ const Calendar = (props: { events: EventInput[] }) => {
           })}
         />
       </div>
-    </Card>
+    </div>
   );
 };
 

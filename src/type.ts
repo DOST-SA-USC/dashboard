@@ -2,6 +2,13 @@ import type { Content } from '@tiptap/react';
 
 type UserRoles = 'admin' | 'faculty' | 'officer' | 'student';
 
+interface AuthorType {
+  authorID: string;
+  authorName: string;
+  authorPosition: string;
+  authorImageURL: string;
+}
+
 interface FormType {
   uscID?: string;
   firstName?: string;
@@ -28,20 +35,17 @@ interface UserType extends Required<FormType> {
 type TimestampString =
   `${number}-${number}-${number}T${number}:${number}:${number}Z`; // e.g., '2024-06-01T12:34:56Z'
 
-interface AnnouncementType {
+interface AnnouncementType extends AuthorType {
   id: string;
   type: 'officer' | 'faculty';
   urgent: boolean;
   title: string;
   content: Content;
-  authorID: string;
-  authorName: string;
-  authorPosition: string;
-  authorImageURL: string;
   createdAt: string | Date;
 }
 
-interface EventType {
+interface EventType extends AuthorType {
+  id: string;
   title: string;
   type: Array<'scientia' | 'virtus' | 'devotio'>;
   description: string;
@@ -56,4 +60,5 @@ export type {
   EventType,
   TimestampString,
   UserType,
+  AuthorType,
 };
