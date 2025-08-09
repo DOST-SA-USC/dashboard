@@ -47,7 +47,7 @@ const Nav = () => {
 
       <Tooltip>
         <TooltipTrigger asChild className="h-full w-full">
-          <Button variant="ghost" className="h-full w-full py-3" asChild>
+          <Button variant="ghost" className="h-full w-full py-3">
             <navData.resources.icon />
           </Button>
         </TooltipTrigger>
@@ -57,18 +57,18 @@ const Nav = () => {
       </Tooltip>
 
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Tooltip>
-            <TooltipTrigger asChild className="h-full w-full">
-              <Button variant="ghost" className="h-full w-full py-3" asChild>
+        <Tooltip>
+          <TooltipTrigger asChild className="h-full w-full">
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-full w-full py-3">
                 <navData.socials.icon />
               </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right">
-              <p>{navData.socials.title}</p>
-            </TooltipContent>
-          </Tooltip>
-        </DropdownMenuTrigger>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>{navData.socials.title}</p>
+          </TooltipContent>
+        </Tooltip>
         <DropdownMenuContent side="right" align="start">
           {navData.socials.items.map((item) => (
             <DropdownMenuItem key={item.title}>

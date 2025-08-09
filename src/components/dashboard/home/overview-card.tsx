@@ -17,10 +17,10 @@ const OverviewCard = (props: {
       onClick={props.action}
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-card-foreground text-xs font-medium md:text-sm">
+        <h1 className="text-card-foreground text-xs font-medium">
           {props.title}
         </h1>
-        <props.icon className="text-primary size-3 md:size-5" />
+        <props.icon className="text-primary size-3 md:size-4" />
       </div>
       <span className="text-primary text-2xl font-extrabold md:text-4xl">
         {props.value}
