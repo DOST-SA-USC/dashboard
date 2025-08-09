@@ -1,9 +1,9 @@
 import React from 'react';
 
-// import IDComponent from '@/components/dashboard/id/id-component';
+import Content from './content';
 
 const ID = () => {
-  return <div>id</div>;
+  return <Content />;
 };
 
 export default ID;

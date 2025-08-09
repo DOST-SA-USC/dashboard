@@ -10,7 +10,7 @@ const IDComponent = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="flex flex-row items-center gap-4 overflow-x-auto md:gap-8 md:p-8">
+    <div className="flex h-full w-full items-center gap-4 overflow-x-auto p-4 md:flex-col md:gap-8 md:p-12 lg:flex-row">
       {!isMobile ? (
         <>
           <HoverCard>
