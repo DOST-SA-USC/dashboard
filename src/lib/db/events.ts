@@ -1,5 +1,7 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
+
 import { events } from '@/db/schema';
 
 import { db } from '../db';
@@ -23,7 +25,7 @@ export const createEvent = async (event: EventType) => {
       } as typeof events.$inferInsert)
       .returning();
 
-    return result[0];
+    return result[0].id;
   } catch (error) {
     console.error('Error creating announcement:', error);
     throw error;
@@ -36,6 +38,16 @@ export const getAllEvents = async () => {
     return result;
   } catch (error) {
     console.error('Error fetching events:', error);
+    throw error;
+  }
+};
+
+export const deleteEventById = async (eventID: string) => {
+  try {
+    await db.delete(events).where(eq(events.id, eventID));
+    return true;
+  } catch (error) {
+    console.error('Error deleting event:', error);
     throw error;
   }
 };

@@ -1,8 +1,9 @@
 'use client';
 
-import { Calendar } from 'lucide-react';
+import { Calendar, Trash } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -19,12 +20,30 @@ import { EventType } from '@/type';
 
 import { GoogleCalendarIcon } from '../ui/icons';
 import EventBadge from './badge';
+import { deleteEventById } from '@/lib/db/events';
+
+import ActionAlert from '../ui/action-alert';
 
 const Selected = (props: {
   event: EventType | undefined | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  setEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
 }) => {
+  const handleDelete = async () => {
+    if (!props.event?.id) return;
+
+    try {
+      await deleteEventById(props.event.id);
+      props.onOpenChange(false);
+      props.setEvents((prevEvents) =>
+        prevEvents.filter((event) => event.id !== props.event?.id)
+      );
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
+
   return (
     <Dialog open={props.open} onOpenChange={props.onOpenChange}>
       <DialogContent>
@@ -72,22 +91,41 @@ const Selected = (props: {
               <span className="text-xs">{props.event?.authorPosition}</span>
             </div>
           </div>
-          {props.event?.startDate && (
-            <Button
-              variant="outline"
-              className="w-full md:w-auto"
-              size="sm"
-              asChild
-            >
-              <Link
-                href={`https://calendar.google.com/event?action=TEMPLATE&text=${encodeURIComponent(`[DSU] - ${props.event?.title}` || '')}&dates=${new Date(props.event?.startDate).toISOString().replace(/-|:|\.\d+/g, '')}/${new Date(props.event?.endDate || props.event?.startDate).toISOString().replace(/-|:|\.\d+/g, '')}&details=${encodeURIComponent(props.event?.description || '')}`}
-                target="_blank"
-              >
-                <GoogleCalendarIcon className="size-6" />
-                Add to Calendar
-              </Link>
-            </Button>
-          )}
+          <div className="flex w-full flex-col gap-2 md:w-auto">
+            {props.event?.startDate && (
+              <Button variant="outline" className="w-full" size="sm" asChild>
+                <Link
+                  href={`https://calendar.google.com/event?action=TEMPLATE&text=${encodeURIComponent(`[DSU] - ${props.event?.title}` || '')}&dates=${new Date(props.event?.startDate).toISOString().replace(/-|:|\.\d+/g, '')}/${new Date(props.event?.endDate || props.event?.startDate).toISOString().replace(/-|:|\.\d+/g, '')}&details=${encodeURIComponent(props.event?.description || '')}`}
+                  target="_blank"
+                >
+                  <GoogleCalendarIcon className="size-6" />
+                  Add to Calendar
+                </Link>
+              </Button>
+            )}
+
+            <ActionAlert
+              button={{
+                label: 'Delete',
+                icon: Trash,
+                onClick: () =>
+                  toast.promise(handleDelete(), {
+                    loading: 'Deleting Event...',
+                    success: 'Event deleted successfully!',
+                    error: (err) => `Failed to delete event: ${err}`,
+                  }),
+                variant: 'outline',
+                className: 'text-destructive w-full',
+                size: 'sm',
+              }}
+              body={{
+                title: 'Delete Event',
+                variant: 'destructive',
+                description:
+                  'Are you sure you want to delete this event? This action cannot be undone.',
+              }}
+            />
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

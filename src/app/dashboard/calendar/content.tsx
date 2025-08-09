@@ -24,6 +24,7 @@ export default function Content(props: { data: EventType[] }) {
   return (
     <>
       <Selected
+        setEvents={setEvents}
         event={currentEvent}
         open={!!selectedEvent}
         onOpenChange={() => setSelectedEvent(null)}

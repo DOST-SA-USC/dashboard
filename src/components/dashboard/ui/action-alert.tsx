@@ -24,10 +24,13 @@ const ActionAlert = (props: {
     icon?: LucideIcon;
     variant?: 'default' | 'destructive' | 'outline';
     disable?: boolean;
+    className?: string;
+    size?: 'default' | 'sm' | 'lg' | 'icon' | null | undefined;
   };
   body: {
     title: string;
     description: string;
+    variant?: 'default' | 'destructive' | 'outline';
   };
 }) => {
   const buttonVariant = props.button.variant ?? 'outline';
@@ -35,7 +38,12 @@ const ActionAlert = (props: {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button disabled={props.button.disable} variant={buttonVariant}>
+        <Button
+          disabled={props.button.disable}
+          variant={buttonVariant}
+          className={props.button.className}
+          size={props.button.size}
+        >
           {props.button.icon && <props.button.icon />} {props.button.label}
         </Button>
       </AlertDialogTrigger>
@@ -50,7 +58,11 @@ const ActionAlert = (props: {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
-              variant={buttonVariant === 'outline' ? 'default' : buttonVariant}
+              variant={
+                buttonVariant === 'outline'
+                  ? (props.body.variant ?? 'default')
+                  : buttonVariant
+              }
               onClick={props.button.onClick}
             >
               {props.button.icon && <props.button.icon />} {props.button.label}

@@ -106,14 +106,13 @@ const New = (props: {
 
     toast.promise(createEvent(body), {
       loading: 'Creating event...',
-      success: 'Event created successfully!',
+      success: (data) => {
+        props.setEvents((prev) => [...prev, { id: data, ...body }]);
+        return 'Event created successfully!';
+      },
       error: (err) => err.message,
     });
 
-    props.setEvents((prev) => [
-      ...prev,
-      { id: new Date().toISOString(), ...body }, // temp id for optimistic UI
-    ]);
     props.onOpenChange(false);
 
     form.reset();
