@@ -1,7 +1,8 @@
-import { Megaphone, Calendar, PhilippinePeso } from 'lucide-react';
+import { Calendar, Megaphone, PhilippinePeso } from 'lucide-react';
 import React from 'react';
 
 import OverviewCard from '@/components/dashboard/home/overview-card';
+import Statistics from '@/components/dashboard/home/statistics';
 
 import HomeHeader from '../../components/dashboard/home/home-header';
 
@@ -36,9 +37,7 @@ export default async function Dashboard() {
         />
       </div>
 
-      <div className="border-border bg-muted/20 text-muted-foreground flex h-full w-full items-center justify-center rounded-md border-2 border-dashed">
-        More Content Soon
-      </div>
+      <Statistics />
     </>
   );
 }

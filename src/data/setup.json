@@ -24,6 +24,25 @@
     ],
     "School of Health Care Professionss": ["BS Architecture"]
   },
+  "programAliases": {
+    "BS Applied Physics": "BSAP",
+    "BS Chemistry": "BSCh",
+    "BS Computer Science": "BSCS",
+    "BS Information Systems": "BSIS",
+    "BS Information Technology": "BSIT",
+    "BS Marine Biology": "BSMB",
+    "BS Psychology": "BSPsych",
+    "BS Chemical Engineering": "BSChE",
+    "BS Civil Engineering": "BSCE",
+    "BS Computer Engineering": "BSCpE",
+    "BS Electrical Engineering": "BSEE",
+    "BS Electronics Engineering": "BSEcE",
+    "BS Industrial Engineering": "BSIE",
+    "BS Mechanical Engineering": "BSME",
+    "BS Pharmacy": "BSPharm",
+    "BS Nutrition and Dietetics": "BSND",
+    "BS Architecture": "BSArch"
+  },
   "scholarshipTypes": [
     "MERIT",
     "RA 7687",
