@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { insertUserData } from '@/lib/db/users';
 import { FormType } from '@/type';
 
-import IDComponent from '../../../components/dashboard/id/id-component';
+import IDComponent from '@/components/dashboard/id/id-component';
 
 const initialState = {
   success: false,
@@ -17,7 +17,7 @@ const initialState = {
 
 const Form4 = (props: {
   prev?: () => void;
-  data?: FormType;
+  data: FormType;
   userID: string;
   formData: FormType;
   update: () => void;
@@ -52,7 +52,22 @@ const Form4 = (props: {
 
   return (
     <>
-      <IDComponent />
+      <IDComponent
+        user={{
+          uscID: props.data.uscID ?? '',
+          firstName: props.data.firstName ?? '',
+          middleName: props.data.middleName ?? '',
+          lastName: props.data.lastName ?? '',
+          image: URL.createObjectURL(props.data.image as Blob),
+          program: props.data.program ?? '',
+          yearLevel: props.data.yearLevel ?? '',
+          contactNumber: props.data.contactNumber ?? '',
+          address: props.data.address ?? '',
+          birthDate: props.data.birthDate ?? '',
+          yearOfAward: props.data.yearOfAward ?? '',
+          scholarshipType: props.data.scholarshipType ?? '',
+        }}
+      />
       <div className="mt-10 flex w-full justify-between">
         <Button variant="outline" type="button" onClick={props.prev}>
           <ChevronLeft className="size-4" />

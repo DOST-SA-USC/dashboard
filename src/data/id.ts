@@ -6,4 +6,5 @@ export const ID_DATA = {
     'Priority registration for courses',
     'Discounts on academic materials and resources',
   ],
+  edit: 'To edit, contact DOST SA USC.',
 };

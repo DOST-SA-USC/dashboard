@@ -1,4 +1,5 @@
 import React, { ReactNode, useRef, useCallback, useMemo, memo } from 'react';
+import { cn } from '@/lib/utils';
 
 const TRANSITION = 'transform 0.2s cubic-bezier(.03,.98,.52,.99)';
 const WILL_CHANGE = 'transform';
@@ -47,8 +48,8 @@ const HoverCard = (props: { children: ReactNode; className?: string }) => {
   return (
     <div
       ref={cardRef}
-      className={props.className}
       style={style}
+      className={cn(props.className)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

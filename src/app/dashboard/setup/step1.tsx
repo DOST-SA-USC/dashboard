@@ -83,11 +83,11 @@ const Form1 = (props: {
                     <label className="group relative cursor-pointer">
                       {field.value && field.value instanceof File ? (
                         <Image
-                          width={160}
-                          height={192}
+                          width={200}
+                          height={200}
                           src={URL.createObjectURL(field.value)}
                           alt="Profile Preview"
-                          className="border-border h-48 w-40 rounded-md border object-cover"
+                          className="border-border size-48 rounded-md border object-cover"
                           onLoad={(e) =>
                             URL.revokeObjectURL(
                               (e.target as HTMLImageElement).src
@@ -95,7 +95,7 @@ const Form1 = (props: {
                           }
                         />
                       ) : (
-                        <div className="bg-muted/40 border-border h-48 w-40 rounded-md border object-cover backdrop-blur-sm" />
+                        <div className="bg-muted/40 border-border size-48 rounded-md border object-cover backdrop-blur-sm" />
                       )}
                       <div className="absolute inset-0 flex items-center justify-center rounded-md bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
                         <Upload className="size-8 text-white" />
