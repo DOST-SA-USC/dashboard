@@ -71,9 +71,11 @@ const Nav = () => {
         </Tooltip>
         <DropdownMenuContent side="right" align="start">
           {NAV_DATA.socials.items.map((item) => (
-            <DropdownMenuItem key={item.title}>
-              <item.icon className="size-3" />
-              {item.title}
+            <DropdownMenuItem key={item.title} asChild>
+              <Link target="_blank" href={item.href}>
+                <item.icon className="size-3" />
+                {item.title}
+              </Link>
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

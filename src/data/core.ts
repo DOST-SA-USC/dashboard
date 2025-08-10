@@ -49,10 +49,26 @@ export const NAV_DATA = {
     title: 'Socials',
     icon: Ellipsis,
     items: [
-      { title: 'Facebook', href: '#', icon: FacebookIcon },
-      { title: 'Instagram', href: '#', icon: InstagramIcon },
-      { title: 'LinkedIn', href: '#', icon: LinkedinIcon },
-      { title: 'GitHub', href: '#', icon: GithubIcon },
+      {
+        title: 'Facebook',
+        href: 'https://www.facebook.com/dostsausc',
+        icon: FacebookIcon,
+      },
+      {
+        title: 'Instagram',
+        href: 'https://www.instagram.com/dostsausc',
+        icon: InstagramIcon,
+      },
+      {
+        title: 'LinkedIn',
+        href: 'https://www.linkedin.com/company/dost-scholars-association-in-the-university-of-san-carlos/',
+        icon: LinkedinIcon,
+      },
+      {
+        title: 'GitHub',
+        href: 'https://github.com/DOST-SA-USC',
+        icon: GithubIcon,
+      },
     ],
   },
 };
