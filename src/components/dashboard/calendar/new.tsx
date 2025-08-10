@@ -33,12 +33,14 @@ import type { DateSelectArg } from '@fullcalendar/core';
 import { useUserStore } from '@/stores/userStore';
 import type { EventType } from '@/type';
 
-const OPTIONS = ['scientia', 'virtus', 'devotio'] as const;
+import { EVENT_TYPE_OPTIONS } from '@/data/core';
 
 const eventSchema = z
   .object({
     title: z.string().min(1, 'Title is required'),
-    type: z.array(z.enum(OPTIONS)).min(1, 'Select at least one type'),
+    type: z
+      .array(z.enum(EVENT_TYPE_OPTIONS))
+      .min(1, 'Select at least one type'),
     description: z.string().min(1, 'Description is required'),
     start: z.string().min(1, 'Start date is required'),
     end: z.string().optional(),
@@ -161,7 +163,7 @@ const New = (props: {
                   <FormLabel>Event Type</FormLabel>
                   <FormControl>
                     <div className="flex w-full flex-wrap items-center gap-4">
-                      {OPTIONS.map((option) => (
+                      {EVENT_TYPE_OPTIONS.map((option) => (
                         <div key={option} className="flex items-center gap-2">
                           <Checkbox
                             id={option}

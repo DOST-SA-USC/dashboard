@@ -16,7 +16,7 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 
-import type { NavDataType } from './component-data';
+import type { NavDataType } from '@/data/core';
 
 const SearchComponent = (props: { data: NavDataType }) => {
   const [open, setOpen] = useState(false);

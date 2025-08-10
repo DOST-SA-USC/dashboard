@@ -13,9 +13,9 @@ import {
   InstagramIcon,
   LinkedinIcon,
   GithubIcon,
-} from '../ui/icons';
+} from '../components/dashboard/ui/icons';
 
-export const brandData = {
+export const BRAND_DATA = {
   title: 'DOST SA USC',
   subtitle: 'Organization Tracker',
   logo: '/logo.png',
@@ -24,7 +24,7 @@ export const brandData = {
   href: '/dashboard',
 };
 
-export const navData = {
+export const NAV_DATA = {
   menu: [
     { title: 'Home', href: '/dashboard', icon: Home },
     { title: 'Stipend', href: '/dashboard/stipend', icon: PhilippinePeso },
@@ -57,4 +57,6 @@ export const navData = {
   },
 };
 
-export type NavDataType = typeof navData;
+export type NavDataType = typeof NAV_DATA;
+
+export const EVENT_TYPE_OPTIONS = ['scientia', 'virtus', 'devotio'];

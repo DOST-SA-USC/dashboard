@@ -17,14 +17,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-import { navData } from './component-data';
+import { NAV_DATA } from '@/data/core';
 
 const Nav = () => {
   const pathname = usePathname();
 
   return (
     <>
-      {navData.menu.map((item) => (
+      {NAV_DATA.menu.map((item) => (
         <Tooltip key={item.title}>
           <TooltipTrigger asChild className="h-full w-full">
             <Button
@@ -48,11 +48,11 @@ const Nav = () => {
       <Tooltip>
         <TooltipTrigger asChild className="h-full w-full">
           <Button variant="ghost" className="h-full w-full py-3">
-            <navData.resources.icon />
+            <NAV_DATA.resources.icon />
           </Button>
         </TooltipTrigger>
         <TooltipContent side="right">
-          <p>{navData.resources.title}</p>
+          <p>{NAV_DATA.resources.title}</p>
         </TooltipContent>
       </Tooltip>
 
@@ -61,16 +61,16 @@ const Nav = () => {
           <TooltipTrigger asChild className="h-full w-full">
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-full w-full py-3">
-                <navData.socials.icon />
+                <NAV_DATA.socials.icon />
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent side="right">
-            <p>{navData.socials.title}</p>
+            <p>{NAV_DATA.socials.title}</p>
           </TooltipContent>
         </Tooltip>
         <DropdownMenuContent side="right" align="start">
-          {navData.socials.items.map((item) => (
+          {NAV_DATA.socials.items.map((item) => (
             <DropdownMenuItem key={item.title}>
               <item.icon className="size-3" />
               {item.title}

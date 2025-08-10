@@ -3,10 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import OverviewCard from '@/components/dashboard/home/overview-card';
-import {
-  STIPEND_DETAILS,
-  STIPEND_OVERVIEW,
-} from '@/components/dashboard/stipend/data';
+import { STIPEND_DETAILS, STIPEND_OVERVIEW } from '@/data/stipend';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,

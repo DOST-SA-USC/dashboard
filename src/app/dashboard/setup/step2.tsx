@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import data from './data.json';
+import data from '@/data/setup.json';
 
 import type { FormType } from '@/type';
 const formSchema = z.object({
