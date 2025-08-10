@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import { QRCodeSVG } from 'qrcode.react';
 import React from 'react';
 
 import HoverCard from '@/components/dashboard/ui/hover-card';
 import ID_BACK from '@/data/id/back.png';
 import ID_FRONT from '@/data/id/front.png';
-
-import { QRCodeSVG } from 'qrcode.react';
+import { formatPhoneNumber } from '@/lib/helpers';
 
 import type { FormType } from '@/type';
 
@@ -82,9 +82,9 @@ const IDComponent = React.forwardRef<
 
           <div className="text-[10px]">
             <p className="leading-3">In case of emergency contact:</p>
-            <p className="leading-3 font-semibold">Brutus B. Batumbakal</p>
+            <p className="leading-3 font-semibold">{user.emergencyContact}</p>
             <p className="leading-3 font-semibold">
-              Contact No.: 0917-123-4567
+              Contact No.: {formatPhoneNumber(user.emergencyContactNumber)}
             </p>
           </div>
           <div className="mt-14 flex w-full flex-col items-center justify-center">
@@ -101,7 +101,7 @@ const IDComponent = React.forwardRef<
 
             <div className="mt-4 text-center">
               <p className="text-[12px] leading-3 font-[600]">
-                JOLINA BATUMBAKAL
+                {process.env.NEXT_PUBLIC_COOL_PERSON!.toUpperCase()}
               </p>
               <p className="text-[8px]">AUTHORIZED SIGNATURE</p>
             </div>

@@ -17,11 +17,11 @@ interface FormType {
   image?: File | string; // File for upload, string for URL
   program?: string;
   yearLevel?: string;
-  contactNumber?: string;
-  address?: string;
   birthDate?: string;
   yearOfAward?: string;
   scholarshipType?: string;
+  emergencyContact?: string;
+  emergencyContactNumber?: string;
 }
 
 interface UserType extends Required<FormType> {

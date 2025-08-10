@@ -1,7 +1,7 @@
 'use client';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { useActionState, useEffect } from 'react';
+import React, { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -23,12 +23,13 @@ const Form4 = (props: {
   update: () => void;
 }) => {
   const router = useRouter();
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [state, formAction, pending] = useActionState(async () => {
     try {
       await insertUserData(props.userID, props.formData);
       return {
         success: true,
-        message: 'User data inserted successfully',
+        message: 'Account set up successful!',
       };
     } catch (error) {
       return {
@@ -42,6 +43,16 @@ const Form4 = (props: {
   }, initialState);
 
   useEffect(() => {
+    if (props.data.image) {
+      const url = URL.createObjectURL(props.data.image as Blob);
+      setImageUrl(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+  }, [props.data.image]);
+
+  useEffect(() => {
     if (state.success) {
       toast.success(state.message);
       router.refresh();
@@ -49,6 +60,10 @@ const Form4 = (props: {
       toast.error(state.message);
     }
   }, [state, router]);
+
+  if (imageUrl === '') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -58,11 +73,11 @@ const Form4 = (props: {
           firstName: props.data.firstName ?? '',
           middleName: props.data.middleName ?? '',
           lastName: props.data.lastName ?? '',
-          image: URL.createObjectURL(props.data.image as Blob),
+          image: imageUrl,
           program: props.data.program ?? '',
           yearLevel: props.data.yearLevel ?? '',
-          contactNumber: props.data.contactNumber ?? '',
-          address: props.data.address ?? '',
+          emergencyContact: props.data.emergencyContact ?? '',
+          emergencyContactNumber: props.data.emergencyContactNumber ?? '',
           birthDate: props.data.birthDate ?? '',
           yearOfAward: props.data.yearOfAward ?? '',
           scholarshipType: props.data.scholarshipType ?? '',

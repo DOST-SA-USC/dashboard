@@ -17,12 +17,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { FormType } from '@/type';
 const formSchema = z.object({
-  contactNumber: z
+  emergencyContact: z.string().min(1, 'Emergency contact is required.'),
+  emergencyContactNumber: z
     .string()
-    .min(11, 'Contact number must be 11 digits.')
-    .max(11, 'Contact number must be 11 digits.')
-    .regex(/^09\d{9}$/, 'Contact number must start with 09 and be 11 digits.'),
-  address: z.string().min(1, 'Address is required.'),
+    .min(11, 'Emergency contact number must be 11 digits.')
+    .max(11, 'Emergency contact number must be 11 digits.')
+    .regex(
+      /^09\d{9}$/,
+      'Emergency contact number must start with 09 and be 11 digits.'
+    ),
   birthDate: z
     .string()
     .min(1, 'Birth date is required.')
@@ -30,12 +33,20 @@ const formSchema = z.object({
       (val) => {
         const date = new Date(val);
         const now = new Date();
-        // Only compare date part, ignore time
         date.setHours(0, 0, 0, 0);
         now.setHours(0, 0, 0, 0);
-        return date < now;
+
+        // Calculate the date 10 years ago from today
+        const tenYearsAgo = new Date(now);
+        tenYearsAgo.setFullYear(now.getFullYear() - 10);
+
+        // Birth date must not be in the future and not within the previous 10 years
+        return date < tenYearsAgo;
       },
-      { message: 'Birth date must not be in the future.' }
+      {
+        message:
+          'Birth date must not be in the previous 10 years or in the future.',
+      }
     ),
 });
 
@@ -47,16 +58,16 @@ const Form3 = (props: {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      contactNumber: props.data?.contactNumber || '',
-      address: props.data?.address || '',
+      emergencyContact: props.data?.emergencyContact || '',
+      emergencyContactNumber: props.data?.emergencyContactNumber || '',
       birthDate: props.data?.birthDate || '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     props.update({
-      contactNumber: values.contactNumber,
-      address: values.address,
+      emergencyContact: values.emergencyContact,
+      emergencyContactNumber: values.emergencyContactNumber,
       birthDate: values.birthDate,
     });
   }
@@ -79,12 +90,12 @@ const Form3 = (props: {
           <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
             <FormField
               control={form.control}
-              name="contactNumber"
+              name="emergencyContact"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Contact Number</FormLabel>
+                  <FormLabel>Emergency Contact</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="09123456789" {...field} />
+                    <Input placeholder="Jane S. Doe" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -92,29 +103,31 @@ const Form3 = (props: {
 
             <FormField
               control={form.control}
-              name="birthDate"
+              name="emergencyContactNumber"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Birth Date</FormLabel>
+                  <FormLabel>Emergency Contact Number</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="number" placeholder="09123456789" {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
           </div>
+
           <FormField
             control={form.control}
-            name="address"
+            name="birthDate"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Current Address</FormLabel>
+                <FormLabel>Birth Date</FormLabel>
                 <FormControl>
-                  <Input placeholder="Talamban, Cebu City" {...field} />
+                  <Input type="date" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
+
           <div className="mt-10 flex w-full justify-between">
             <Button variant="outline" type="button" onClick={props.prev}>
               <ChevronLeft className="size-4" />

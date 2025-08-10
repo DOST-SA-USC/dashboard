@@ -62,8 +62,8 @@ const Form = (props: { userID: string; user: UserType }) => {
     yearLevel: '',
     yearOfAward: '',
     scholarshipType: '',
-    contactNumber: '',
-    address: '',
+    emergencyContact: '',
+    emergencyContactNumber: '',
     birthDate: '',
   });
 
