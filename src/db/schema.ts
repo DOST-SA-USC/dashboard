@@ -106,12 +106,14 @@ export const announcement = pgTable('announcements', {
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-  authorId: text('author_id').references(() => user.id, {
-    onDelete: 'set null',
-  }),
+  authorId: text('author_id')
+    .references(() => user.id, {
+      onDelete: 'set null',
+    })
+    .notNull(),
   authorName: text('author_name').notNull(),
-  authorPosition: text('author_position'),
-  authorImageURL: text('author_image_url'),
+  authorPosition: text('author_position').notNull(),
+  authorImageURL: text('author_image_url').notNull(),
 }).enableRLS();
 
 export const events = pgTable('events', {
@@ -121,6 +123,24 @@ export const events = pgTable('events', {
   description: text('description').notNull(),
   startDate: date('start_date').notNull(),
   endDate: date('end_date'),
+  createdAt: timestamp('created_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  authorId: text('author_id')
+    .references(() => user.id, {
+      onDelete: 'set null',
+    })
+    .notNull(),
+  authorName: text('author_name').notNull(),
+  authorPosition: text('author_position').notNull(),
+  authorImageURL: text('author_image_url').notNull(),
+}).enableRLS();
+
+export const stipend = pgTable('stipend', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  monthly: text('monthly').notNull(),
+  forecast: text('forecast').notNull(),
+  remarks: text('remarks').array().notNull(),
   createdAt: timestamp('created_at')
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),

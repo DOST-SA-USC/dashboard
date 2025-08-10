@@ -53,6 +53,14 @@ interface EventType extends AuthorType {
   endDate?: TimestampString;
 }
 
+interface StipendType extends AuthorType {
+  id?: string;
+  monthly: string;
+  forecast: string;
+  remarks: string[];
+  createdAt?: string | Date;
+}
+
 export type {
   FormType,
   UserRoles,
@@ -61,4 +69,5 @@ export type {
   TimestampString,
   UserType,
   AuthorType,
+  StipendType,
 };
