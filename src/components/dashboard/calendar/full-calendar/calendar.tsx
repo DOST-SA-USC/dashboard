@@ -66,7 +66,9 @@ const Calendar = (props: {
           eventContent={(arg) => (
             <CalendarItem onEventClick={props.onEventClick} arg={arg} />
           )}
-          datesSet={(arg) => setCurrentTitle(arg.view.title)}
+          datesSet={(arg) => {
+            Promise.resolve().then(() => setCurrentTitle(arg.view.title));
+          }}
           events={events.map((event) => {
             // Make end date inclusive for all-day events
             if (event.allDay && event.end) {
