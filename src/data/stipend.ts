@@ -16,8 +16,8 @@ export const STIPEND_OVERVIEW = [
 export const STIPEND_DETAILS = {
   note: 'Note: Stipend update will be periodically updated (7–15 days).',
   resources: [
+    { label: 'Contact HR', href: '#', disabled: false },
     { label: 'Stipend Guide', href: '#', disabled: true },
     { label: 'FAQ', href: '#', disabled: true },
-    { label: 'Contact HR', href: '#', disabled: false },
   ],
 };

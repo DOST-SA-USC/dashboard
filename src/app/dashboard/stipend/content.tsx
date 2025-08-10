@@ -14,6 +14,12 @@ import {
 } from '@/components/ui/card';
 import Update from '@/components/dashboard/stipend/update';
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
 import type { StipendType } from '@/type';
 
 import { getUserInitials, formatDateStartEnd } from '@/lib/helpers';
@@ -86,20 +92,33 @@ const Content = (props: { data: StipendType }) => {
             </CardHeader>
             <CardContent className="flex flex-1 flex-col gap-1">
               {STIPEND_DETAILS.resources.map((resource, idx) => (
-                <div key={idx} className="flex gap-2">
-                  <Link
-                    href={resource.disabled ? '#' : resource.href}
-                    className={`text-secondary flex items-center gap-2 underline hover:opacity-80 ${resource.disabled ? 'pointer-events-none opacity-50' : ''}`}
-                    aria-disabled={resource.disabled}
-                    tabIndex={resource.disabled ? -1 : 0}
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    {resource.label}
-                  </Link>
-                  {resource.disabled && (
-                    <span className="bg-muted text-muted-foreground ml-2 rounded px-2 py-0.5 text-xs font-semibold">
-                      soon
-                    </span>
+                <div key={idx} className="flex items-center gap-2">
+                  {resource.disabled ? (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span>
+                          <Link
+                            href="#"
+                            className="text-secondary pointer-events-none flex items-center gap-2 underline opacity-50 hover:opacity-80"
+                            aria-disabled
+                            tabIndex={-1}
+                          >
+                            <LinkIcon className="h-4 w-4" />
+                            {resource.label}
+                          </Link>
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">soon</TooltipContent>
+                    </Tooltip>
+                  ) : (
+                    <Link
+                      href={resource.href}
+                      className="text-secondary flex items-center gap-2 underline hover:opacity-80"
+                      tabIndex={0}
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      {resource.label}
+                    </Link>
                   )}
                 </div>
               ))}
