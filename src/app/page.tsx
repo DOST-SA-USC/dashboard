@@ -7,6 +7,8 @@ import LoginForm from '@/components/dashboard/login/form';
 import { Card, CardContent } from '@/components/ui/card';
 import { getSession } from '@/lib/auth/server';
 
+import GoogleSignIn from '@/components/dashboard/login/google';
+
 export default async function Home() {
   const session = await getSession();
   if (session) {
@@ -18,12 +20,13 @@ export default async function Home() {
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <ThemeSwitch variant="default" />
       </div>
+
       <div className="w-full max-w-sm md:max-w-3xl">
-        <div className="flex flex-col gap-6">
-          <Card className="overflow-hidden p-0">
-            <CardContent className="grid p-0 md:grid-cols-2">
-              <div className="space-y-8 p-8 py-14">
-                <div className="flex flex-col items-center text-center">
+        <div className="flex h-full w-full flex-col gap-2">
+          <Card className="h-full w-full overflow-hidden p-0">
+            <CardContent className="grid h-full w-full p-0 md:grid-cols-2">
+              <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6 py-8">
+                <div className="flex w-full flex-col items-center justify-center text-center">
                   <Image
                     width={64}
                     height={64}
@@ -33,10 +36,11 @@ export default async function Home() {
                   />
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <p className="text-muted-foreground text-balance">
-                    Sign In to your scholar account.
+                    Sign In to continue.
                   </p>
                 </div>
                 <LoginForm />
+                <GoogleSignIn />
               </div>
               <div className="bg-muted relative hidden md:block">
                 <Image

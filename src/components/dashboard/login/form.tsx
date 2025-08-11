@@ -3,7 +3,7 @@
 import { Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -14,7 +14,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { signIn } from '@/lib/auth/user';
@@ -61,11 +60,19 @@ export default function LoginForm() {
     });
   }
 
+  function onError(error: FieldErrors) {
+    Object.values(error).forEach((err) => {
+      if (err && typeof err === 'object' && 'message' in err && err.message) {
+        toast.error(err.message as string);
+      }
+    });
+  }
+
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-2"
-        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex w-full flex-col gap-2"
+        onSubmit={form.handleSubmit(onSubmit, onError)}
       >
         <FormField
           control={form.control}
@@ -82,7 +89,6 @@ export default function LoginForm() {
                   required
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -120,7 +126,6 @@ export default function LoginForm() {
                   </button>
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
