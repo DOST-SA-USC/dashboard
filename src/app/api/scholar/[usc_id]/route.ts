@@ -4,8 +4,11 @@ import { getUserDataByUscID } from '@/lib/db/users';
 
 export async function GET(
   request: Request,
-  { params }: { params: { usc_id: string } }
+  context: Promise<{ params: { usc_id: string } }>
 ) {
+  const { params } = await context;
+  const { usc_id } = await params;
+
   const headersInstance = await headers();
   const authorization = headersInstance.get('authorization');
 
@@ -20,7 +23,7 @@ export async function GET(
     return new Response('Unauthorized', { status: 401 });
   }
 
-  const userData = await getUserDataByUscID(params.usc_id);
+  const userData = await getUserDataByUscID(usc_id);
   if (!userData) {
     return new Response('User not found', { status: 404 });
   }
