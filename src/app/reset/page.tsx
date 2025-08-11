@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -51,8 +51,13 @@ const Content = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
-  const token = params.get('token');
-  const error = params.get('error');
+  const [token, setToken] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setToken(params.get('token'));
+    setError(params.get('error'));
+  }, [params]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -152,7 +157,7 @@ const Content = () => {
           <Label htmlFor="show-password">Show Password</Label>
         </div>
       </CardContent>
-      <CardFooter className="mt-4 w-full justify-end">
+      <CardFooter className="w-full justify-end">
         <Button form="form" type="submit" className="w-full md:w-auto">
           Submit
         </Button>

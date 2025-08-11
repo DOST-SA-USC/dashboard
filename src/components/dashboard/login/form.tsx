@@ -34,6 +34,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [openForgotPasswordModal, setOpenForgotPasswordModal] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
 
@@ -71,70 +72,87 @@ export default function LoginForm() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="flex w-full flex-col gap-2"
-        onSubmit={form.handleSubmit(onSubmit, onError)}
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  id="email"
-                  placeholder="dostsausc@usc.edu.ph"
-                  type="email"
-                  required
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <div className="mt-2 flex items-center justify-between">
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Forgot />
-              </div>
-              <FormControl>
-                <div className="relative">
+    <>
+      <Forgot
+        open={openForgotPasswordModal}
+        setOpen={setOpenForgotPasswordModal}
+        body={{
+          title: 'Forgot Password',
+          description:
+            'Enter your email address to receive a password reset link.',
+        }}
+      />
+      <Form {...form}>
+        <form
+          className="flex w-full flex-col gap-2"
+          onSubmit={form.handleSubmit(onSubmit, onError)}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormControl>
                   <Input
                     {...field}
-                    id="password"
-                    name="password"
-                    placeholder={showPassword ? 'stipendcutie' : '********'}
-                    type={showPassword ? 'text' : 'password'}
+                    id="email"
+                    placeholder="dostsausc@usc.edu.ph"
+                    type="email"
                     required
                   />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <div className="mt-2 flex items-center justify-between">
+                  <FormLabel htmlFor="password">Password</FormLabel>
                   <button
                     type="button"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    className="text-muted-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                    className="text-muted-foreground cursor-pointer text-xs hover:underline"
+                    onClick={() => setOpenForgotPasswordModal(true)}
                   >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    Forgot Password?
                   </button>
                 </div>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      id="password"
+                      name="password"
+                      placeholder={showPassword ? 'stipendcutie' : '********'}
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="text-muted-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-        <Button
-          type="submit"
-          className="mt-4 w-full cursor-pointer"
-          disabled={isPending}
-        >
-          Sign In
-        </Button>
-      </form>
-    </Form>
+          <Button
+            type="submit"
+            className="mt-4 w-full cursor-pointer"
+            disabled={isPending}
+          >
+            Sign In
+          </Button>
+        </form>
+      </Form>
+    </>
   );
 }

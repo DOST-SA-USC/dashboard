@@ -18,11 +18,11 @@ import { signOut } from '@/lib/auth/client';
 import { getUserInitials } from '@/lib/helpers';
 import { useUserStore } from '@/stores/userStore';
 
-import SettingsModal from './settings';
+import Forgot from '../login/forgot';
 
 export default function UserComponent() {
   const router = useRouter();
-  const [openSettingsModal, setOpenSettingsModal] = useState(false);
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false);
 
   const [isPending, setIsPending] = useState(false);
 
@@ -35,7 +35,7 @@ export default function UserComponent() {
       loading: 'Signing out...',
       success: () => {
         router.push('/');
-        setOpenSettingsModal(false);
+        setOpenChangePasswordModal(false);
         return 'Signed out successfully!';
       },
       error: (error: Error) => {
@@ -47,9 +47,14 @@ export default function UserComponent() {
 
   return (
     <>
-      <SettingsModal
-        open={openSettingsModal}
-        onOpenChange={setOpenSettingsModal}
+      <Forgot
+        open={openChangePasswordModal}
+        setOpen={setOpenChangePasswordModal}
+        body={{
+          title: 'Change Password',
+          description:
+            'Enter your email address to receive a password reset link.',
+        }}
       />
 
       <DropdownMenu>
@@ -96,10 +101,11 @@ export default function UserComponent() {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onClick={() => setOpenSettingsModal(true)}>
+          <DropdownMenuItem onClick={() => setOpenChangePasswordModal(true)}>
             <Settings />
-            Account Password
+            Change Password
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
           <form action={handleSignOut} className="w-full">
             <DropdownMenuItem asChild>

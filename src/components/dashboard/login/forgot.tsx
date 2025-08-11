@@ -17,13 +17,16 @@ import { Label } from '@/components/ui/label';
 import { requestPasswordReset } from '@/lib/auth/client';
 import { doesUserEmailExist } from '@/lib/db/users';
 
-const Forgot = () => {
-  const [open, setOpen] = useState(false);
+const Forgot = (props: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  body: { title: string; description: string };
+}) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
   const resetForm = () => {
-    setOpen(false);
+    props.setOpen(false);
     setLoading(false);
     setEmail('');
   };
@@ -51,7 +54,7 @@ const Forgot = () => {
 
     await requestPasswordReset({
       email: email,
-      redirectTo: '/forgot',
+      redirectTo: '/reset',
     });
 
     await resetForm();
@@ -59,27 +62,17 @@ const Forgot = () => {
 
   return (
     <>
-      <button
-        type="button"
-        className="text-muted-foreground cursor-pointer text-xs hover:underline"
-        onClick={() => setOpen(true)}
-      >
-        Forgot Password?
-      </button>
-
       <Dialog
-        open={open}
+        open={props.open}
         onOpenChange={(open) => {
           resetForm();
-          setOpen(open);
+          props.setOpen(open);
         }}
       >
         <DialogContent className="w-lg" showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>Forgot Password</DialogTitle>
-            <DialogDescription>
-              Enter your email address to receive a password reset link.
-            </DialogDescription>
+            <DialogTitle>{props.body.title}</DialogTitle>
+            <DialogDescription>{props.body.description}</DialogDescription>
           </DialogHeader>
           <div className="flex h-full w-full flex-col gap-2">
             <Label htmlFor="email">Email</Label>
