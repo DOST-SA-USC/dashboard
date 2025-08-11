@@ -107,3 +107,27 @@ export async function getUserIdByEmail(email: string) {
     throw error;
   }
 }
+
+export async function getUserDataByUscID(uscID: string) {
+  try {
+    const result = await db
+      .select({
+        scholarshipType: userData.scholarshipType,
+        yearOfAward: userData.yearOfAward,
+        yearLevel: userData.yearLevel,
+        uscID: userData.uscID,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        middleName: userData.middleName,
+        program: userData.program,
+      })
+      .from(userData)
+      .where(eq(userData.uscID, uscID))
+      .limit(1);
+
+    return result[0] || null;
+  } catch (error) {
+    console.error('Error fetching user data by USC ID:', error);
+    throw error;
+  }
+}
