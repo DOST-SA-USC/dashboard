@@ -112,14 +112,15 @@ export async function getUserDataByUscID(uscID: string) {
   try {
     const result = await db
       .select({
-        scholarshipType: userData.scholarshipType,
-        yearOfAward: userData.yearOfAward,
-        yearLevel: userData.yearLevel,
         uscID: userData.uscID,
         firstName: userData.firstName,
         lastName: userData.lastName,
         middleName: userData.middleName,
+        image: userData.image,
         program: userData.program,
+        scholarshipType: userData.scholarshipType,
+        yearOfAward: userData.yearOfAward,
+        yearLevel: userData.yearLevel,
       })
       .from(userData)
       .where(eq(userData.uscID, uscID))

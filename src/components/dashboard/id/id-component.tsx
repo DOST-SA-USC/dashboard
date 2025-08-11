@@ -91,7 +91,7 @@ const IDComponent = React.forwardRef<
             <QRCodeSVG
               fgColor="#334FA1"
               bgColor="#ECF0F3"
-              value={`${user.lastName}, ${user.firstName} ${user.middleName.charAt(0)}.`.toUpperCase()}
+              value={`https://verify.dostsausc.org/${user.uscID}`}
               size={128}
               className="translate-x-1"
             />
