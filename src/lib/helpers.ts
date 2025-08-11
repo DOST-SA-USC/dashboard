@@ -100,3 +100,15 @@ export function formatPhoneNumber(phone: string): string {
   }
   return phone;
 }
+
+export function getMinutesSecondsLeft(targetDate: Date): string {
+  const now = new Date();
+  const diffMs = targetDate.getTime() - now.getTime();
+  if (diffMs <= 0) return '0m 0s';
+
+  const totalSeconds = Math.floor(diffMs / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${minutes}m ${seconds}s`;
+}

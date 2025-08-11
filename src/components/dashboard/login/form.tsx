@@ -19,6 +19,8 @@ import { Input } from '@/components/ui/input';
 import { signIn } from '@/lib/auth/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import Forgot from './forgot';
+
 const formSchema = z.object({
   email: z
     .email('Please enter a valid email address')
@@ -84,7 +86,7 @@ export default function LoginForm() {
                 <Input
                   {...field}
                   id="email"
-                  placeholder="dostsausc@example.com"
+                  placeholder="dostsausc@usc.edu.ph"
                   type="email"
                   required
                 />
@@ -100,12 +102,7 @@ export default function LoginForm() {
             <FormItem>
               <div className="mt-2 flex items-center justify-between">
                 <FormLabel htmlFor="password">Password</FormLabel>
-                <button
-                  type="button"
-                  className="text-muted-foreground cursor-pointer text-xs hover:underline"
-                >
-                  Forgot Password?
-                </button>
+                <Forgot />
               </div>
               <FormControl>
                 <div className="relative">
@@ -113,7 +110,7 @@ export default function LoginForm() {
                     {...field}
                     id="password"
                     name="password"
-                    placeholder="*********"
+                    placeholder={showPassword ? 'stipendcutie' : '********'}
                     type={showPassword ? 'text' : 'password'}
                     required
                   />

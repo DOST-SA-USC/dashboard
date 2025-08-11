@@ -16,11 +16,12 @@ export const sendEmail = async (
     cc?: string | string[];
     bcc?: string | string[];
   },
+  summary: string,
   subject: string,
   html: string
 ) => {
   return transporter.sendMail({
-    from: `"DOST SA USC - New Announcement" <${process.env.EMAIL_USER}>`,
+    from: `"DOST SA USC - ${summary}" <${process.env.EMAIL_USER}>`,
     to: recipient.to,
     cc: recipient.cc,
     bcc: recipient.bcc,

@@ -2,6 +2,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from 'better-auth/next-js';
 
+import { passwordChangedTemplate, resetPasswordTemplate } from '@/data/emails';
 import * as authSchemas from '@/db/schema'; // import your auth schemas if needed
 import { db } from '@/lib/db'; // your drizzle instance
 
@@ -13,6 +14,12 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     signUp: false,
+    sendResetPassword: async ({ user, token }) => {
+      await resetPasswordTemplate(user.email, token);
+    },
+    onPasswordReset: async ({ user }) => {
+      await passwordChangedTemplate(user.email);
+    },
   },
   socialProviders: {
     google: {

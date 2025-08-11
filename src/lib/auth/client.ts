@@ -11,4 +11,11 @@ export const signInWithGoogle = async () => {
   });
 };
 
-export const { signIn, signUp, signOut, useSession } = createAuthClient();
+export const {
+  signIn,
+  signUp,
+  signOut,
+  useSession,
+  resetPassword,
+  requestPasswordReset,
+} = createAuthClient();

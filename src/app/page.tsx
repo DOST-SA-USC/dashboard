@@ -4,10 +4,10 @@ import React from 'react';
 
 import { ThemeSwitch } from '@/components/dashboard/core';
 import LoginForm from '@/components/dashboard/login/form';
+import GoogleSignIn from '@/components/dashboard/login/google';
+import RandomQuote from '@/components/dashboard/login/quote';
 import { Card, CardContent } from '@/components/ui/card';
 import { getSession } from '@/lib/auth/server';
-
-import GoogleSignIn from '@/components/dashboard/login/google';
 
 export default async function Home() {
   const session = await getSession();
@@ -34,9 +34,9 @@ export default async function Home() {
                     alt="Logo"
                     className="mb-2"
                   />
-                  <h1 className="text-2xl font-bold">Welcome back</h1>
+                  <h1 className="text-2xl font-bold">DOST SA USC</h1>
                   <p className="text-muted-foreground text-balance">
-                    Sign In to continue.
+                    Welcome Iskolar ng Bayan!
                   </p>
                 </div>
                 <LoginForm />
@@ -53,9 +53,8 @@ export default async function Home() {
               </div>
             </CardContent>
           </Card>
-          <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-            By clicking sign in, you agree to our{' '}
-            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+          <div className="text-muted-foreground *:[a]:hover:text-primary mt-2 text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+            <RandomQuote />
           </div>
         </div>
       </div>

@@ -77,3 +77,33 @@ export async function getAllUserEmails() {
     throw error;
   }
 }
+
+export async function doesUserEmailExist(email: string): Promise<boolean> {
+  try {
+    const result = await db
+      .select({ email: user.email })
+      .from(user)
+      .where(eq(user.email, email))
+      .limit(1);
+
+    return result.length > 0;
+  } catch (error) {
+    console.error('Error checking if user email exists:', error);
+    throw error;
+  }
+}
+
+export async function getUserIdByEmail(email: string) {
+  try {
+    const result = await db
+      .select({ userId: user.id })
+      .from(user)
+      .where(eq(user.email, email))
+      .limit(1);
+
+    return result.length > 0 ? result[0].userId : null;
+  } catch (error) {
+    console.error('Error fetching user ID by email:', error);
+    throw error;
+  }
+}

@@ -153,3 +153,16 @@ export const stipend = pgTable('stipend', {
   authorPosition: text('author_position').notNull(),
   authorImageURL: text('author_image_url').notNull(),
 }).enableRLS();
+
+// export const forgotSessions = pgTable('forgot_sessions', {
+//   tokenHash: text('token_hash').primaryKey(),
+//   userId: text('user_id')
+//     .notNull()
+//     .references(() => user.id, { onDelete: 'cascade' }),
+//   createdAt: timestamp('created_at')
+//     .$defaultFn(() => /* @__PURE__ */ new Date())
+//     .notNull(),
+//   expiresAt: timestamp('expires_at') // + now + 15 mins
+//     .$defaultFn(() => /* @__PURE__ */ new Date(Date.now() + 15 * 60 * 1000))
+//     .notNull(),
+// }).enableRLS();
