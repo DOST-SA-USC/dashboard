@@ -24,3 +24,23 @@ export const passwordChangedTemplate = async (email: string) => {
     `
   );
 };
+
+export const announcementEmailTemplate = async ({
+  recipients,
+  title,
+  html,
+}: {
+  recipients: string[];
+  title: string;
+  html: string;
+}) => {
+  await sendEmail(
+    {
+      to: process.env.NEXT_PUBLIC_EMAIL_TO!,
+      bcc: recipients,
+    },
+    'New Announcement',
+    title,
+    html
+  );
+};

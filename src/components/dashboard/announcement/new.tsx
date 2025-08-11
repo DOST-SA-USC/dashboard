@@ -20,11 +20,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { announcementEmailTemplate } from '@/data/emails';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { createAnnouncement } from '@/lib/db/announcements';
 import { replaceBlobUrls } from '@/lib/db/storage';
 import { getAllUserEmails } from '@/lib/db/users';
-import { sendEmail } from '@/lib/email';
 import { tiptapToHTML } from '@/lib/tiptap-to-html';
 import { useUserStore } from '@/stores/userStore';
 import { AnnouncementType } from '@/type';
@@ -87,14 +87,11 @@ const NewAnnouncement = (props: {
     const recipients = await getAllUserEmails();
 
     toast.promise(
-      sendEmail(
-        {
-          to: process.env.NEXT_PUBLIC_EMAIL_TO!,
-          bcc: recipients,
-        },
-        `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
-        tiptapToHTML(newContent)
-      ),
+      announcementEmailTemplate({
+        recipients: recipients,
+        title: `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
+        html: tiptapToHTML(newContent),
+      }),
       {
         loading: 'Emailing recipients, might take a while...',
         success: 'Email sent successfully!',
