@@ -4,10 +4,9 @@ import { getUserDataByUscID } from '@/lib/db/users';
 
 export async function GET(
   request: Request,
-  context: Promise<{ params: { usc_id: string } }>
+  context: { params: Promise<{ usc_id: string }> }
 ) {
-  const { params } = await context;
-  const { usc_id } = await params;
+  const { usc_id } = await context.params;
 
   const headersInstance = await headers();
   const authorization = headersInstance.get('authorization');
