@@ -1,13 +1,13 @@
 import { sendEmail } from '@/lib/email';
 
-export const resetPasswordTemplate = async (email: string, token: string) => {
+export const resetPasswordTemplate = async (email: string, url: string) => {
   await sendEmail(
     { to: email },
     'Forgot Password',
     'Reset Password',
     `
       <p>Please click the link below to reset your password:</p>
-      <a href="${process.env.NEXT_PUBLIC_BASE_URL}/forgot/${token}">Reset Password</a>
+      <a href="${url}">Reset Password</a>
       <p>If you did not request a password reset, please ignore this email.</p>
     `
   );

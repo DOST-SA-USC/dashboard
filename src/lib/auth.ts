@@ -14,8 +14,9 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     signUp: false,
-    sendResetPassword: async ({ user, token }) => {
-      await resetPasswordTemplate(user.email, token);
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url }) => {
+      await resetPasswordTemplate(user.email, url);
     },
     onPasswordReset: async ({ user }) => {
       await passwordChangedTemplate(user.email);

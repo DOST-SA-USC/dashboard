@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -8,6 +8,7 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {
+  Card,
   CardContent,
   CardDescription,
   CardFooter,
@@ -27,6 +28,8 @@ import { Label } from '@/components/ui/label';
 import { resetPassword } from '@/lib/auth/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import Invalid from '@/components/dashboard/forgot/invalid';
+
 const formSchema = z
   .object({
     password: z
@@ -43,9 +46,13 @@ const formSchema = z
     path: ['confirmPassword'],
   });
 
-const Content = (props: { token: string }) => {
+const Content = () => {
+  const params = useSearchParams();
   const router = useRouter();
   const [show, setShow] = useState(false);
+
+  const token = params.get('token');
+  const error = params.get('error');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,13 +62,17 @@ const Content = (props: { token: string }) => {
     },
   });
 
+  if (!token || error) {
+    return <Invalid />;
+  }
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { password } = values;
 
     toast.promise(
       resetPassword({
         newPassword: password,
-        token: props.token,
+        token: token as string,
       }),
       {
         loading: 'Changing password...',
@@ -83,7 +94,7 @@ const Content = (props: { token: string }) => {
   }
 
   return (
-    <>
+    <Card className="w-[90%] md:w-md">
       <CardHeader>
         <CardTitle>Reset Password</CardTitle>
         <CardDescription>
@@ -146,7 +157,7 @@ const Content = (props: { token: string }) => {
           Submit
         </Button>
       </CardFooter>
-    </>
+    </Card>
   );
 };
 

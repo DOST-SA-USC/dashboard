@@ -51,6 +51,7 @@ const Forgot = () => {
 
     await requestPasswordReset({
       email: email,
+      redirectTo: '/forgot',
     });
 
     await resetForm();
