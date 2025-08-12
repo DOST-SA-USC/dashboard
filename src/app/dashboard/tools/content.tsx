@@ -13,7 +13,7 @@ const Content = () => {
   }
   return (
     <div className="h-full w-full p-2">
-      <div className="border-border bg-muted/20 text-muted-foreground flex h-full w-full flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed">
+      <div className="border-border bg-muted/20 text-secondary/40 flex h-full w-full flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed">
         {user.role !== 'student' ? (
           <>
             <Meh className="size-16 sm:size-18 md:size-20" />
