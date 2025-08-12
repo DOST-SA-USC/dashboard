@@ -15,8 +15,9 @@ export const auth = betterAuth({
     enabled: true,
     signUp: false,
     revokeSessionsOnPasswordReset: true,
+    resetPasswordTokenExpiresIn: 300, // 5 minutes in seconds
     sendResetPassword: async ({ user, url }) => {
-      await resetPasswordTemplate(user.email, url);
+      await resetPasswordTemplate(user.email, user.name, url);
     },
     onPasswordReset: async ({ user }) => {
       await passwordChangedTemplate(user.email);
