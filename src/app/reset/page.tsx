@@ -54,6 +54,8 @@ const Content = () => {
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [isPending, setIsPending] = useState(false);
+
   useEffect(() => {
     setToken(params.get('token'));
     setError(params.get('error'));
@@ -74,6 +76,7 @@ const Content = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { password } = values;
 
+    setIsPending(true);
     toast.promise(
       resetPassword({
         newPassword: password,
@@ -85,7 +88,10 @@ const Content = () => {
           router.push('/');
           return 'Password changed successfully';
         },
-        error: (err) => err,
+        error: (err) => {
+          setIsPending(false);
+          return err;
+        },
       }
     );
   }
@@ -158,7 +164,12 @@ const Content = () => {
         </div>
       </CardContent>
       <CardFooter className="w-full justify-end">
-        <Button form="form" type="submit" className="w-full md:w-auto">
+        <Button
+          form="form"
+          type="submit"
+          className="w-full md:w-auto"
+          disabled={isPending}
+        >
           Submit
         </Button>
       </CardFooter>
