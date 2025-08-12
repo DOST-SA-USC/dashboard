@@ -5,7 +5,7 @@ import {
   BookOpen,
   IdCardLanyard,
   Ellipsis,
-  ToolCase,
+  Hammer,
   Wallet,
 } from 'lucide-react';
 
@@ -60,7 +60,7 @@ export const NAV_DATA = {
     {
       title: 'Tools',
       href: '/dashboard/tools',
-      icon: ToolCase,
+      icon: Hammer,
       studentsNotAllowed: true,
     },
     {
