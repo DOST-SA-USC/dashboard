@@ -28,7 +28,7 @@ export default async function RootLayout({
       <UserHydration user={userData as UserType} />
 
       {userData ? (
-        <div className="flex h-screen w-full gap-2 sm:h-[90vh] sm:w-[90%] md:h-[80vh] md:w-4/5 lg:h-[70vh] lg:w-[70%]">
+        <div className="flex h-screen w-full gap-2 sm:h-[90vh] sm:w-[90vw] md:h-[650px] md:w-4xl lg:w-[1100px]">
           <Card className="hidden h-fit flex-col items-center gap-2 p-1 shadow-sm md:flex">
             <Nav />
           </Card>

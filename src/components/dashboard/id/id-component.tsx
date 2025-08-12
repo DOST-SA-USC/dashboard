@@ -19,7 +19,7 @@ const IDComponent = React.forwardRef<
   return (
     <div
       ref={ref}
-      className="flex h-full w-full flex-col items-center justify-center gap-4 p-2 text-[#334FA1] 2xl:flex-row"
+      className="flex h-full w-full flex-col items-center justify-center gap-4 p-2 text-[#334FA1] lg:flex-row lg:overflow-x-auto"
     >
       <HoverCard>
         <div
