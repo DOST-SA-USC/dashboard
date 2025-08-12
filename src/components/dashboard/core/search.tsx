@@ -13,13 +13,22 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from '@/components/ui/command';
+import { useUserStore } from '@/stores/userStore';
 
 import type { NavDataType } from '@/data/core';
 
 const SearchComponent = (props: { data: NavDataType }) => {
+  const { user } = useUserStore();
   const [open, setOpen] = useState(false);
+
+  if (!user) return null;
+
+  const navItems = props.data.menu.filter((item) => {
+    if (user.role !== 'student') return true;
+    return !item.studentsNotAllowed;
+  });
+
   return (
     <>
       <Button
@@ -37,7 +46,7 @@ const SearchComponent = (props: { data: NavDataType }) => {
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Main Navigation">
-              {props.data.menu.map((item) => {
+              {navItems.map((item) => {
                 return (
                   <CommandItem key={item.title} asChild>
                     <Link
@@ -52,25 +61,7 @@ const SearchComponent = (props: { data: NavDataType }) => {
               })}
             </CommandGroup>
 
-            <CommandSeparator />
-
-            <CommandGroup heading="Resources">
-              <CommandItem asChild>
-                <Link
-                  href={props.data.resources.href}
-                  onClick={() => setOpen(false)}
-                  className="flex flex-col items-start"
-                >
-                  <span className="flex items-center gap-2">
-                    {props.data.resources.title}
-                  </span>
-                </Link>
-              </CommandItem>
-            </CommandGroup>
-
-            <CommandSeparator />
-
-            <CommandGroup heading="Socials">
+            <CommandGroup heading="More">
               {props.data.socials.items.map((item) => {
                 return (
                   <CommandItem key={item.title} asChild>

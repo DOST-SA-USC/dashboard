@@ -4,8 +4,9 @@ import {
   Calendar,
   BookOpen,
   IdCardLanyard,
-  PhilippinePeso,
   Ellipsis,
+  ToolCase,
+  Wallet,
 } from 'lucide-react';
 
 import {
@@ -17,36 +18,60 @@ import {
 
 export const BRAND_DATA = {
   title: 'DOST SA USC',
-  subtitle: 'Organization Tracker',
+  subtitle: 'Global Tracker',
   logo: '/logo.png',
-  alt: 'DOST SA USC Logo',
+  alt: 'Logo',
   fallback: 'DSU',
   href: '/dashboard',
 };
 
 export const NAV_DATA = {
   menu: [
-    { title: 'Home', href: '/dashboard', icon: Home },
-    { title: 'Stipend', href: '/dashboard/stipend', icon: PhilippinePeso },
-    { title: 'Scholar ID', href: '/dashboard/id', icon: IdCardLanyard },
+    {
+      title: 'Home',
+      href: '/dashboard',
+      icon: Home,
+      studentsNotAllowed: false,
+    },
+    {
+      title: 'Stipend',
+      href: '/dashboard/stipend',
+      icon: Wallet,
+      studentsNotAllowed: false,
+    },
+    {
+      title: 'Scholar ID',
+      href: '/dashboard/id',
+      icon: IdCardLanyard,
+      studentsNotAllowed: false,
+    },
     {
       title: 'Announcements',
       href: '/dashboard/announcements',
       icon: Megaphone,
+      studentsNotAllowed: false,
     },
     {
       title: 'Calendar',
       href: '/dashboard/calendar',
       icon: Calendar,
+      studentsNotAllowed: false,
+    },
+    {
+      title: 'Tools',
+      href: '/dashboard/tools',
+      icon: ToolCase,
+      studentsNotAllowed: true,
+    },
+    {
+      title: 'Resources',
+      href: '/dashboard/resources',
+      icon: BookOpen,
+      studentsNotAllowed: false,
     },
   ],
-  resources: {
-    title: 'Resources',
-    icon: BookOpen,
-    href: '#',
-  },
   socials: {
-    title: 'Socials',
+    title: 'More',
     icon: Ellipsis,
     items: [
       {

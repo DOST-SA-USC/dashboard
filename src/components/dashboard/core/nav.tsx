@@ -16,15 +16,23 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-
 import { NAV_DATA } from '@/data/core';
+import { useUserStore } from '@/stores/userStore';
 
 const Nav = () => {
+  const { user } = useUserStore();
   const pathname = usePathname();
+
+  if (!user) return null;
+
+  const navItems = NAV_DATA.menu.filter((item) => {
+    if (user.role !== 'student') return true;
+    return !item.studentsNotAllowed;
+  });
 
   return (
     <>
-      {NAV_DATA.menu.map((item) => (
+      {navItems.map((item) => (
         <Tooltip key={item.title}>
           <TooltipTrigger asChild className="h-full w-full">
             <Button
@@ -42,19 +50,6 @@ const Nav = () => {
           </TooltipContent>
         </Tooltip>
       ))}
-
-      <hr className="w-4/5" />
-
-      <Tooltip>
-        <TooltipTrigger asChild className="h-full w-full">
-          <Button variant="ghost" className="h-full w-full py-3">
-            <NAV_DATA.resources.icon />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="right">
-          <p>{NAV_DATA.resources.title}</p>
-        </TooltipContent>
-      </Tooltip>
 
       <DropdownMenu>
         <Tooltip>
