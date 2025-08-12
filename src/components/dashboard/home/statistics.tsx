@@ -11,7 +11,19 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 
-const Statistics = () => {
+import {
+  getProgramCounts,
+  getYearLevelCounts,
+  getScholarshipCounts,
+} from '@/lib/db/users';
+
+const Statistics = async () => {
+  const [programCounts, yearLevelCounts, scholarshipCounts] = await Promise.all(
+    [getProgramCounts(), getYearLevelCounts(), getScholarshipCounts()]
+  );
+
+  console.log([programCounts, yearLevelCounts, scholarshipCounts]);
+
   return (
     <>
       <Card>
@@ -22,7 +34,7 @@ const Statistics = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <BarChart />
+          <BarChart data={programCounts} />
         </CardContent>
       </Card>
 
@@ -35,7 +47,7 @@ const Statistics = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <PieChart />
+            <PieChart data={yearLevelCounts} />
           </CardContent>
         </Card>
         <Card className="h-full w-full">
@@ -46,7 +58,7 @@ const Statistics = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <RadarChart />
+            <RadarChart data={scholarshipCounts} />
           </CardContent>
         </Card>
       </div>

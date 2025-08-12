@@ -1,6 +1,6 @@
 'use server';
 
-import { eq } from 'drizzle-orm';
+import { and, eq, gte, lte } from 'drizzle-orm';
 
 import { events } from '@/db/schema';
 
@@ -48,6 +48,34 @@ export const deleteEventById = async (eventID: string) => {
     return true;
   } catch (error) {
     console.error('Error deleting event:', error);
+    throw error;
+  }
+};
+
+export const getEventsCountThisWeek = async () => {
+  try {
+    const now = new Date();
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+
+    const result = await db
+      .select()
+      .from(events)
+      .where(
+        and(
+          gte(events.startDate, startOfWeek.toISOString()),
+          lte(events.startDate, endOfWeek.toISOString())
+        )
+      );
+
+    return result.length;
+  } catch (error) {
+    console.error('Error counting events this week:', error);
     throw error;
   }
 };

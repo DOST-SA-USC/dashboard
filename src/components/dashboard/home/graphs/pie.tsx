@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Label, Pie, PieChart } from 'recharts';
+import { Label, Pie, PieChart, Cell } from 'recharts';
 
 import {
   ChartConfig,
@@ -9,14 +9,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-
-const chartData = [
-  { year: 'Year 1', count: 120, fill: 'var(--chart-1)' },
-  { year: 'Year 2', count: 95, fill: 'var(--chart-2)' },
-  { year: 'Year 3', count: 80, fill: 'var(--chart-3)' },
-  { year: 'Year 4', count: 65, fill: 'var(--chart-4)' },
-  { year: 'Year 5', count: 50, fill: 'var(--chart-5)' },
-];
 
 const chartConfig = {
   count: {
@@ -44,10 +36,23 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function PieChartComponent() {
+const chartColors = [
+  'var(--chart-1)',
+  'var(--chart-2)',
+  'var(--chart-3)',
+  'var(--chart-4)',
+  'var(--chart-5)',
+];
+
+export default function PieChartComponent(props: {
+  data: { year: string | null; count: number }[];
+}) {
   const totalCount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.count, 0);
-  }, []);
+    return props.data.reduce(
+      (acc, curr) => Number(acc) + Number(curr.count),
+      0
+    );
+  }, [props.data]);
 
   return (
     <ChartContainer
@@ -60,12 +65,18 @@ export default function PieChartComponent() {
           content={<ChartTooltipContent hideLabel />}
         />
         <Pie
-          data={chartData}
+          data={props.data}
           dataKey="count"
           nameKey="year"
           innerRadius={60}
           strokeWidth={5}
         >
+          {props.data.map((_, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={chartColors[index % chartColors.length]}
+            />
+          ))}
           <Label
             content={({ viewBox }) => {
               if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {

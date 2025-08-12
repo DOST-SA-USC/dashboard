@@ -9,14 +9,6 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
-const chartData = [
-  { type: 'MERIT', count: 120 },
-  { type: 'RA 7687', count: 95 },
-  { type: 'JLSS RA 7687', count: 80 },
-  { type: 'JLSS MERIT', count: 65 },
-  { type: 'JLSS RA 10612', count: 50 },
-];
-
 const chartConfig = {
   count: {
     label: 'Number of Scholars',
@@ -24,13 +16,15 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function RadarChartComponent() {
+export default function RadarChartComponent(props: {
+  data: { type: string | null; count: number }[];
+}) {
   return (
     <ChartContainer
       config={chartConfig}
       className="mx-auto aspect-square h-full max-h-[250px] w-full"
     >
-      <RadarChart data={chartData}>
+      <RadarChart data={props.data}>
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         <PolarAngleAxis dataKey="type" />
         <PolarGrid />

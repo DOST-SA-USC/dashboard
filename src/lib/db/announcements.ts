@@ -1,6 +1,6 @@
 'use server';
 
-import { desc, eq, ilike, and, count } from 'drizzle-orm';
+import { and, count, desc, eq, gte, ilike, lt } from 'drizzle-orm';
 
 import { announcement } from '@/db/schema';
 
@@ -104,6 +104,31 @@ export const getAnnouncements = async (
     return { announcements: data ?? [], size: totalPages };
   } catch (error) {
     console.error('Error fetching announcements:', error);
+    throw error;
+  }
+};
+
+export const getTodaysAnnouncementCount = async (): Promise<number> => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    const result = await db
+      .select({ count: count(announcement.id) })
+      .from(announcement)
+      .where(
+        and(
+          gte(announcement.createdAt, today),
+          lt(announcement.createdAt, tomorrow)
+        )
+      );
+
+    return result[0]?.count ?? 0;
+  } catch (error) {
+    console.error("Error getting today's announcement count:", error);
     throw error;
   }
 };

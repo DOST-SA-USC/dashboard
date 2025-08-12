@@ -2,7 +2,7 @@
 
 import { db } from '../db';
 import { userData, user } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import { uploadUserImage } from '@/lib/db/storage';
 
@@ -129,6 +129,66 @@ export async function getUserDataByUscID(uscID: string) {
     return result[0] || null;
   } catch (error) {
     console.error('Error fetching user data by USC ID:', error);
+    throw error;
+  }
+}
+
+export async function getProgramCounts() {
+  try {
+    const result = await db
+      .select({
+        program: userData.program,
+        count: sql<number>`COUNT(*)`,
+      })
+      .from(userData)
+      .groupBy(userData.program);
+
+    return result.map((row) => ({
+      program: row.program,
+      count: Number(row.count),
+    }));
+  } catch (error) {
+    console.error('Error fetching program counts:', error);
+    throw error;
+  }
+}
+
+export async function getYearLevelCounts() {
+  try {
+    const result = await db
+      .select({
+        yearLevel: userData.yearLevel,
+        count: sql<number>`COUNT(*)`,
+      })
+      .from(userData)
+      .groupBy(userData.yearLevel);
+
+    return result.map((row) => ({
+      year: `Year ${row.yearLevel}`,
+      count: Number(row.count),
+    }));
+  } catch (error) {
+    console.error('Error fetching year level counts:', error);
+    throw error;
+  }
+}
+
+export async function getScholarshipCounts() {
+  try {
+    const result = await db
+      .select({
+        type: userData.scholarshipType,
+        count: sql<number>`COUNT(*)`,
+      })
+      .from(userData)
+      .groupBy(userData.scholarshipType);
+
+    return result.map((row) => ({
+      type: row.type,
+      count: Number(row.count),
+    }));
+  } catch (error) {
+    console.error('Error fetching scholarship counts:', error);
     throw error;
   }
 }
