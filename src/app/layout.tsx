@@ -5,8 +5,8 @@ import { ThemeProvider } from '@/components/ui/theme-provider';
 
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: 'DOST SA USC Tracker',
-  description: 'Official organization tracker for DOST SA USC.',
+  title: 'DOST SA USC',
+  description: 'Official global tracker for DOST SA USC.',
 };
 
 export default function RootLayout({

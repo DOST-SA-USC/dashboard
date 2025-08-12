@@ -99,7 +99,7 @@ export default function PieChartComponent(props: {
                       y={(viewBox.cy || 0) + 24}
                       className="fill-muted-foreground"
                     >
-                      Students
+                      {totalCount === 1 ? 'Student' : 'Students'}
                     </tspan>
                   </text>
                 );

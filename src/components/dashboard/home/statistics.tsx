@@ -22,8 +22,6 @@ const Statistics = async () => {
     [getProgramCounts(), getYearLevelCounts(), getScholarshipCounts()]
   );
 
-  console.log([programCounts, yearLevelCounts, scholarshipCounts]);
-
   return (
     <>
       <Card>
@@ -41,9 +39,9 @@ const Statistics = async () => {
       <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
         <Card className="h-full w-full">
           <CardHeader>
-            <CardTitle>Year Distribution</CardTitle>
+            <CardTitle>Year Level Distribution</CardTitle>
             <CardDescription>
-              Scholar count across different years.
+              Scholar count across different years levels.
             </CardDescription>
           </CardHeader>
           <CardContent>
