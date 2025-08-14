@@ -25,8 +25,7 @@ const SearchComponent = (props: { data: NavDataType }) => {
   if (!user) return null;
 
   const navItems = props.data.menu.filter((item) => {
-    if (user.role !== 'student') return true;
-    return !item.studentsNotAllowed;
+    return !item.notAllowed?.includes(user.role);
   });
 
   return (
