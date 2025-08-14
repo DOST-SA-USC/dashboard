@@ -23,8 +23,8 @@ const Content = () => {
           </>
         ) : (
           <>
-            <Frown className="size-16 sm:size-18 md:size-20" />
-            <h1 className="text-lg font-extrabold sm:text-xl md:text-2xl">
+            <Frown className="text-destructive/40 size-16 sm:size-18 md:size-20" />
+            <h1 className="text-destructive/40 text-lg font-extrabold sm:text-xl md:text-2xl">
               Access Denied
             </h1>
           </>

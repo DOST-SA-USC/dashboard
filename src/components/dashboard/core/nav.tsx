@@ -26,8 +26,7 @@ const Nav = () => {
   if (!user) return null;
 
   const navItems = NAV_DATA.menu.filter((item) => {
-    if (user.role !== 'student') return true;
-    return !item.studentsNotAllowed;
+    return !item.notAllowed?.includes(user.role);
   });
 
   return (
