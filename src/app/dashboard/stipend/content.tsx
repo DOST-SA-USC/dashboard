@@ -5,13 +5,7 @@ import React from 'react';
 import OverviewCard from '@/components/dashboard/home/overview-card';
 import { STIPEND_DETAILS, STIPEND_OVERVIEW } from '@/data/stipend';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Update from '@/components/dashboard/stipend/update';
 
 import {
@@ -22,7 +16,7 @@ import {
 
 import type { StipendType } from '@/type';
 
-import { getUserInitials, formatDateStartEnd } from '@/lib/helpers';
+import { getUserInitials, getRelativeDate } from '@/lib/helpers';
 
 const Content = (props: { data: StipendType }) => {
   return (
@@ -43,8 +37,8 @@ const Content = (props: { data: StipendType }) => {
       </div>
 
       <div className="flex h-full w-full flex-col justify-between gap-4 md:flex-row">
-        <Card className="h-full w-full gap-4 pt-0">
-          <CardHeader className="flex w-full items-center justify-between p-4">
+        <Card className="h-full w-full gap-4 py-0">
+          <div className="border-border m-0 flex w-full items-center justify-between border-b px-4 py-2">
             <div className="flex items-center gap-3">
               <Avatar className="bg-accent flex size-8 items-center justify-center text-base font-medium">
                 <AvatarImage
@@ -59,17 +53,17 @@ const Content = (props: { data: StipendType }) => {
                 <p className="text-base leading-5 font-semibold">
                   {props.data.authorName}
                 </p>
-                <span className="text-xs">{props.data.authorPosition}</span>
+                <span className="text-[10px] md:text-xs">
+                  {props.data.authorPosition}
+                </span>
               </div>
             </div>
             <span className="text-muted-foreground text-xs">
-              {formatDateStartEnd(props.data.createdAt as string)}
+              {getRelativeDate(new Date(props.data.createdAt ?? ''))}
             </span>
-          </CardHeader>
+          </div>
 
-          <hr />
-
-          <CardContent className="my-4 flex-1 md:my-0">
+          <CardContent className="flex-1 text-sm md:my-0 md:text-base">
             <h1 className="font-semibold">Remarks:</h1>
             <ul className="list-disc pl-5">
               {props.data.remarks.map((remark, idx) => (
@@ -78,11 +72,9 @@ const Content = (props: { data: StipendType }) => {
             </ul>
           </CardContent>
 
-          <hr />
-
-          <CardFooter className="text-muted-foreground flex !justify-start text-xs md:text-sm">
+          <div className="text-muted-foreground border-border flex !justify-start border-t px-4 py-2 text-xs md:text-sm">
             {STIPEND_DETAILS.note}
-          </CardFooter>
+          </div>
         </Card>
 
         <div className="flex h-full w-full flex-col gap-2 md:w-2/5">
