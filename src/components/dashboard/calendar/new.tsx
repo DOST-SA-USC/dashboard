@@ -6,7 +6,6 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
@@ -34,6 +33,7 @@ import { useUserStore } from '@/stores/userStore';
 import type { EventType } from '@/type';
 
 import { EVENT_TYPE_OPTIONS } from '@/data/core';
+import { ActionAlert } from '../ui';
 
 const eventSchema = z
   .object({
@@ -129,7 +129,7 @@ const New = (props: {
   }
 
   return (
-    <Dialog open={props.open} onOpenChange={props.onOpenChange}>
+    <Dialog open={props.open} onOpenChange={() => null}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>New Event</DialogTitle>
@@ -138,11 +138,7 @@ const New = (props: {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form
-            id="new-event-form"
-            onSubmit={(e) => form.handleSubmit(onSubmit, onError)(e)}
-            className="flex w-full flex-col gap-2"
-          >
+          <form className="flex w-full flex-col gap-2">
             <FormField
               control={form.control}
               name="title"
@@ -232,19 +228,30 @@ const New = (props: {
           </form>
         </Form>
         <DialogFooter>
-          <Button
-            variant="outline"
-            type="button"
-            onClick={() => {
-              props.onOpenChange(false);
+          <ActionAlert
+            button={{
+              label: 'Close',
+              variant: 'outline',
+              onClick: () => props.onOpenChange(false),
             }}
-          >
-            Close
-          </Button>
-          <Button form="new-event-form" type="submit">
-            <Save />
-            Save
-          </Button>
+            body={{
+              title: 'Close',
+              description: 'Are you sure you want to close?',
+            }}
+          />
+          <ActionAlert
+            button={{
+              label: 'Save',
+              variant: 'default',
+              onClick: () => form.handleSubmit(onSubmit, onError)(),
+              disable: !form.formState.isValid || form.formState.isSubmitting,
+              icon: Save,
+            }}
+            body={{
+              title: 'Save Event',
+              description: 'Are you sure you want to save the event details?',
+            }}
+          />
         </DialogFooter>
       </DialogContent>
     </Dialog>
