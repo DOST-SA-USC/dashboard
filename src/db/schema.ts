@@ -8,6 +8,8 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 
+import { getManilaTime } from '@/lib/helpers';
+
 // Better Auth Schemas
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -18,10 +20,10 @@ export const user = pgTable('user', {
     .notNull(),
   image: text('image'),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   updatedAt: timestamp('updated_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
 }).enableRLS();
 
@@ -61,11 +63,11 @@ export const verification = pgTable('verification', {
   identifier: text('identifier').notNull(),
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at').notNull(),
-  createdAt: timestamp('created_at').$defaultFn(
-    () => /* @__PURE__ */ new Date()
+  createdAt: timestamp('created_at').$defaultFn(() =>
+    /* @__PURE__ */ getManilaTime()
   ),
-  updatedAt: timestamp('updated_at').$defaultFn(
-    () => /* @__PURE__ */ new Date()
+  updatedAt: timestamp('updated_at').$defaultFn(() =>
+    /* @__PURE__ */ getManilaTime()
   ),
 }).enableRLS();
 
@@ -90,10 +92,10 @@ export const userData = pgTable('user_data', {
   role: text('role').notNull().default('student'),
   position: text('position'),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   updatedAt: timestamp('updated_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
 }).enableRLS();
 
@@ -104,7 +106,7 @@ export const announcement = pgTable('announcements', {
   type: text('type').notNull(),
   urgent: boolean('urgent').notNull().default(false),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   authorId: text('author_id')
     .references(() => user.id, {
@@ -124,7 +126,7 @@ export const events = pgTable('events', {
   startDate: date('start_date').notNull(),
   endDate: date('end_date'),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   authorId: text('author_id')
     .references(() => user.id, {
@@ -142,7 +144,7 @@ export const stipend = pgTable('stipend', {
   forecast: text('forecast').notNull(),
   remarks: text('remarks').array().notNull(),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   authorId: text('author_id')
     .references(() => user.id, {
@@ -160,10 +162,10 @@ export const resources = pgTable('resources', {
   content: jsonb('content'),
   link: text('link'),
   createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   updatedAt: timestamp('updated_at')
-    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
     .notNull(),
   authorId: text('author_id')
     .references(() => user.id, {

@@ -1,3 +1,7 @@
+import { toZonedTime } from 'date-fns-tz';
+
+export const getManilaTime = () => toZonedTime(new Date(), 'Asia/Manila');
+
 export function capitalizeFirstLetter(str: string): string {
   if (!str) return '';
   return str

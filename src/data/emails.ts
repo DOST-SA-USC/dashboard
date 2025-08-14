@@ -49,6 +49,12 @@ export const resetPasswordTemplate = async (
 };
 
 export const passwordChangedTemplate = async (email: string) => {
+  const manilaTime = new Date().toLocaleString('en-PH', {
+    timeZone: 'Asia/Manila',
+    dateStyle: 'full',
+    timeStyle: 'short',
+  });
+
   await sendEmail(
     { to: email },
     'Password Changed',
@@ -59,7 +65,7 @@ export const passwordChangedTemplate = async (email: string) => {
 
         <p>Hello,</p>
 
-        <p>Your account password was successfully changed on <strong>${new Date().toLocaleString()}</strong>.</p>
+        <p>Your account password was successfully changed on <strong>${manilaTime}</strong>.</p>
 
         <p>If <strong>you</strong> made this change, no further action is needed.</p>
 
