@@ -41,7 +41,7 @@ const Statistics = async () => {
           <CardHeader>
             <CardTitle>Year Level Distribution</CardTitle>
             <CardDescription>
-              Scholar count across different years levels.
+              Scholar count across different year levels.
             </CardDescription>
           </CardHeader>
           <CardContent>
