@@ -10,3 +10,15 @@
 .fc .fc-scrollgrid-section-body th {
   border-color: var(--border) !important;
 }
+
+.fc-popover-header,
+.fc-popover-title {
+  color: var(--color-primary) !important;
+  background-color: var(--color-popover) !important;
+}
+
+.fc-popover,
+.fc-more-popover {
+  background-color: var(--color-popover) !important;
+  border-color: var(--border) !important;
+}

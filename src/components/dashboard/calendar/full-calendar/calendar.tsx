@@ -49,7 +49,7 @@ const Calendar = (props: {
         </div>
       </div>
 
-      <div className="h-full w-full md:p-2">
+      <div className="h-full w-full">
         <FullCalendar
           ref={calendarRef}
           plugins={[dayGridPlugin, interactionPlugin]}
