@@ -61,11 +61,14 @@ interface StipendType extends AuthorType {
   createdAt?: string | Date;
 }
 
+type TabType = 'guides' | 'links' | 'documents' | 'officer';
+
 export type {
   FormType,
   UserRoles,
   AnnouncementType,
   EventType,
+  TabType,
   TimestampString,
   UserType,
   AuthorType,

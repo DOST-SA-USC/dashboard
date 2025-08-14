@@ -154,15 +154,23 @@ export const stipend = pgTable('stipend', {
   authorImageURL: text('author_image_url').notNull(),
 }).enableRLS();
 
-// export const forgotSessions = pgTable('forgot_sessions', {
-//   tokenHash: text('token_hash').primaryKey(),
-//   userId: text('user_id')
-//     .notNull()
-//     .references(() => user.id, { onDelete: 'cascade' }),
-//   createdAt: timestamp('created_at')
-//     .$defaultFn(() => /* @__PURE__ */ new Date())
-//     .notNull(),
-//   expiresAt: timestamp('expires_at') // + now + 15 mins
-//     .$defaultFn(() => /* @__PURE__ */ new Date(Date.now() + 15 * 60 * 1000))
-//     .notNull(),
-// }).enableRLS();
+export const resources = pgTable('resources', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  type: text('type').notNull(),
+  content: jsonb('content'),
+  link: text('link'),
+  createdAt: timestamp('created_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  updatedAt: timestamp('updated_at')
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  authorId: text('author_id')
+    .references(() => user.id, {
+      onDelete: 'set null',
+    })
+    .notNull(),
+  authorName: text('author_name').notNull(),
+  authorPosition: text('author_position').notNull(),
+  authorImageURL: text('author_image_url').notNull(),
+}).enableRLS();
