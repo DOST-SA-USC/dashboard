@@ -1,5 +1,5 @@
 'use client';
-import { Printer } from 'lucide-react';
+import { Frown, Printer } from 'lucide-react';
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 
@@ -18,7 +18,16 @@ const Content = () => {
     documentTitle: user ? user.uscID : 'ID_CARD',
   });
 
-  if (!user) return null;
+  if (!user || user.role === 'faculty') {
+    return (
+      <div className="border-border bg-muted/20 text-destructive/40 flex h-full w-full flex-1 flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed">
+        <Frown className="size-16 sm:size-18 md:size-20" />
+        <h1 className="text-lg font-extrabold sm:text-xl md:text-2xl">
+          Access Denied
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-auto w-full flex-col gap-4 xl:flex-row">
