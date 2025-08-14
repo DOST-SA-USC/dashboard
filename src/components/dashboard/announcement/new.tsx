@@ -20,8 +20,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { announcementEmailTemplate } from '@/data/emails';
 import { useIsMobile } from '@/hooks/use-mobile';
+import sendBatchedEmails from '@/lib/batchEmail';
 import { createAnnouncement } from '@/lib/db/announcements';
 import { replaceBlobUrls } from '@/lib/db/storage';
 import { getAllUserEmails } from '@/lib/db/users';
@@ -87,10 +87,11 @@ const NewAnnouncement = (props: {
     const recipients = await getAllUserEmails();
 
     toast.promise(
-      announcementEmailTemplate({
+      sendBatchedEmails({
         recipients: recipients,
         title: `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
         html: tiptapToHTML(newContent),
+        isUrgent: isUrgent,
       }),
       {
         loading: 'Emailing recipients, might take a while...',
