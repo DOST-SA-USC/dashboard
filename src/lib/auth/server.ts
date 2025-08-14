@@ -6,15 +6,13 @@ import { auth } from '../auth'; // path to your Better Auth server instance
 
 export const signIn = async (email: string, password: string) => {
   try {
-    const result = await auth.api.signInEmail({
-      body: {
-        email,
-        password,
-      },
-    });
-    return result;
+    const result = await auth.api.signInEmail({ body: { email, password } });
+    return { success: true, data: result };
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'Sign in failed');
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Sign in failed',
+    };
   }
 };
 
