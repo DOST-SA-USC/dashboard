@@ -4,17 +4,19 @@ import { headers } from 'next/headers';
 
 import { auth } from '../auth'; // path to your Better Auth server instance
 
-export async function signIn(email: string, password: string) {
-  const response = await auth.api.signInEmail({
-    body: {
-      email,
-      password,
-    },
-    asResponse: true, // returns a response object instead of data
-  });
-
-  return response;
-}
+export const signIn = async (email: string, password: string) => {
+  try {
+    const result = await auth.api.signInEmail({
+      body: {
+        email,
+        password,
+      },
+    });
+    return result;
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : 'Sign in failed');
+  }
+};
 
 export async function signOut() {
   const response = await auth.api.signOut({

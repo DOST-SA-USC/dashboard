@@ -16,7 +16,7 @@ import {
   FormLabel,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signIn } from '@/lib/auth/user';
+import { signIn } from '@/lib/auth/server';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Forgot from './forgot';
