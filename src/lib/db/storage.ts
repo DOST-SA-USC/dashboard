@@ -3,10 +3,11 @@ import type { Content } from '@tiptap/react';
 
 export async function uploadUserImage(file: File, userId: string) {
   try {
+    const fileName = `${userId}-${Date.now()}`;
     const { data, error } = await supabase.storage
       .from('users')
-      .upload(userId, file, {
-        cacheControl: '120', // 2 mins
+      .upload(fileName, file, {
+        cacheControl: '0',
         upsert: true,
       });
 
@@ -17,7 +18,7 @@ export async function uploadUserImage(file: File, userId: string) {
     if (data) {
       const { data: publicUrlData } = supabase.storage
         .from('users')
-        .getPublicUrl(userId);
+        .getPublicUrl(fileName);
       return publicUrlData.publicUrl;
     }
     throw new Error('No Public URL returned');

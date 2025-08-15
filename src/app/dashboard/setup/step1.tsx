@@ -80,10 +80,11 @@ async function getCroppedImg(imageSrc: string, pixelCrop: Area): Promise<File> {
   });
 }
 
+import type { FormType } from '@/type';
 export default function Form1(props: {
   prev?: () => void;
-  data?: FormValues;
-  update: (arg: FormValues) => void;
+  data?: FormType;
+  update: (arg: FormType) => void;
 }) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

@@ -82,7 +82,7 @@ const Form = (props: { userID: string; user: UserType }) => {
     });
   }
 
-  function handleFormDataChange(data?: FormType) {
+  function handleFormDataChange(data?: Partial<FormType>) {
     // handleNext
     if (step < formSteps.length - 1 && data) {
       setFormData((prev) => ({ ...prev, ...data }));
@@ -132,9 +132,9 @@ const Form = (props: { userID: string; user: UserType }) => {
               {React.createElement(formSteps[step].component, {
                 prev: handlePrev,
                 data: formData,
+                update: handleFormDataChange,
                 formData: formData,
                 userID: props.userID,
-                update: handleFormDataChange,
               })}
             </div>
           </CardContent>

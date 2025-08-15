@@ -34,6 +34,8 @@ export default function UserComponent() {
     toast.promise(signOut(), {
       loading: 'Signing out...',
       success: () => {
+        router.push('/');
+
         setOpenChangePasswordModal(false);
         return 'Signed out successfully!';
       },
@@ -42,8 +44,6 @@ export default function UserComponent() {
         return error.message || 'Sign out failed';
       },
     });
-
-    router.push('/');
   }
 
   return (
