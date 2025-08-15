@@ -29,8 +29,8 @@ const formSchema = z.object({
     .refine((file) => file instanceof File && file.size > 0, {
       message: 'Image is required.',
     })
-    .refine((file) => file instanceof File && file.size <= 500 * 1024, {
-      message: 'Image must be less than 500KB.',
+    .refine((file) => file instanceof File && file.size <= 2 * 1024 * 1024, {
+      message: 'Image must be less than 2MB.',
     }),
 });
 
