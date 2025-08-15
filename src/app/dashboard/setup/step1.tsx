@@ -1,11 +1,15 @@
+'use client';
+
 import { ChevronRight, Upload } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
+import ImageElement from 'next/image';
+import React, { useCallback, useState } from 'react';
+import Cropper, { Area } from 'react-easy-crop';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -15,8 +19,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-import type { FormType } from '@/type';
 
 const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required.'),
@@ -32,12 +34,58 @@ const formSchema = z.object({
     }),
 });
 
-const Form1 = (props: {
+type FormValues = z.infer<typeof formSchema>;
+
+/**
+ * Convert the cropped area to a File
+ */
+async function getCroppedImg(imageSrc: string, pixelCrop: Area): Promise<File> {
+  const image = new Image();
+  image.src = imageSrc;
+  await new Promise<void>((res) => {
+    image.onload = () => res();
+  });
+
+  const canvas = document.createElement('canvas');
+  canvas.width = pixelCrop.width;
+  canvas.height = pixelCrop.height;
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) throw new Error('Could not get canvas context');
+
+  ctx.drawImage(
+    image,
+    pixelCrop.x,
+    pixelCrop.y,
+    pixelCrop.width,
+    pixelCrop.height,
+    0,
+    0,
+    pixelCrop.width,
+    pixelCrop.height
+  );
+
+  return new Promise<File>((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          reject(new Error('Canvas is empty'));
+          return;
+        }
+        resolve(new File([blob], 'cropped.jpg', { type: 'image/jpeg' }));
+      },
+      'image/jpeg',
+      1
+    );
+  });
+}
+
+export default function Form1(props: {
   prev?: () => void;
-  data?: FormType;
-  update: (arg: FormType) => void;
-}) => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  data?: FormValues;
+  update: (arg: FormValues) => void;
+}) {
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: props.data?.firstName || '',
@@ -47,16 +95,24 @@ const Form1 = (props: {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    props.update({
-      firstName: values.firstName,
-      middleName: values.middleName,
-      lastName: values.lastName,
-      image: values.image,
-    });
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [tempImage, setTempImage] = useState<string | null>(null);
+  const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState<number>(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+
+  const onCropComplete = useCallback(
+    (_croppedArea: Area, croppedPixels: Area) => {
+      setCroppedAreaPixels(croppedPixels);
+    },
+    []
+  );
+
+  async function onSubmit(values: FormValues) {
+    props.update(values);
   }
 
-  function onError(error: FieldErrors) {
+  function onError(error: FieldErrors<FormValues>) {
     Object.values(error).forEach((err) => {
       if (err && typeof err === 'object' && 'message' in err && err.message) {
         toast.error(err.message as string);
@@ -66,6 +122,41 @@ const Form1 = (props: {
 
   return (
     <>
+      {cropModalOpen && tempImage && (
+        <Card className="fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-center">
+          <div className="relative h-[300px] w-[300px] bg-white">
+            <Cropper
+              image={tempImage}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={(location) => setCrop(location)}
+              onZoomChange={(newZoom) => setZoom(newZoom)}
+              onCropComplete={onCropComplete}
+            />
+          </div>
+          <div className="mt-4 flex gap-2">
+            <Button variant="outline" onClick={() => setCropModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={async () => {
+                if (croppedAreaPixels && tempImage) {
+                  const croppedFile = await getCroppedImg(
+                    tempImage,
+                    croppedAreaPixels
+                  );
+                  form.setValue('image', croppedFile);
+                }
+                setCropModalOpen(false);
+              }}
+            >
+              Save
+            </Button>
+          </div>
+        </Card>
+      )}
+
       <Form {...form}>
         <form
           id="form1"
@@ -82,20 +173,15 @@ const Form1 = (props: {
                   <div className="flex flex-col items-center gap-2">
                     <label className="group relative cursor-pointer">
                       {field.value && field.value instanceof File ? (
-                        <Image
+                        <ImageElement
                           width={200}
                           height={200}
                           src={URL.createObjectURL(field.value)}
                           alt="Profile Preview"
                           className="border-border size-48 rounded-md border object-cover"
-                          onLoad={(e) =>
-                            URL.revokeObjectURL(
-                              (e.target as HTMLImageElement).src
-                            )
-                          }
                         />
                       ) : (
-                        <div className="bg-muted/40 border-border size-48 rounded-md border object-cover backdrop-blur-sm" />
+                        <div className="bg-muted/40 border-border size-48 rounded-md border object-cover" />
                       )}
                       <div className="absolute inset-0 flex items-center justify-center rounded-md bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
                         <Upload className="size-8 text-white" />
@@ -104,9 +190,16 @@ const Form1 = (props: {
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           const file = e.target.files?.[0];
-                          field.onChange(file || null);
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                              setTempImage(reader.result as string);
+                              setCropModalOpen(true);
+                            };
+                            reader.readAsDataURL(file);
+                          }
                         }}
                       />
                     </label>
@@ -115,6 +208,7 @@ const Form1 = (props: {
               </FormItem>
             )}
           />
+
           <div className="flex flex-col gap-4 md:flex-row">
             <FormField
               control={form.control}
@@ -155,6 +249,11 @@ const Form1 = (props: {
           </div>
         </form>
       </Form>
+
+      <p className="text-muted-foreground mt-4 text-xs md:text-sm">
+        Upload a formal photo — this cannot be changed later.
+      </p>
+
       <div className="mt-10 flex w-full justify-end">
         <Button form="form1" type="submit">
           Next
@@ -163,6 +262,4 @@ const Form1 = (props: {
       </div>
     </>
   );
-};
-
-export default Form1;
+}

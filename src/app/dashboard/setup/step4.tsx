@@ -1,14 +1,13 @@
 'use client';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, LoaderCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+import IDComponent from '@/components/dashboard/id/id-component';
 import { Button } from '@/components/ui/button';
 import { insertUserData } from '@/lib/db/users';
 import { FormType } from '@/type';
-
-import IDComponent from '@/components/dashboard/id/id-component';
 
 const initialState = {
   success: false,
@@ -90,7 +89,7 @@ const Form4 = (props: {
         </Button>
         <form action={formAction}>
           <Button type="submit" onClick={props.update} disabled={pending}>
-            Submit
+            {pending ? <LoaderCircle className="animate-spin" /> : 'Submit'}
           </Button>
         </form>
       </div>

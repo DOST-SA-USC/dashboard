@@ -6,7 +6,7 @@ export async function uploadUserImage(file: File, userId: string) {
     const { data, error } = await supabase.storage
       .from('users')
       .upload(userId, file, {
-        cacheControl: '3600',
+        cacheControl: '120', // 2 mins
         upsert: true,
       });
 
