@@ -26,28 +26,6 @@ const formSchema = z.object({
       /^09\d{9}$/,
       'Emergency contact number must start with 09 and be 11 digits.'
     ),
-  birthDate: z
-    .string()
-    .min(1, 'Birth date is required.')
-    .refine(
-      (val) => {
-        const date = new Date(val);
-        const now = new Date();
-        date.setHours(0, 0, 0, 0);
-        now.setHours(0, 0, 0, 0);
-
-        // Calculate the date 10 years ago from today
-        const tenYearsAgo = new Date(now);
-        tenYearsAgo.setFullYear(now.getFullYear() - 10);
-
-        // Birth date must not be in the future and not within the previous 10 years
-        return date < tenYearsAgo;
-      },
-      {
-        message:
-          'Birth date must not be in the previous 10 years or in the future.',
-      }
-    ),
 });
 
 const Form3 = (props: {
@@ -60,7 +38,6 @@ const Form3 = (props: {
     defaultValues: {
       emergencyContact: props.data?.emergencyContact || '',
       emergencyContactNumber: props.data?.emergencyContactNumber || '',
-      birthDate: props.data?.birthDate || '',
     },
   });
 
@@ -68,7 +45,6 @@ const Form3 = (props: {
     props.update({
       emergencyContact: values.emergencyContact,
       emergencyContactNumber: values.emergencyContactNumber,
-      birthDate: values.birthDate,
     });
   }
 
@@ -87,42 +63,27 @@ const Form3 = (props: {
           onSubmit={form.handleSubmit(onSubmit, onError)}
           className="flex w-full flex-col items-center justify-center gap-4"
         >
-          <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
-            <FormField
-              control={form.control}
-              name="emergencyContact"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Emergency Contact</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Jane S. Doe" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="emergencyContactNumber"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Emergency Contact Number</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="09123456789" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="emergencyContact"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Emergency Contact</FormLabel>
+                <FormControl>
+                  <Input placeholder="Jane S. Doe" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
-            name="birthDate"
+            name="emergencyContactNumber"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Birth Date</FormLabel>
+                <FormLabel>Emergency Contact Number</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} />
+                  <Input type="tel" placeholder="09123456789" {...field} />
                 </FormControl>
               </FormItem>
             )}

@@ -46,8 +46,8 @@ const IDComponent = React.forwardRef<
             className="rounded-4xl"
             draggable={false}
           />
-          <h1 className="mt-3 text-xl leading-6 font-bold">
-            {`${user.lastName}, ${user.firstName} ${user.middleName.charAt(0)}.`.toUpperCase()}
+          <h1 className="mt-3 px-4 text-center text-xl leading-6 font-bold">
+            {`${user.lastName}, ${user.firstName} ${user.middleName.charAt(0)}. ${user.suffix ? user.suffix : ''}`.toUpperCase()}
           </h1>
           <h2 className="text-xs font-[600]">{user.program.toUpperCase()}</h2>
           <div className="mt-4 flex w-full justify-between px-8">

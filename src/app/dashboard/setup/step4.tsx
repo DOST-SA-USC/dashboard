@@ -72,12 +72,12 @@ const Form4 = (props: {
           firstName: props.data.firstName ?? '',
           middleName: props.data.middleName ?? '',
           lastName: props.data.lastName ?? '',
+          suffix: props.data.suffix ?? '',
           image: imageUrl,
           program: props.data.program ?? '',
           yearLevel: props.data.yearLevel ?? '',
           emergencyContact: props.data.emergencyContact ?? '',
           emergencyContactNumber: props.data.emergencyContactNumber ?? '',
-          birthDate: props.data.birthDate ?? '',
           yearOfAward: props.data.yearOfAward ?? '',
           scholarshipType: props.data.scholarshipType ?? '',
         }}

@@ -14,10 +14,10 @@ interface FormType {
   firstName?: string;
   middleName?: string;
   lastName?: string;
+  suffix?: string;
   image?: File | string; // File for upload, string for URL
   program?: string;
   yearLevel?: string;
-  birthDate?: string;
   yearOfAward?: string;
   scholarshipType?: string;
   emergencyContact?: string;

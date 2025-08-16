@@ -36,8 +36,8 @@ const formSteps = [
     component: Form2,
   },
   {
-    title: 'Additional Information',
-    description: 'Final details for your account.',
+    title: 'Emergency Contact',
+    description: 'Provide your emergency contact information.',
     component: Form3,
   },
   {
@@ -56,6 +56,7 @@ const Form = (props: { userID: string; user: UserType }) => {
     firstName: '',
     middleName: '',
     lastName: '',
+    suffix: '',
     image: undefined,
     uscID: '',
     program: '',
@@ -64,7 +65,6 @@ const Form = (props: { userID: string; user: UserType }) => {
     scholarshipType: '',
     emergencyContact: '',
     emergencyContactNumber: '',
-    birthDate: '',
   });
 
   function handleSignOut() {

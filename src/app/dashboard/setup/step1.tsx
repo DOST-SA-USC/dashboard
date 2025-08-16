@@ -18,12 +18,21 @@ import {
   FormLabel,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import SET_UP_JSON from '@/data/setup.json';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required.'),
   middleName: z.string().min(1, 'Middle name is required.'),
   lastName: z.string().min(1, 'Last name is required.'),
+  suffix: z.string().optional(),
   image: z
     .any()
     .refine((file) => file instanceof File && file.size > 0, {
@@ -36,9 +45,6 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-/**
- * Convert the cropped area to a File
- */
 async function getCroppedImg(imageSrc: string, pixelCrop: Area): Promise<File> {
   const image = new Image();
   image.src = imageSrc;
@@ -92,6 +98,9 @@ export default function Form1(props: {
       firstName: props.data?.firstName || '',
       middleName: props.data?.middleName || '',
       lastName: props.data?.lastName || '',
+      suffix: props.data?.suffix
+        ? props.data.suffix
+        : SET_UP_JSON.suffix.default,
       image: props.data?.image || null,
     },
   });
@@ -110,6 +119,10 @@ export default function Form1(props: {
   );
 
   async function onSubmit(values: FormValues) {
+    if (values.suffix === SET_UP_JSON.suffix.default) {
+      values.suffix = '';
+    }
+
     props.update(values);
   }
 
@@ -243,6 +256,29 @@ export default function Form1(props: {
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Doe" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="suffix"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Suffix</FormLabel>
+                  <FormControl>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full md:w-20">
+                        <SelectValue placeholder="" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SET_UP_JSON.suffix.options.map((option) => (
+                          <SelectItem key={option} value={option}>
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                 </FormItem>
               )}
