@@ -53,7 +53,7 @@ export default async function Home() {
               </div>
             </CardContent>
           </Card>
-          <div className="text-muted-foreground *:[a]:hover:text-primary mt-2 text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+          <div className="text-muted-foreground *:[a]:hover:text-primary mt-2 text-center text-xs text-balance md:text-sm *:[a]:underline *:[a]:underline-offset-4">
             <RandomQuote />
           </div>
         </div>
