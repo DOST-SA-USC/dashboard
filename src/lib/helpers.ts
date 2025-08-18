@@ -68,15 +68,23 @@ export function formatDateStartEnd(
   const startDay = start.getDate();
 
   if (end) {
-    const sameMonth =
+    const isSameDate =
+      start.getFullYear() === end.getFullYear() &&
       start.getMonth() === end.getMonth() &&
-      start.getFullYear() === end.getFullYear();
-    const endDay = end.getDate();
-    if (sameMonth) {
-      return `${month} ${startDay}-${endDay}`;
-    } else {
-      const endMonth = end.toLocaleString('en-US', { month: 'short' });
-      return `${month} ${startDay} - ${endMonth} ${endDay}`;
+      start.getDate() === end.getDate();
+
+    if (!isSameDate) {
+      const sameMonth =
+        start.getMonth() === end.getMonth() &&
+        start.getFullYear() === end.getFullYear();
+      const endDay = end.getDate();
+
+      if (sameMonth) {
+        return `${month} ${startDay}-${endDay}`;
+      } else {
+        const endMonth = end.toLocaleString('en-US', { month: 'short' });
+        return `${month} ${startDay} - ${endMonth} ${endDay}`;
+      }
     }
   }
 
