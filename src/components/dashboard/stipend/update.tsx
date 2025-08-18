@@ -87,7 +87,10 @@ const Update = (props: { data: StipendType }) => {
       return;
     }
 
-    const remarks: string[] = data.remarks.split('\n').filter(Boolean);
+    const remarks: string[] = data.remarks // clean up text area input
+      .split('\n')
+      .map((r) => r.trim())
+      .filter((r) => r.length > 0);
 
     const body = {
       monthly: data.monthly,
