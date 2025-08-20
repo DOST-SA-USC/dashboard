@@ -12,7 +12,10 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
 // --- Lib ---
 import {
-    findNodePosition, isNodeInSchema, isNodeTypeSelected, isValidPosition
+  findNodePosition,
+  isNodeInSchema,
+  isNodeTypeSelected,
+  isValidPosition,
 } from '@/lib/tiptap-utils';
 import { NodeSelection, TextSelection } from '@tiptap/pm/state';
 import { Editor } from '@tiptap/react';

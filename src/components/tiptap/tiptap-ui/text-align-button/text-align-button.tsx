@@ -5,7 +5,8 @@ import * as React from 'react';
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import {
-    TEXT_ALIGN_SHORTCUT_KEYS, useTextAlign
+  TEXT_ALIGN_SHORTCUT_KEYS,
+  useTextAlign,
 } from '@/components/tiptap/tiptap-ui/text-align-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

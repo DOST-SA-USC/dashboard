@@ -5,7 +5,8 @@ import * as React from 'react';
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import {
-    BLOCKQUOTE_SHORTCUT_KEY, useBlockquote
+  BLOCKQUOTE_SHORTCUT_KEY,
+  useBlockquote,
 } from '@/components/tiptap/tiptap-ui/blockquote-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

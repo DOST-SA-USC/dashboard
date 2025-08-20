@@ -1,6 +1,4 @@
-import {
-    ImageUploadNode as ImageUploadNodeComponent
-} from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node';
+import { ImageUploadNode as ImageUploadNodeComponent } from '@/components/tiptap/tiptap-node/image-upload-node/image-upload-node';
 import { mergeAttributes, Node, ReactNodeViewRenderer } from '@tiptap/react';
 
 export type UploadFunction = (

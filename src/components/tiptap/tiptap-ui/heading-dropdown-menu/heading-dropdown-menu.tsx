@@ -4,10 +4,16 @@ import * as React from 'react';
 
 // --- Icons ---
 import { ChevronDownIcon } from '@/components/tiptap/tiptap-icons/chevron-down-icon';
-import { Button, ButtonGroup } from '@/components/tiptap/tiptap-ui-primitive/button';
+import {
+  Button,
+  ButtonGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/button';
 import { Card, CardBody } from '@/components/tiptap/tiptap-ui-primitive/card';
 import {
-    DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '@/components/tiptap/tiptap-ui-primitive/dropdown-menu';
 // --- Tiptap UI ---
 import { HeadingButton } from '@/components/tiptap/tiptap-ui/heading-button';

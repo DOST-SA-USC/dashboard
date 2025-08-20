@@ -8,7 +8,9 @@ import * as React from 'react';
 
 // --- Tiptap UI Primitive ---
 import {
-    Tooltip, TooltipContent, TooltipTrigger
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from '@/components/tiptap/tiptap-ui-primitive/tooltip';
 // --- Lib ---
 import { cn, parseShortcutKeys } from '@/lib/tiptap-utils';

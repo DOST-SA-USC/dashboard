@@ -4,7 +4,10 @@ import * as React from 'react';
 
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
-import { LIST_SHORTCUT_KEYS, useList } from '@/components/tiptap/tiptap-ui/list-button';
+import {
+  LIST_SHORTCUT_KEYS,
+  useList,
+} from '@/components/tiptap/tiptap-ui/list-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
 // --- Lib ---

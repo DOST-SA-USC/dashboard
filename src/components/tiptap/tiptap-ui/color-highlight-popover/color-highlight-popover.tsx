@@ -5,14 +5,25 @@ import * as React from 'react';
 // --- Icons ---
 import { BanIcon } from '@/components/tiptap/tiptap-icons/ban-icon';
 import { HighlighterIcon } from '@/components/tiptap/tiptap-icons/highlighter-icon';
-import { Button, ButtonGroup } from '@/components/tiptap/tiptap-ui-primitive/button';
-import { Card, CardBody, CardItemGroup } from '@/components/tiptap/tiptap-ui-primitive/card';
 import {
-    Popover, PopoverContent, PopoverTrigger
+  Button,
+  ButtonGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/button';
+import {
+  Card,
+  CardBody,
+  CardItemGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/card';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from '@/components/tiptap/tiptap-ui-primitive/popover';
 import { Separator } from '@/components/tiptap/tiptap-ui-primitive/separator';
 import {
-    ColorHighlightButton, pickHighlightColorsByValue, useColorHighlight
+  ColorHighlightButton,
+  pickHighlightColorsByValue,
+  useColorHighlight,
 } from '@/components/tiptap/tiptap-ui/color-highlight-button';
 // --- Hooks ---
 import { useMenuNavigation } from '@/hooks/use-menu-navigation';

@@ -5,7 +5,8 @@ import * as React from 'react';
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import {
-    UNDO_REDO_SHORTCUT_KEYS, useUndoRedo
+  UNDO_REDO_SHORTCUT_KEYS,
+  useUndoRedo,
 } from '@/components/tiptap/tiptap-ui/undo-redo-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

@@ -8,7 +8,8 @@ import * as React from 'react';
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import {
-    COLOR_HIGHLIGHT_SHORTCUT_KEY, useColorHighlight
+  COLOR_HIGHLIGHT_SHORTCUT_KEY,
+  useColorHighlight,
 } from '@/components/tiptap/tiptap-ui/color-highlight-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

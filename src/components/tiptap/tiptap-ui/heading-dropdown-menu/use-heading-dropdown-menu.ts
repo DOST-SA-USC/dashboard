@@ -6,7 +6,11 @@ import * as React from 'react';
 import { HeadingIcon } from '@/components/tiptap/tiptap-icons/heading-icon';
 // --- Tiptap UI ---
 import {
-    canToggle, headingIcons, isHeadingActive, Level, shouldShowButton
+  canToggle,
+  headingIcons,
+  isHeadingActive,
+  Level,
+  shouldShowButton,
 } from '@/components/tiptap/tiptap-ui/heading-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

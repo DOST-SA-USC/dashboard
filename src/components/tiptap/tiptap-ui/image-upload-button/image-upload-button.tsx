@@ -5,7 +5,8 @@ import * as React from 'react';
 import { Badge } from '@/components/tiptap/tiptap-ui-primitive/badge';
 import { Button } from '@/components/tiptap/tiptap-ui-primitive/button';
 import {
-    IMAGE_UPLOAD_SHORTCUT_KEY, useImageUpload
+  IMAGE_UPLOAD_SHORTCUT_KEY,
+  useImageUpload,
 } from '@/components/tiptap/tiptap-ui/image-upload-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';

@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/test-results
+/junit.xml
 
 # next.js
 /.next/
@@ -40,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.idea/
+
+# testing artifacts
+audit-results.json

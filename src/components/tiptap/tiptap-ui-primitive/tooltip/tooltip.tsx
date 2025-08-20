@@ -5,9 +5,22 @@ import '@/components/tiptap/tiptap-ui-primitive/tooltip/tooltip.scss';
 import * as React from 'react';
 
 import {
-    autoUpdate, flip, FloatingDelayGroup, FloatingPortal, offset, Placement, ReferenceType, shift,
-    useDismiss, useFloating, UseFloatingReturn, useFocus, useHover, useInteractions, useMergeRefs,
-    useRole
+  autoUpdate,
+  flip,
+  FloatingDelayGroup,
+  FloatingPortal,
+  offset,
+  Placement,
+  ReferenceType,
+  shift,
+  useDismiss,
+  useFloating,
+  UseFloatingReturn,
+  useFocus,
+  useHover,
+  useInteractions,
+  useMergeRefs,
+  useRole,
 } from '@floating-ui/react';
 
 interface TooltipProviderProps {

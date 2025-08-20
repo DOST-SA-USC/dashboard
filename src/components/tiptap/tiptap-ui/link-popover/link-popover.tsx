@@ -7,11 +7,23 @@ import { CornerDownLeftIcon } from '@/components/tiptap/tiptap-icons/corner-down
 import { ExternalLinkIcon } from '@/components/tiptap/tiptap-icons/external-link-icon';
 import { LinkIcon } from '@/components/tiptap/tiptap-icons/link-icon';
 import { TrashIcon } from '@/components/tiptap/tiptap-icons/trash-icon';
-import { Button, ButtonGroup } from '@/components/tiptap/tiptap-ui-primitive/button';
-import { Card, CardBody, CardItemGroup } from '@/components/tiptap/tiptap-ui-primitive/card';
-import { Input, InputGroup } from '@/components/tiptap/tiptap-ui-primitive/input';
 import {
-    Popover, PopoverContent, PopoverTrigger
+  Button,
+  ButtonGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/button';
+import {
+  Card,
+  CardBody,
+  CardItemGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/card';
+import {
+  Input,
+  InputGroup,
+} from '@/components/tiptap/tiptap-ui-primitive/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from '@/components/tiptap/tiptap-ui-primitive/popover';
 import { Separator } from '@/components/tiptap/tiptap-ui-primitive/separator';
 import { useLinkPopover } from '@/components/tiptap/tiptap-ui/link-popover';

@@ -8,7 +8,10 @@ import { ListOrderedIcon } from '@/components/tiptap/tiptap-icons/list-ordered-i
 import { ListTodoIcon } from '@/components/tiptap/tiptap-icons/list-todo-icon';
 // --- Tiptap UI ---
 import {
-    canToggleList, isListActive, listIcons, ListType
+  canToggleList,
+  isListActive,
+  listIcons,
+  ListType,
 } from '@/components/tiptap/tiptap-ui/list-button';
 // --- Hooks ---
 import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
