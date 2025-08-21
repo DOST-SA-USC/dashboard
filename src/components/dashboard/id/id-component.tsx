@@ -98,13 +98,6 @@ const IDComponent = React.forwardRef<
             <p className="mt-10 text-[10px] font-[600] italic">
               Scholar ID Card valid until {Number(user.yearOfAward) + 5}
             </p>
-
-            <div className="mt-4 text-center">
-              <p className="text-[12px] leading-3 font-[600]">
-                {process.env.NEXT_PUBLIC_COOL_PERSON!.toUpperCase()}
-              </p>
-              <p className="text-[8px]">AUTHORIZED SIGNATURE</p>
-            </div>
           </div>
         </div>
       </HoverCard>
