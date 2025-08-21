@@ -78,7 +78,7 @@ const NewResource = () => {
       <Button
         size="sm"
         className="text-xs sm:text-sm md:text-base"
-        onClick={() => setOpen(true)}
+        // onClick={() => setOpen(true)}
       >
         <Plus className="size-3 sm:size-4" />
         New
