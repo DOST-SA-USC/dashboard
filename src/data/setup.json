@@ -2,6 +2,7 @@
   "programs": {
     "School of Arts and Sciences": [
       "BS Applied Physics",
+      "BS Biology",
       "BS Chemistry",
       "BS Computer Science",
       "BS Information Systems",
@@ -18,7 +19,7 @@
       "BS Industrial Engineering",
       "BS Mechanical Engineering"
     ],
-    "School of Health Care Professions": [
+    "School of Healthcare Professions": [
       "BS Pharmacy",
       "BS Nutrition and Dietetics"
     ],
@@ -26,6 +27,7 @@
   },
   "programAliases": {
     "BS Applied Physics": "BSAP",
+    "BS Biology": "BSBio",
     "BS Chemistry": "BSCh",
     "BS Computer Science": "BSCS",
     "BS Information Systems": "BSIS",
