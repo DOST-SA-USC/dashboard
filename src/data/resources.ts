@@ -6,12 +6,6 @@ export const TABS = [
     studentsNotAllowed: false,
   },
   {
-    value: 'documents',
-    smLabel: 'Documents',
-    lgLabel: 'Documents',
-    studentsNotAllowed: false,
-  },
-  {
     value: 'links',
     smLabel: 'Links',
     lgLabel: 'Links & Resources',

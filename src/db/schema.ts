@@ -158,6 +158,8 @@ export const stipend = pgTable('stipend', {
 
 export const resources = pgTable('resources', {
   id: uuid('id').defaultRandom().primaryKey(),
+  icon: text('icon').notNull(),
+  title: text('title').notNull(),
   type: text('type').notNull(),
   content: jsonb('content'),
   link: text('link'),

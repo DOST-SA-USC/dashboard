@@ -22,7 +22,7 @@ const ActionAlert = (props: {
     label: string;
     onClick: () => void;
     icon?: LucideIcon;
-    variant?: 'default' | 'destructive' | 'outline';
+    variant?: 'default' | 'destructive' | 'outline' | 'ghost';
     disable?: boolean;
     className?: string;
     size?: 'default' | 'sm' | 'lg' | 'icon' | null | undefined;

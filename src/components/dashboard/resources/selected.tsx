@@ -1,18 +1,19 @@
-'use client';
+import React from 'react';
 
-import { Frown } from 'lucide-react';
-import React, { useMemo, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { getUserInitials } from '@/lib/helpers';
+import { tiptapToHTML } from '@/lib/tiptap-to-html';
 
-import Item from '@/components/dashboard/resources/item';
-import Selected from '@/components/dashboard/resources/selected';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { TABS } from '@/data/resources';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { useUserStore } from '@/stores/userStore';
+import Actions from './actions';
 
-import type { ResourceType, TabType } from '@/type';
-
+import type { ResourceType } from '@/type';
 const MOCK_DATA: ResourceType[] = [
   {
     id: '91ba2ec9-c2cc-489d-a464-b5487a2f9804',
@@ -207,85 +208,106 @@ const MOCK_DATA: ResourceType[] = [
     authorPosition: 'API Specialist',
     authorImageURL: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
+  {
+    id: 'c3d4e5f6-a7b8-489d-d234-567890abcdef',
+    title: 'Security Advisory',
+    icon: '⚠️',
+    type: 'officer',
+    description: 'Important security update for all users.',
+    content: {
+      type: 'doc',
+      content: [
+        {
+          type: 'heading',
+          content: [{ text: 'Vulnerability Notice', type: 'text' }],
+        },
+        {
+          type: 'paragraph',
+          content: [
+            {
+              text: 'A critical vulnerability has been identified. Please update your software immediately.',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          type: 'horizontalRule',
+        },
+        {
+          type: 'paragraph',
+          content: [
+            { text: 'Contact support for more information.', type: 'text' },
+          ],
+        },
+      ],
+    },
+    authorID: '321',
+    authorName: 'Morgan Lee',
+    authorPosition: 'Security Lead',
+    authorImageURL: 'https://randomuser.me/api/portraits/men/65.jpg',
+  },
 ];
 
-const Content = () => {
-  const [currentTab, setCurrentTab] = useState<TabType>('guides');
-  const [selectedResource, setSelectedResource] = useState('');
-
-  const { user } = useUserStore();
-  const isMobile = useIsMobile();
-
-  const getTabs = useMemo(() => {
-    return TABS.filter((tab) => {
-      if (tab.studentsNotAllowed && user?.role === 'student') {
-        return false;
-      }
-      return true;
-    });
-  }, [user?.role]);
-
-  const selectedTab = useMemo(() => {
-    return MOCK_DATA.filter((item) => item.type === currentTab);
-  }, [currentTab]);
+const Selected = (props: {
+  resourceID: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  const selectedItem = MOCK_DATA.find((item) => item.id === props.resourceID);
 
   return (
-    <>
-      {/* tabs */}
-      <Card className="flex w-full flex-row items-center justify-between gap-1 rounded-md p-1">
-        {getTabs.map((tab, index) => (
-          <Button
-            key={index}
-            variant={currentTab === tab.value ? 'default' : 'ghost'}
-            className="flex-1 text-xs sm:text-sm"
-            size="sm"
-            onClick={() => setCurrentTab(tab.value as TabType)}
-          >
-            {isMobile ? tab.smLabel : tab.lgLabel}
-          </Button>
-        ))}
-      </Card>
+    <Dialog open={props.open} onOpenChange={props.onOpenChange}>
+      <DialogContent className="min-w-[90%] gap-0 p-2 px-4 md:min-w-2xl lg:min-w-4xl xl:min-w-6xl">
+        <DialogHeader className="mt-4 px-0 pb-2 text-left md:px-2">
+          <div className="flex w-fit items-center justify-center gap-2">
+            <DialogTitle>
+              {selectedItem?.icon} {selectedItem?.title}
+            </DialogTitle>
 
-      {/* main */}
-      <Card className="h-full w-full flex-1 gap-2 overflow-y-auto p-2 md:gap-4 md:p-4">
-        {selectedTab.length !== 0 ? (
-          selectedTab.map((item) => (
-            <Item
-              key={item.id}
-              data={{
-                type: item.type,
-                icon: item.icon,
-                title: item.title,
-                description: item.description,
-              }}
-              onClick={() =>
-                item.type !== 'links'
-                  ? setSelectedResource(item.id)
-                  : window.open(item.link!, '_blank')
-              }
-            />
-          ))
-        ) : (
-          <div className="text-secondary/40 flex h-full w-full flex-col items-center justify-center gap-2">
-            <Frown className="size-16 sm:size-18 md:size-20" />
-            <h1 className="text-lg font-extrabold sm:text-xl md:text-2xl">
-              No resources yet.
-            </h1>
+            {selectedItem?.id && <Actions resourceID={selectedItem.id} />}
           </div>
-        )}
-      </Card>
-
-      <Selected
-        resourceID={selectedResource}
-        open={!!selectedResource}
-        onOpenChange={(open) => {
-          if (!open) {
-            setSelectedResource('');
-          }
-        }}
-      />
-    </>
+          <DialogDescription>{selectedItem?.description}</DialogDescription>
+          <div className="border-border flex w-full items-center justify-between gap-4 border-y py-2">
+            <div className="flex w-full items-center gap-2">
+              <Avatar className="bg-accent flex size-7 items-center justify-center text-base font-medium">
+                <AvatarImage
+                  src={selectedItem?.authorImageURL as string}
+                  alt={selectedItem?.authorName}
+                />
+                <AvatarFallback>
+                  {getUserInitials(selectedItem?.authorName || '')}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col text-xs">
+                <p className="leading-4 font-semibold">
+                  {selectedItem?.authorName}
+                </p>
+                <span>{selectedItem?.authorPosition}</span>
+              </div>
+            </div>
+            <span className="text-muted-foreground w-full text-right text-xs">
+              1-20-30
+            </span>
+          </div>
+        </DialogHeader>
+        <div className="overflow-x-hidden overflow-y-auto p-4">
+          <div
+            className="simple-editor-content mt-2 text-justify text-sm"
+            role="presentation"
+          >
+            {selectedItem?.content && (
+              <div
+                className="prose prose-sm tiptap ProseMirror max-w-none"
+                dangerouslySetInnerHTML={{
+                  __html: tiptapToHTML(selectedItem.content) || '',
+                }}
+              />
+            )}
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default Content;
+export default Selected;
