@@ -8,12 +8,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Update from '@/components/dashboard/stipend/update';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-
 import type { StipendType } from '@/type';
 
 import { getUserInitials, getRelativeDate } from '@/lib/helpers';
@@ -77,43 +71,29 @@ const Content = (props: { data: StipendType }) => {
           </div>
         </Card>
 
-        <div className="flex h-full w-full flex-col gap-2 md:w-2/5">
+        <div className="flex h-full w-full flex-col gap-4 md:w-3/5">
           <Card className="h-full w-full gap-2">
             <CardHeader>
-              <CardTitle>Resources</CardTitle>
+              <CardTitle>{STIPEND_DETAILS.more.title}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-1 flex-col gap-1">
-              {STIPEND_DETAILS.resources.map((resource, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  {resource.disabled ? (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <span>
-                          <Link
-                            href="#"
-                            className="text-secondary pointer-events-none flex items-center gap-2 underline opacity-50 hover:opacity-80"
-                            aria-disabled
-                            tabIndex={-1}
-                          >
-                            <LinkIcon className="h-4 w-4" />
-                            {resource.label}
-                          </Link>
-                        </span>
-                      </TooltipTrigger>
-                      <TooltipContent side="right">soon</TooltipContent>
-                    </Tooltip>
-                  ) : (
-                    <Link
-                      href={resource.href}
-                      className="text-secondary flex items-center gap-2 underline hover:opacity-80"
-                      tabIndex={0}
-                    >
-                      <LinkIcon className="h-4 w-4" />
-                      {resource.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
+              <Link
+                href={STIPEND_DETAILS.more.link}
+                className="text-secondary flex items-center gap-2 underline hover:opacity-80"
+                tabIndex={-1}
+                target="_blank"
+              >
+                <LinkIcon className="h-4 w-4" />
+                Link
+              </Link>
+              <div className="mt-2 text-sm">
+                <p>{STIPEND_DETAILS.more.content.text}</p>
+                <ol className="list-decimal pl-5">
+                  {STIPEND_DETAILS.more.content.steps.map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
+                </ol>
+              </div>
             </CardContent>
           </Card>
           <Update data={props.data} />
