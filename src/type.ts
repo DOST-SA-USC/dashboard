@@ -1,6 +1,6 @@
 import type { Content } from '@tiptap/react';
 
-type UserRoles = 'admin' | 'faculty' | 'officer' | 'student';
+type UserRoles = 'admin' | 'staff' | 'officer' | 'student';
 
 interface AuthorType {
   authorID: string;
@@ -37,7 +37,7 @@ type TimestampString =
 
 interface AnnouncementType extends AuthorType {
   id: string;
-  type: 'officer' | 'faculty';
+  type: 'officer' | 'staff';
   urgent: boolean;
   title: string;
   content: Content;

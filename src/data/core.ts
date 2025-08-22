@@ -42,7 +42,7 @@ export const NAV_DATA = {
       title: 'Scholar ID',
       href: '/dashboard/id',
       icon: IdCardLanyard,
-      notAllowed: ['faculty'],
+      notAllowed: ['staff'],
     },
     {
       title: 'Announcements',

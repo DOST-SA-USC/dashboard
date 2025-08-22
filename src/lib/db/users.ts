@@ -141,7 +141,7 @@ export async function getProgramCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
-      .where(sql`${userData.role} != 'faculty'`)
+      .where(sql`${userData.role} != 'staff'`)
       .groupBy(userData.program);
 
     return result.map((row) => ({
@@ -162,7 +162,7 @@ export async function getYearLevelCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
-      .where(sql`${userData.role} != 'faculty'`)
+      .where(sql`${userData.role} != 'staff'`)
       .groupBy(userData.yearLevel);
 
     return result.map((row) => ({
@@ -183,7 +183,7 @@ export async function getScholarshipCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
-      .where(sql`${userData.role} != 'faculty'`)
+      .where(sql`${userData.role} != 'staff'`)
       .groupBy(userData.scholarshipType);
 
     return result.map((row) => ({
@@ -198,7 +198,7 @@ export async function getScholarshipCounts() {
 
 export async function getAllStaffUsers() {
   try {
-    const roles = ['officer', 'admin', 'faculty'];
+    const roles = ['officer', 'admin', 'staff'];
     const result = await db
       .select()
       .from(userData)

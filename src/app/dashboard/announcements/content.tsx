@@ -137,7 +137,7 @@ const AnnouncementContent = (props: {
                 <SelectLabel>Select Filter</SelectLabel>
                 <SelectItem value="all">All</SelectItem>
                 <SelectItem value="officer">Officer</SelectItem>
-                <SelectItem value="faculty">Faculty</SelectItem>
+                <SelectItem value="staff">Staff</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
