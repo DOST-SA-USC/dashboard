@@ -61,25 +61,11 @@ interface StipendType extends AuthorType {
   createdAt?: string | Date;
 }
 
-type TabType = 'guides' | 'links' | 'officer';
-
-interface ResourceType extends AuthorType {
-  id: string;
-  type: TabType;
-  icon: string;
-  title: string;
-  description: string;
-  content?: object;
-  link?: string;
-}
-
 export type {
-  ResourceType,
   FormType,
   UserRoles,
   AnnouncementType,
   EventType,
-  TabType,
   TimestampString,
   UserType,
   AuthorType,

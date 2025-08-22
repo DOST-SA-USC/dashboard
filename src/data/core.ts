@@ -2,12 +2,10 @@ import {
   Home,
   Mail,
   Calendar,
-  BookOpen,
   IdCardLanyard,
   Ellipsis,
   Hammer,
   Wallet,
-  // UsersRound,
 } from 'lucide-react';
 
 import {
@@ -64,18 +62,6 @@ export const NAV_DATA = {
       icon: Hammer,
       notAllowed: ['student'],
     },
-    {
-      title: 'Resources',
-      href: '/dashboard/resources',
-      icon: BookOpen,
-      notAllowed: [],
-    },
-    // {
-    //   title: 'Officers',
-    //   href: '/dashboard/officers',
-    //   icon: UsersRound,
-    //   notAllowed: [],
-    // },
   ],
   socials: {
     title: 'More',
