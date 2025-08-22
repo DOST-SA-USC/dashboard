@@ -18,7 +18,7 @@ const Content = () => {
     documentTitle: user ? user.uscID : 'ID_CARD',
   });
 
-  if (!user || user.role === 'faculty') {
+  if (!user || user.role === 'staff') {
     return (
       <div className="border-border bg-muted/20 text-destructive/40 flex h-full w-full flex-1 flex-col items-center justify-center gap-4 rounded-md border-2 border-dashed">
         <Frown className="size-16 sm:size-18 md:size-20" />
