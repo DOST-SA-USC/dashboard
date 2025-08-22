@@ -141,6 +141,7 @@ export async function getProgramCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
+      .where(sql`${userData.role} != 'faculty'`)
       .groupBy(userData.program);
 
     return result.map((row) => ({
@@ -161,6 +162,7 @@ export async function getYearLevelCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
+      .where(sql`${userData.role} != 'faculty'`)
       .groupBy(userData.yearLevel);
 
     return result.map((row) => ({
@@ -181,6 +183,7 @@ export async function getScholarshipCounts() {
         count: sql<number>`COUNT(*)`,
       })
       .from(userData)
+      .where(sql`${userData.role} != 'faculty'`)
       .groupBy(userData.scholarshipType);
 
     return result.map((row) => ({
@@ -189,6 +192,23 @@ export async function getScholarshipCounts() {
     }));
   } catch (error) {
     console.error('Error fetching scholarship counts:', error);
+    throw error;
+  }
+}
+
+export async function getAllStaffUsers() {
+  try {
+    const roles = ['officer', 'admin', 'faculty'];
+    const result = await db
+      .select()
+      .from(userData)
+      .where(
+        sql`${userData.role} IN (${roles.map((r) => `'${r}'`).join(',')})`
+      );
+
+    return result;
+  } catch (error) {
+    console.error('Error fetching staff users:', error);
     throw error;
   }
 }

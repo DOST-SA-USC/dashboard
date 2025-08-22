@@ -33,8 +33,18 @@ const HomeHeader = () => {
             icon={GraduationCap}
             text={capitalizeFirstLetter(user.program)}
           />
-          <InfoBadge icon={TrendingUp} text={`Year ${user.yearLevel}`} />
-          <InfoBadge icon={Award} text={user.scholarshipType.toUpperCase()} />
+          <InfoBadge
+            icon={TrendingUp}
+            text={user.yearLevel ? `Year ${user.yearLevel}` : undefined}
+          />
+          <InfoBadge
+            icon={Award}
+            text={
+              user.scholarshipType
+                ? user.scholarshipType.toUpperCase()
+                : undefined
+            }
+          />
           <InfoBadge icon={Calendar} text={user.yearOfAward} />
           <InfoBadge icon={Briefcase} text={user.position} />
         </div>

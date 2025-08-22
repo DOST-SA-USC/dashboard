@@ -7,6 +7,7 @@ import {
   Ellipsis,
   Hammer,
   Wallet,
+  // UsersRound,
 } from 'lucide-react';
 
 import {
@@ -69,6 +70,12 @@ export const NAV_DATA = {
       icon: BookOpen,
       notAllowed: [],
     },
+    // {
+    //   title: 'Officers',
+    //   href: '/dashboard/officers',
+    //   icon: UsersRound,
+    //   notAllowed: [],
+    // },
   ],
   socials: {
     title: 'More',

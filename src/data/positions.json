@@ -1,0 +1,35 @@
+{
+  "core": [
+    "President",
+    "Vice President - Internal",
+    "Vice President - External",
+    "Executive Secretary",
+    "VP Internal Undersecretary",
+    "VP External Undersecretary",
+    "Executive Treasurer",
+    "Auditor",
+    "Public Relations Officer",
+    "School VP - SHCP",
+    "School VP - SAS",
+    "School VP - SOE",
+    "Batch Minister 2024",
+    "Batch Minister 2025"
+  ],
+  "committees": [
+    "Intellectual",
+    "Programs & Production",
+    "Logistical Operations",
+    "Finance",
+    "Secretariat",
+    "Public Relations",
+    "Technology Development"
+  ],
+  "OFFICE_VP_INTERNAL": {
+    "head": "Vice President Internal",
+    "associate": "Associate VP Internal",
+    "secretariat_department_members": "Secretariat Department Member",
+    "programs_department_members": "Programs Department Member",
+    "batch_minister": "Batch Minister",
+    "school_representative": "School Representative"
+  }
+}
