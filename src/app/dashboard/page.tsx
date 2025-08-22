@@ -24,9 +24,9 @@ export default async function Dashboard() {
 
       <div className="grid grid-cols-2 grid-rows-2 gap-4 lg:grid-cols-4 lg:grid-rows-1">
         <OverviewCard
-          title="Stipend Status"
-          value={latestStipendUpdate.monthly}
-          description="Awaiting Approval"
+          title="Stipend Forecast"
+          value={latestStipendUpdate.forecast}
+          description="Expected release window"
           icon={PhilippinePeso}
           className="col-span-2"
         />
