@@ -1,3 +1,11 @@
+import React from 'react';
+
+const Page = () => {
+  return <div>Soon</div>;
+};
+
+export default Page;
+
 // import { columns, Payment } from './column';
 // import { DataRow, DataTable } from './data-table';
 
