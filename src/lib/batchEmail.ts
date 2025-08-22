@@ -4,12 +4,10 @@ export default async function sendBatchedEmails({
   recipients,
   title,
   html,
-  isUrgent,
 }: {
   recipients: string[];
   title: string;
   html: string;
-  isUrgent: boolean;
 }) {
   const batchSize = 100;
 
@@ -23,7 +21,7 @@ export default async function sendBatchedEmails({
     try {
       await announcementEmailTemplate({
         recipients: batch,
-        title: `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
+        title: title,
         html: html,
       });
     } catch (err) {

@@ -68,6 +68,7 @@ const SearchComponent = (props: { data: NavDataType }) => {
                       onClick={() => setOpen(false)}
                       href={item.href}
                       className="flex items-center gap-2"
+                      target="_blank"
                     >
                       {item.title}
                     </Link>

@@ -91,7 +91,6 @@ const NewAnnouncement = (props: {
         recipients: recipients,
         title: `${isUrgent ? 'IMPORTANT - ' : ''}${title}`,
         html: tiptapToHTML(newContent),
-        isUrgent: isUrgent,
       }),
       {
         loading: 'Emailing recipients, might take a while...',
