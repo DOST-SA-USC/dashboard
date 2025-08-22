@@ -1,6 +1,6 @@
 import {
   Home,
-  Megaphone,
+  Mail,
   Calendar,
   BookOpen,
   IdCardLanyard,
@@ -49,7 +49,7 @@ export const NAV_DATA = {
     {
       title: 'Announcements',
       href: '/dashboard/announcements',
-      icon: Megaphone,
+      icon: Mail,
       notAllowed: [],
     },
     {
