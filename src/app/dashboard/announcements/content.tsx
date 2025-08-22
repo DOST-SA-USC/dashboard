@@ -112,7 +112,7 @@ const AnnouncementContent = (props: {
   return (
     <div className="flex h-full w-full flex-1 gap-4 overflow-hidden">
       <div className="flex h-full w-full flex-col md:w-1/2">
-        <div className="flex w-full gap-4 py-3.5 md:p-3.5">
+        <div className="flex w-full gap-4 py-3.5 md:py-3.5">
           <div className="flex w-full items-center gap-2">
             <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
               <Search className="text-muted-foreground size-4" />
