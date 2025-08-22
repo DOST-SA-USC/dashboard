@@ -155,26 +155,3 @@ export const stipend = pgTable('stipend', {
   authorPosition: text('author_position').notNull(),
   authorImageURL: text('author_image_url').notNull(),
 }).enableRLS();
-
-export const resources = pgTable('resources', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  icon: text('icon').notNull(),
-  title: text('title').notNull(),
-  type: text('type').notNull(),
-  content: jsonb('content'),
-  link: text('link'),
-  createdAt: timestamp('created_at')
-    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
-    .notNull(),
-  updatedAt: timestamp('updated_at')
-    .$defaultFn(() => /* @__PURE__ */ getManilaTime())
-    .notNull(),
-  authorId: text('author_id')
-    .references(() => user.id, {
-      onDelete: 'set null',
-    })
-    .notNull(),
-  authorName: text('author_name').notNull(),
-  authorPosition: text('author_position').notNull(),
-  authorImageURL: text('author_image_url').notNull(),
-}).enableRLS();
