@@ -21,10 +21,15 @@ export function getBadgeClass(type: EventType['type'][0]) {
         bg: '!bg-chart-3',
         badge: '!bg-chart-3/20 !border-chart-3 !text-chart-3',
       };
+    case 'organization development':
+      return {
+        bg: '!bg-gray-300',
+        badge: '!bg-gray-300/20 !border-gray-300 !text-gray-300',
+      };
     default:
       return {
-        bg: '!bg-gray-400',
-        badge: '!bg-gray-200/60 !border-gray-400 !text-gray-600',
+        bg: '!bg-gray-500',
+        badge: '!bg-gray-500/20 !border-gray-500 !text-gray-500',
       };
   }
 }

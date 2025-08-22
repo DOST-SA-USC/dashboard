@@ -47,7 +47,7 @@ interface AnnouncementType extends AuthorType {
 interface EventType extends AuthorType {
   id?: string;
   title: string;
-  type: Array<'scientia' | 'virtus' | 'devotio'>;
+  type: Array<'scientia' | 'virtus' | 'devotio' | 'organization development'>;
   description: string;
   startDate: TimestampString;
   endDate?: TimestampString;

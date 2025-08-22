@@ -93,4 +93,10 @@ export const NAV_DATA = {
 
 export type NavDataType = typeof NAV_DATA;
 
-export const EVENT_TYPE_OPTIONS = ['scientia', 'virtus', 'devotio'];
+export const EVENT_TYPE_OPTIONS = [
+  'scientia',
+  'virtus',
+  'devotio',
+  'holiday',
+  'organization development',
+];

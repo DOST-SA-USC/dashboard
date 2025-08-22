@@ -5,8 +5,6 @@ import React, { useEffect } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -21,19 +19,29 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import {
+  MultiSelect,
+  MultiSelectContent,
+  MultiSelectGroup,
+  MultiSelectItem,
+  MultiSelectTrigger,
+  MultiSelectValue,
+} from '@/components/ui/multi-select';
 import { Textarea } from '@/components/ui/textarea';
+import { EVENT_TYPE_OPTIONS } from '@/data/core';
 import { createEvent } from '@/lib/db/events';
+import { useUserStore } from '@/stores/userStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { ActionAlert } from '../ui';
+
 import type { DateSelectArg } from '@fullcalendar/core';
-import { useUserStore } from '@/stores/userStore';
 import type { EventType } from '@/type';
 
-import { EVENT_TYPE_OPTIONS } from '@/data/core';
-import { ActionAlert } from '../ui';
+import { capitalizeFirstLetter } from '@/lib/helpers';
 
 const eventSchema = z
   .object({
@@ -48,6 +56,10 @@ const eventSchema = z
   .refine((data) => !data.end || new Date(data.end) >= new Date(data.start), {
     message: 'End date must not be before start date',
     path: ['end'],
+  })
+  .refine((data) => !(data.type.length > 1 && data.type.includes('holiday')), {
+    message: 'Holiday cannot be selected with other types',
+    path: ['type'],
   });
 
 type EventForm = z.infer<typeof eventSchema>;
@@ -155,35 +167,32 @@ const New = (props: {
               control={form.control}
               name="type"
               render={({ field }) => (
-                <FormItem className="my-2">
+                <FormItem>
                   <FormLabel>Event Type</FormLabel>
-                  <FormControl>
-                    <div className="flex w-full flex-wrap items-center gap-4">
-                      {EVENT_TYPE_OPTIONS.map((option) => (
-                        <div key={option} className="flex items-center gap-2">
-                          <Checkbox
-                            id={option}
-                            checked={field.value?.includes(option)}
-                            onCheckedChange={(checked) => {
-                              if (checked) {
-                                field.onChange([
-                                  ...(field.value || []),
-                                  option,
-                                ]);
-                              } else {
-                                field.onChange(
-                                  field.value?.filter(
-                                    (v: string) => v !== option
-                                  )
-                                );
-                              }
-                            }}
-                          />
-                          <Label htmlFor={option}>{option}</Label>
-                        </div>
-                      ))}
-                    </div>
-                  </FormControl>
+
+                  <MultiSelect
+                    onValuesChange={field.onChange}
+                    values={field.value}
+                  >
+                    <FormControl>
+                      <MultiSelectTrigger className="w-full">
+                        <MultiSelectValue placeholder="Select type" />
+                      </MultiSelectTrigger>
+                    </FormControl>
+
+                    <MultiSelectContent search={false}>
+                      <MultiSelectGroup>
+                        {EVENT_TYPE_OPTIONS.map((option) => (
+                          <MultiSelectItem key={option} value={option}>
+                            {capitalizeFirstLetter(option)}
+                          </MultiSelectItem>
+                        ))}
+                      </MultiSelectGroup>
+                    </MultiSelectContent>
+                  </MultiSelect>
+                  <FormDescription>
+                    Note: Holiday cannot be selected with other types.
+                  </FormDescription>
                 </FormItem>
               )}
             />
