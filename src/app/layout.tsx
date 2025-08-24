@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
@@ -66,6 +67,7 @@ export default function RootLayout({
           <Toaster position="bottom-right" richColors />
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
