@@ -7,10 +7,12 @@ import type { Metadata, Viewport } from 'next';
 export const metadata: Metadata = {
   metadataBase: new URL('https://dostsausc.org'),
   title: 'DOST SA USC',
-  description: 'Official global tracker for DOST SA USC.',
+  description:
+    "Official Website of the DOST Scholars' Association - University of San Carlos! Home of your USC Isko championing academic excellence, community service, and all things DOST SA USC Iskolars ng Agham, lagi't lagi, para sa bayan!",
   openGraph: {
     title: 'DOST SA USC',
-    description: 'Official global tracker for DOST SA USC.',
+    description:
+      "Official Website of the DOST Scholars' Association - University of San Carlos! Home of your USC Isko championing academic excellence, community service, and all things DOST SA USC Iskolars ng Agham, lagi't lagi, para sa bayan!",
     url: 'https://dostsausc.org',
     siteName: 'DOST SA USC',
     images: [
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'DOST SA USC',
-    description: 'Official global tracker for DOST SA USC.',
+    description:
+      "Official Website of the DOST Scholars' Association - University of San Carlos! Home of your USC Isko championing academic excellence, community service, and all things DOST SA USC Iskolars ng Agham, lagi't lagi, para sa bayan!",
     images: ['/banner.jpg'],
   },
   icons: {
