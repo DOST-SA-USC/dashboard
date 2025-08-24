@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     images: ['/banner.jpg'],
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: '/favi.ico',
+    shortcut: '/favi.ico',
   },
 };
 
