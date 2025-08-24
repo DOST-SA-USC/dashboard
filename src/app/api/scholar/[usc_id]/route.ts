@@ -32,6 +32,7 @@ export async function GET(
     firstName: userData.firstName,
     middleName: userData.middleName,
     lastName: userData.lastName,
+    suffix: userData.suffix,
     image: userData.image,
     program: userData.program as string,
     yearLevel: userData.yearLevel as string,

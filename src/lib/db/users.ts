@@ -116,6 +116,7 @@ export async function getUserDataByUscID(uscID: string) {
         firstName: userData.firstName,
         lastName: userData.lastName,
         middleName: userData.middleName,
+        suffix: userData.suffix,
         image: userData.image,
         program: userData.program,
         scholarshipType: userData.scholarshipType,
