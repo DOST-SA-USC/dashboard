@@ -4,7 +4,7 @@
   <h1>DOST SA USC</h1>
   
   <p>
-    The official scholar tracker for DOST SA USC.
+    The official organization tracker for DOST SA USC.
   </p>
 
 ![Tech Stack](https://skills-icons.vercel.app/api/icons?i=nextjs,ts,tailwind,shadcnui,supabase,betterauth,drizzle,zustand)
