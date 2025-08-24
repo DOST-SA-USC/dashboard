@@ -93,7 +93,7 @@ const NewAnnouncement = (props: {
         html: tiptapToHTML(newContent),
       }),
       {
-        loading: 'Emailing recipients, might take a while...',
+        loading: 'Emailing recipients, please do not exit the page.',
         success: 'Email sent successfully!',
         error: (err) => {
           throw new Error(`Failed to send email: ${err}`);

@@ -101,7 +101,7 @@ export const announcementEmailTemplate = async ({
     <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
 
     <p style="font-size: 0.9em; color: #555;">
-      This is an automated announcement — please do not reply.<br>
+      This is an forwarded email from the global tracker — please do not reply.<br>
       For any questions, please contact DOST SA USC.
     </p>
   `;
