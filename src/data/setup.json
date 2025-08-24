@@ -54,7 +54,20 @@
   ],
   "suffix": {
     "default": "N/A",
-    "options": ["N/A", "Jr.", "Sr.", "II", "III", "IV", "V"]
+    "options": [
+      "N/A",
+      "Jr.",
+      "Sr.",
+      "II",
+      "III",
+      "IV",
+      "V",
+      "VI",
+      "VII",
+      "VIII",
+      "IX",
+      "X"
+    ]
   },
   "yearLevels": ["1", "2", "3", "4", "5"],
   "yearOfAwards": ["2020", "2021", "2022", "2023", "2024", "2025"]
