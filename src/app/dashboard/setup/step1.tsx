@@ -30,7 +30,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required.'),
-  middleName: z.string().min(1, 'Middle name is required.'),
+  middleName: z.string().optional(),
   lastName: z.string().min(1, 'Last name is required.'),
   suffix: z.string().optional(),
   image: z

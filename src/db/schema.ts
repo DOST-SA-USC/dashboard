@@ -79,7 +79,7 @@ export const userData = pgTable('user_data', {
     .references(() => user.id, { onDelete: 'cascade' }),
   uscID: text('usc_id').notNull().unique(),
   firstName: text('first_name').notNull(),
-  middleName: text('middle_name').notNull(),
+  middleName: text('middle_name'),
   lastName: text('last_name').notNull(),
   suffix: text('suffix'),
   emergencyContact: text('emergency_contact'),
