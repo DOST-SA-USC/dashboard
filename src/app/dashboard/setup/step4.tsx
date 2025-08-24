@@ -83,12 +83,22 @@ const Form4 = (props: {
         }}
       />
       <div className="mt-10 flex w-full justify-between">
-        <Button variant="outline" type="button" onClick={props.prev}>
+        <Button
+          variant="outline"
+          type="button"
+          onClick={props.prev}
+          disabled={pending || state.success}
+        >
           <ChevronLeft className="size-4" />
           Back
         </Button>
         <form action={formAction}>
-          <Button type="submit" onClick={props.update} disabled={pending}>
+          <Button
+            type="submit"
+            onClick={props.update}
+            disabled={pending || state.success}
+            className="transition-all duration-300"
+          >
             {pending ? <LoaderCircle className="animate-spin" /> : 'Submit'}
           </Button>
         </form>

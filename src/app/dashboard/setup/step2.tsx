@@ -88,7 +88,7 @@ const Form2 = (props: {
                 <FormItem>
                   <FormLabel>USC ID</FormLabel>
                   <FormControl>
-                    <Input placeholder="00000000" {...field} />
+                    <Input placeholder="12345678" {...field} />
                   </FormControl>
                 </FormItem>
               )}

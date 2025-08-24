@@ -287,9 +287,17 @@ export default function Form1(props: {
         </form>
       </Form>
 
-      <p className="text-muted-foreground mt-4 text-xs md:text-sm">
-        Upload a formal photo — this cannot be changed later.
-      </p>
+      <div className="text-muted-foreground mt-4 w-full text-xs md:text-sm">
+        Upload a formal professional photo. Non-compliance may result in account
+        deletion.
+        <ul className="list-inside list-disc pl-2 text-left">
+          <li>Recent, clear headshot.</li>
+          <li>Plain, light-colored background.</li>
+          <li>Face clearly visible, facing forward.</li>
+          <li>No sunglasses, hats, or filters.</li>
+          <li>High-resolution image (not pixelated or blurry).</li>
+        </ul>
+      </div>
 
       <div className="mt-10 flex w-full justify-end">
         <Button form="form1" type="submit">

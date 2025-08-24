@@ -11,6 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -69,6 +70,9 @@ const Form3 = (props: {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Emergency Contact</FormLabel>
+                <FormDescription>
+                  Firstname MI. Lastname (e.g., Jane S. Doe)
+                </FormDescription>
                 <FormControl>
                   <Input placeholder="Jane S. Doe" {...field} />
                 </FormControl>
