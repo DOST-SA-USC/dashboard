@@ -15,8 +15,6 @@
 
 ## 📷 Project Demo
 
-### 👤 Passenger View
-
 <img src="/docs/demo1.png" alt="Demo 1" /> 
 <img src="/docs/demo2.png" alt="Demo 2" />
 
