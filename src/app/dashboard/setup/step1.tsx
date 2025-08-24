@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import SET_UP_JSON from '@/data/setup.json';
+import { capitalizeFirstLetter } from '@/lib/helpers';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z.object({
@@ -123,7 +124,14 @@ export default function Form1(props: {
       values.suffix = '';
     }
 
+    values.firstName = capitalizeFirstLetter(values.firstName);
+    if (values.middleName)
+      values.middleName = capitalizeFirstLetter(values.middleName);
+    values.lastName = capitalizeFirstLetter(values.lastName);
+    if (values.suffix) values.suffix = capitalizeFirstLetter(values.suffix);
+
     props.update(values);
+    console.log(values);
   }
 
   function onError(error: FieldErrors<FormValues>) {

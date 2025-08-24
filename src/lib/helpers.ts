@@ -5,8 +5,9 @@ export const getManilaTime = () => toZonedTime(new Date(), 'Asia/Manila');
 export function capitalizeFirstLetter(str: string): string {
   if (!str) return '';
   return str
+    .trim()
     .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 }
 

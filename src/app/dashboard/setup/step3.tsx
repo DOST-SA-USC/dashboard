@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { FormType } from '@/type';
+import { capitalizeFirstLetter } from '@/lib/helpers';
 const formSchema = z.object({
   emergencyContact: z.string().min(1, 'Emergency contact is required.'),
   emergencyContactNumber: z
@@ -43,9 +44,14 @@ const Form3 = (props: {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const cleanedValues = {
+      emergencyContact: capitalizeFirstLetter(values.emergencyContact),
+      emergencyContactNumber: values.emergencyContactNumber.replace(/\D/g, ''),
+    };
+    console.log(cleanedValues);
     props.update({
-      emergencyContact: values.emergencyContact,
-      emergencyContactNumber: values.emergencyContactNumber,
+      emergencyContact: cleanedValues.emergencyContact,
+      emergencyContactNumber: cleanedValues.emergencyContactNumber,
     });
   }
 
