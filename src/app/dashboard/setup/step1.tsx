@@ -128,10 +128,8 @@ export default function Form1(props: {
     if (values.middleName)
       values.middleName = capitalizeFirstLetter(values.middleName);
     values.lastName = capitalizeFirstLetter(values.lastName);
-    if (values.suffix) values.suffix = capitalizeFirstLetter(values.suffix);
 
     props.update(values);
-    console.log(values);
   }
 
   function onError(error: FieldErrors<FormValues>) {

@@ -48,7 +48,6 @@ const Form3 = (props: {
       emergencyContact: capitalizeFirstLetter(values.emergencyContact),
       emergencyContactNumber: values.emergencyContactNumber.replace(/\D/g, ''),
     };
-    console.log(cleanedValues);
     props.update({
       emergencyContact: cleanedValues.emergencyContact,
       emergencyContactNumber: cleanedValues.emergencyContactNumber,
