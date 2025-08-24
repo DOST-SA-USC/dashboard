@@ -127,7 +127,6 @@ export default function Form1(props: {
     values.firstName = capitalizeFirstLetter(values.firstName);
     if (values.middleName)
       values.middleName = capitalizeFirstLetter(values.middleName);
-    values.lastName = capitalizeFirstLetter(values.lastName);
 
     props.update(values);
   }
