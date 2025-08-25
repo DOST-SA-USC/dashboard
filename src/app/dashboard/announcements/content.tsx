@@ -110,8 +110,8 @@ const AnnouncementContent = (props: {
   ]);
 
   return (
-    <div className="flex h-full w-full flex-1 gap-4 overflow-hidden">
-      <div className="flex h-full w-full flex-col md:w-1/2">
+    <div className="flex h-full w-full flex-1 flex-col gap-4 overflow-hidden">
+      <div className="flex h-full w-full flex-col">
         <div className="flex w-full gap-4 py-3.5 md:py-3.5">
           <div className="flex w-full items-center gap-2">
             <div className="placeholder:text-muted-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 items-center rounded-md border px-3 py-1 text-sm shadow-xs backdrop-blur-xs transition-[color,box-shadow] outline-none">
@@ -141,12 +141,14 @@ const AnnouncementContent = (props: {
               </SelectGroup>
             </SelectContent>
           </Select>
+          <NewAnnouncement updateData={fetchAnnouncements} />
         </div>
-        <div className="h-full w-full space-y-2 overflow-auto">
+
+        <div className="flex h-full w-full flex-col items-center space-y-2 overflow-auto">
           {isLoading ? (
             <>
-              {[...Array(4)].map((_, idx) => (
-                <Skeleton key={idx} className="bg-transparent">
+              {[...Array(2)].map((_, idx) => (
+                <Skeleton key={idx} className="w-full bg-transparent">
                   <Card className="!bg-background flex h-40 w-full items-center justify-center" />
                 </Skeleton>
               ))}
@@ -172,17 +174,10 @@ const AnnouncementContent = (props: {
           <Pagination page={currentPage} onPageChange={setCurrentPage} />
         </div>
       </div>
-      <div className="hidden h-full max-w-full flex-col md:flex md:w-full">
-        <div className="flex w-full justify-end gap-4 py-3.5 md:p-3.5">
-          <NewAnnouncement updateData={fetchAnnouncements} />
-        </div>
-        <SelectedAnnouncement
-          announcement={selectedAnnouncement}
-          setAnnouncement={setSelectedAnnouncement}
-        />
-      </div>
-
-      <NewAnnouncement className="md:hidden" updateData={fetchAnnouncements} />
+      <SelectedAnnouncement
+        announcement={selectedAnnouncement}
+        setAnnouncement={setSelectedAnnouncement}
+      />
     </div>
   );
 };

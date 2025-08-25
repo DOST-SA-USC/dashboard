@@ -11,7 +11,7 @@ const Pagination = (props: {
   onPageChange: (arg: { page: number; total: number }) => void;
 }) => {
   return (
-    <div className="flex items-center justify-between py-2">
+    <div className="flex w-fit items-center justify-between gap-4 py-2">
       <Button
         variant="outline"
         onClick={() =>

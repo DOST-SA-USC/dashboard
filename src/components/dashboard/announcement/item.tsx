@@ -37,7 +37,7 @@ const AnnouncementItem = (
 
   return (
     <Card
-      className="hover:bg-accent hover:text-accent-foreground cursor-pointer gap-0 space-y-2 border-1 p-4"
+      className="hover:bg-accent hover:text-accent-foreground w-full cursor-pointer gap-0 space-y-2 border-1 p-4"
       {...rest}
     >
       <div className="flex items-center justify-between gap-4">
