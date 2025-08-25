@@ -30,8 +30,8 @@ import type { FormType } from '@/type';
 const formSchema = z.object({
   uscID: z
     .string()
-    .min(1, 'USC ID is required.')
-    .regex(/^\d{8}$/, 'USC ID must be 8 digits.'),
+    .min(7, 'USC ID must be at least 7 digits.')
+    .max(8, 'USC ID must be at most 8 digits.'),
   program: z.string().min(1, 'Program is required.'),
   yearLevel: z.string().min(1, 'Year level is required.'),
   yearOfAward: z.string().min(1, 'Year of award is required.'),
