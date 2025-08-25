@@ -11,7 +11,7 @@ import { Selection } from '@tiptap/extensions';
 import { generateHTML } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 
-import type { JSONContent } from '@tiptap/react';
+import type { Content, JSONContent } from '@tiptap/react';
 
 function ensureAbsoluteUrl(text: string): string {
   // Skip empty
@@ -54,8 +54,8 @@ export function normalizeLinks(node: JSONContent): JSONContent {
   return node;
 }
 
-export const tiptapToHTML = (content: JSONContent): string => {
-  const normalized = normalizeLinks(content);
+export const tiptapToHTML = (content: Content): string => {
+  const normalized = normalizeLinks(content as JSONContent);
 
   const html = generateHTML(normalized, [
     StarterKit.configure({
