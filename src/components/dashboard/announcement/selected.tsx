@@ -92,7 +92,7 @@ const SelectedAnnouncement = (props: {
         open={!!props.announcement}
         onOpenChange={() => props.setAnnouncement(null)}
       >
-        <DialogContent className="flex min-h-[696px] flex-col gap-0 p-0 md:min-w-2xl lg:min-w-4xl">
+        <DialogContent className="flex h-[696px] flex-col gap-0 p-0 md:min-w-2xl lg:min-w-4xl">
           {/* header */}
           <DialogHeader className="border-border flex h-fit w-full flex-col gap-0 border-b p-0">
             <DialogTitle className="sr-only">
