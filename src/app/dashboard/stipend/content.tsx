@@ -10,7 +10,7 @@ import Update from '@/components/dashboard/stipend/update';
 
 import type { StipendType } from '@/type';
 
-import { getUserInitials, getRelativeDate } from '@/lib/helpers';
+import { getUserInitials, formatDate } from '@/lib/helpers';
 
 const Content = (props: { data: StipendType }) => {
   return (
@@ -53,7 +53,8 @@ const Content = (props: { data: StipendType }) => {
               </div>
             </div>
             <span className="text-muted-foreground text-xs">
-              {getRelativeDate(new Date(props.data.createdAt ?? ''))}
+              {props.data.createdAt &&
+                formatDate(new Date(props.data.createdAt))}
             </span>
           </div>
 
