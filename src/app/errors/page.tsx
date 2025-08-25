@@ -20,7 +20,7 @@ export default function AuthErrorPage() {
 
   if (error === 'signup_disabled') {
     message =
-      'Scholar Account does not exist, if you think that this is a mistake please contact 24100907@usc.edu.ph.';
+      'Scholar Account does not exist, if you think that this is a mistake please contact DOST SA USC via uscdostsa@gmail.com for assistance.';
   } else if (error === 'please_restart_the_process') {
     message = 'Something went wrong. Please try signing in again.';
   }
