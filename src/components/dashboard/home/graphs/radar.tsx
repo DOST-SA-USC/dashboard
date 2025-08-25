@@ -11,7 +11,7 @@ import {
 
 const chartConfig = {
   count: {
-    label: 'Number of Scholars',
+    label: 'count',
     color: 'var(--chart-1)',
   },
 } satisfies ChartConfig;
